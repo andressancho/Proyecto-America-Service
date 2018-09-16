@@ -7,7 +7,7 @@ namespace AmericanService.Models
 {
     public class Roleplay
     {
-        private int id_roleplay { get; set }
+        private int id_roleplay { get; set; }
         private Usuario supervisor { get; set; }
         private DateTime fecha { get; set; }
         private string detalle { get; set; }
