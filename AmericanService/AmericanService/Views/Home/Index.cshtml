@@ -19,19 +19,14 @@
     </header>
 
     <section>
-        <form>
-            <p>
-                <label for="usuario" >Usuario: </label>
-                <input type="text" name="usuario" id="usuario" placeholder="Ingrese su  usuario">
-            </p>
-            <p>
-                <label for="password">Contraseña: </label>
-                <input type="password" name="password" id="password" placeholder="Ingrese su contraseña">
-            </p>
-            <p>
-                <input type="submit" name="inicio_sesion" value="Iniciar Sesión ">
-            </p>
-        </form>
+        @using (Html.BeginForm("Login", "Home"))
+        {
+            <label>User Name</label>
+            <input type="text" class="form-control" id="userid" name="userid" />
+            <label>Password</label>
+            <input type="password" class="form-control" id="pwd" name="pwd" /> <br />
+            <input type="submit" class="btn btn-success" value="Submit" />
+        }
     </section>
 
 </body>
