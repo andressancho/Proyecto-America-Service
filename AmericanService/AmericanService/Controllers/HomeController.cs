@@ -26,5 +26,22 @@ namespace AmericanService.Controllers
 
             return View();
         }
+        [HttpPost]
+        public ActionResult Login(string userid, string pwd) //Formal Parameters  
+        {
+            string username = userid;
+            string password = pwd;
+            if (username == "Admin" && password == "123456")
+            {
+                Response.Write("<h2> Success </h2> Valid User...");
+
+            }
+            else
+            {
+                Response.Write(" <h2> Failed </h2> Invalid User...");
+                return View("About");
+            }
+            return View("Index");
+        }
     }
 }
