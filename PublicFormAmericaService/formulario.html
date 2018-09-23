@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		 <link rel="stylesheet" href="estilos.css" type="text/css" media="all" />
+		<title>America Service</title>
+	</head>
+
+	<body>
+	    <!-- Encabezado -->
+	    <header>
+	        <div >
+
+	        <img src="logo.png" alt="Logo" title="Sitio Web" class="logo">
+	        </div>
+
+	    </header>
+
+	    <!-- Contenido -->
+
+	    <section>
+	        <form>
+	            <strong><h1>Entrevista</h1></strong>
+	            <br />
+	            <div>
+		            <p>
+		                <label for="Jornada">Jornada: </label>
+		                <input type="text" name="jornada" id="jornada" placeholder="Tipo de jornada">
+		            </p>
+		            <p>
+		                <label for="motivo_jornada">¿Porqué le sirve esta jornada? </label><br />
+		                <textarea name="motivo_jornada" id="motivo_jornada" cols="80" rows="10"></textarea>
+		            </p>
+		            <p>
+		                <label for="horario">Horario: </label>
+		                <input type="time" name="horario" id="horario">
+		            </p>
+		            <p>
+		                <label for="fecha">Fecha: </label>
+		                <input type="date" name="fecha" id="fecha">
+		            </p>
+		            <p>
+		                <label for="salario">Salario: </label>
+		                <input type="number" name="salario" id="salario">
+		            </p>
+		            <p>
+		                <label for="fecha_nacimiento">Fecha de nacimiento: </label>
+		                <input type="date" name="fecha_nacimiento" id="fecha_nacimiento">
+		            </p>
+		            <p>
+		                <label for="domicilio">Domicilio: </label><br />
+		                <textarea name="domicilio" id="domicilio" cols="80" rows="10"></textarea>
+		            </p>
+	            </div>
+
+	            <!---------------------------------------------------------------------------------->
+
+	            <br /><br />
+	            <strong><h1>Requisitos</h1></strong>
+	            <br />
+
+	            <p>
+	            	<label for="cv">Adjunte su curriculum vitae </label><br />
+	                <input type="file" id="cv" name="cv" value="Subir CV" accept=".pdf">
+	                <br /><br />
+	            </p>
+
+	            <p>
+	                <label for="experiencia">Experiencia en Call Center: </label><br />
+	                <input type="radio" name="experiencia" id="experiencia" value="Si">Si
+	                <input type="radio" name="experiencia" id="experiencia" value="no">No<br />
+	            </p>
+	            <p>
+	                <label for="exp_descripcion">Detalle experiencia: </label><br />
+	                <textarea name="exp_descripcion" id="exp_descripcion" cols="80" rows="10"></textarea>
+	            </p>
+
+	            <p>
+	                <label for="exp_judicial">Experiencia en cobro judicial: </label><br />
+	                <input type="radio" name="exp_judicial" id="exp_judicial" value="Si">Si
+	                <input type="radio" name="exp_judicial" id="exp_judicial" value="no">No<br />
+	            </p>
+	            <p>
+	                <label for="desc_judicial">Detalle experiencia en cobro judicial: </label><br />
+	                <textarea name="desc_judicial" id="desc_judicial" cols="80" rows="10"></textarea>
+	            </p>
+
+	            <p>
+	                <label for="excel">Excel: </label><br />
+	                <input type="radio" name="excel" id="excel" value="Si">Si
+	                <input type="radio" name="excel" id="excel" value="no">No<br />
+	            </p>
+
+	            <p>
+	                <label for="bachillerato">Bachillerato: </label><br />
+	                <input type="radio" name="bachillerato" id="bachillerato" value="Si">Si
+	                <input type="radio" name="bachillerato" id="bachillerato" value="No">No<br />
+	            </p>
+	            <br />
+
+	            <p>
+	                <label for="valores">Ingrese tres valores: </label>
+	                <br />
+	                <input type="text" name="valores" id="valor_1" placeholder="valor 1">
+	                <input type="text" name="valores" id="valor_2" placeholder="valor 2">
+	                <input type="text" name="valores" id="valor_3" placeholder="valor 3">
+	            </p>
+
+	            <p>
+	                <label for="competencias">Ingrese tres valores: </label>
+	                <br />
+	                <input type="text" name="competencias" id="competencia_1" placeholder="Competencia 1">
+	                <input type="text" name="competencias" id="competencia_2" placeholder="Competencia 2">
+	                <input type="text" name="competencias" id="competencia_3" placeholder="Competencia 3">
+	            </p>
+
+	            <p>
+	                <input type="submit" name="enviar" value="enviar">
+	            </p>
+	        </form>
+	    </section>
+
+	</body>
+
+</head>
