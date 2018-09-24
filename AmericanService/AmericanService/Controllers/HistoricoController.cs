@@ -14,6 +14,11 @@ namespace AmericanService.Controllers
         // GET: Historico
         public ActionResult Index()
         {
+            
+          return View(consulta_historico());
+        }
+
+        public List<Historico> consulta_historico() {
             SqlConnection con = new SqlConnection(
                WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
 
@@ -30,7 +35,8 @@ namespace AmericanService.Controllers
             int cantidad;
             List<Historico> lista_historico = new List<Historico>();
 
-            while (dr.Read()) {
+            while (dr.Read())
+            {
                 cedula = Convert.ToInt32(dr["cedula"]);
                 nombre = Convert.ToString(dr["nombre"]);
                 descripcion = Convert.ToString(dr["descripcion"]);
@@ -42,82 +48,40 @@ namespace AmericanService.Controllers
             //foreach (Historico h in lista_historico) {
             //    Response.Write(h.nombre);
             //}
-
-
-          con.Close();
-          return View(lista_historico);
+            con.Close();
+            return lista_historico;
         }
 
-        // GET: Historico/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Historico/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Historico/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+        public ActionResult Find(string buscar_string) {
+            int i;
+            List<Historico> lista_historico_buscar = new List<Historico>();
+            foreach (Historico h in consulta_historico()) {
+                if (!String.IsNullOrEmpty(buscar_string)) {
+                    if (int.TryParse(buscar_string, out i))
+                    {
+                        if (h.cedula == i)
+                        {
+                            lista_historico_buscar.Add(h);
+                        }
+                    }
+                    else
+                    {
+                        if (h.nombre.Equals(buscar_string))
+                        {
+                            lista_historico_buscar.Add(h);    
+                        }
+                    }
+                   
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View("Index", lista_historico_buscar);
+        }
+        public ActionResult Edit(String cedula) {
+            Response.Write(cedula);
+            List<Historico> lista = new List<Historico>();
+            return View("Index", lista);
         }
 
-        // GET: Historico/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Historico/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Historico/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Historico/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }
