@@ -44,18 +44,30 @@ namespace AmericanService.Controllers
             cmd.Parameters.AddWithValue("@contrasena", password);
             con.Open();
             SqlDataReader dr = cmd.ExecuteReader();
-            
+
+
+
+            bool exito = false;
+            string nombre = "";
+            string apellidos = "";
+
+            while (dr.Read())
+            {
+                exito = true;
+                nombre = Convert.ToString(dr["nombre"]);
+                apellidos = Convert.ToString(dr["apellidos"]);
+            }
             con.Close();
 
-            if (username == "Admin" && password == "123456")
+            if (exito)
             {
-                Response.Write("<h2> Success </h2> Valid User...");
-
+                Response.Write(" <h2> Bienvenido </h2>" + nombre + " " + apellidos);
+                return View("Contact");
             }
             else
             {
-                Response.Write(" <h2> Failed </h2> Invalid User...");
-                return View("About");
+
+                return View("Index");
             }
             return View("Index");
         }
