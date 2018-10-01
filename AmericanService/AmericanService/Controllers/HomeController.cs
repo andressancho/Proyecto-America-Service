@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Configuration;
 using System.Data.SqlClient;
+using AmericanService.Models;
 
 namespace AmericanService.Controllers
 {
@@ -46,23 +47,53 @@ namespace AmericanService.Controllers
             SqlDataReader dr = cmd.ExecuteReader();
 
 
-
+            Usuario usuario = new Usuario();
             bool exito = false;
             string nombre = "";
             string apellidos = "";
+            DateTime fecha_nacimiento;
+            DateTime fecha_ingreso;
+            string cedula = "";
+            string estado = "";
+            string desempeno = "";
+            string supervisor = "";
 
             while (dr.Read())
             {
                 exito = true;
+                cedula = Convert.ToString(dr["cedula"]);
                 nombre = Convert.ToString(dr["nombre"]);
                 apellidos = Convert.ToString(dr["apellidos"]);
+                fecha_nacimiento = Convert.ToDateTime(dr["cumpleanos"]);
+                fecha_ingreso = Convert.ToDateTime(dr["fecha_ingreso"]);
+                estado = Convert.ToString(dr["estado"]);
+                desempeno = Convert.ToString(dr["desempeno_pruebas"]);
+                supervisor = Convert.ToString(dr["supervisor"]);
+                if (estado == "A")
+                {
+                    estado = "Activo";
+                }
+                else {
+                    estado = "NoActivo";
+                }
+
+                if (desempeno == "")
+                {
+                    desempeno = "NoTieneDesempeño";
+                }
+                if (supervisor == "")
+                {
+                    supervisor = "NoTieneSupervisor";
+                }
+
+                usuario = new Usuario(cedula, nombre, apellidos, fecha_nacimiento, fecha_ingreso, estado, desempeno, supervisor);
             }
             con.Close();
 
             if (exito)
             {
-                Response.Write(" <h2> Bienvenido </h2>" + nombre + " " + apellidos);
-                return View("Contact");
+                //Response.Write(" <h2> Bienvenido </h2>" + nombre + " " + apellidos);       
+                return View("~/Views/Perfil/Perfil.cshtml", usuario);
             }
             else
             {
