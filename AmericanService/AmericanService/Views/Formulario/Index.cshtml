@@ -12,25 +12,33 @@
 
 <body>
 
-    
+
 
 
 
 
     <h2>Formularios</h2>
     <br />
-    @using (Html.BeginForm("Filtrar", "Formulario"))
-    {
-        <label><input type="checkbox" id="cbox1" value="first_checkbox"> Ventas</label>
-        <input type="checkbox" id="cbox2" value="second_checkbox"> <label for="cbox2">Call Center</label>
-        <input type="checkbox" id="cbox3" value="third_checkbox"> <label for="cbox3">Servicio al Cliente</label>
-        <input type="checkbox" id="cbox4" value="fourth_checkbox"> <label for="cbox4">Cobros</label>
-        <input type="checkbox" id="cbox5" value="fifth_checkbox"> <label for="cbox5">Mora30</label>
-        <input type="checkbox" id="cbox6" value="sixth_checkbox"> <label for="cbox6">Mora60</label>
-        <input type="checkbox" id="cbox7" value="seventh_checkbox"> <label for="cbox7">Mora90</label>
-        <input type="checkbox" id="cbox8" value="eight_checkbox"> <label for="cbox8">Cartera Separada</label>
-        <input type="submit" value="Aceptar" />
-    }
+
+    <div class="container">
+        
+        <p>Filtrar por:</p>
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                Filtro
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Experiencia en Call Center</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Experiencia en servicio al cliente</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Experiencia en cobros</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Bachillerato</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Conocimiento de Excel</a></li>
+
+            </ul>
+        </div>
+    </div>
+
 
     <br />
 
