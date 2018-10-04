@@ -77,6 +77,7 @@ namespace AmericanService.Controllers
                     estado = "No Activo";
                 }
 
+                HttpContext.Session["usuario_actual"] = cedula;
                 usuario = new Usuario(cedula, nombre, apellidos, fecha_nacimiento, fecha_ingreso, estado, desempeno, supervisor);
             }
             con.Close();
@@ -88,7 +89,6 @@ namespace AmericanService.Controllers
             }
             else
             {
-
                 return View("Index");
             }
             return View("Index");

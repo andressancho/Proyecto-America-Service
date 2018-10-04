@@ -288,6 +288,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Historico\Index.cshtml" />
     <Content Include="Views\Perfil\Perfil.cshtml" />
+    <Content Include="Views\Perfil\crear_perfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
