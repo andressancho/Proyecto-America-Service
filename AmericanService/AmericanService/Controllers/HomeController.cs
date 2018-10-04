@@ -74,16 +74,7 @@ namespace AmericanService.Controllers
                     estado = "Activo";
                 }
                 else {
-                    estado = "NoActivo";
-                }
-
-                if (desempeno == "")
-                {
-                    desempeno = "NoTieneDesempeño";
-                }
-                if (supervisor == "")
-                {
-                    supervisor = "NoTieneSupervisor";
+                    estado = "No Activo";
                 }
 
                 usuario = new Usuario(cedula, nombre, apellidos, fecha_nacimiento, fecha_ingreso, estado, desempeno, supervisor);
