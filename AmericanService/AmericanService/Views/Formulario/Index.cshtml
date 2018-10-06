@@ -29,11 +29,15 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Experiencia en Call Center</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Experiencia en servicio al cliente</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Experiencia en cobros</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Bachillerato</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Conocimiento de Excel</a></li>
+
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 1 })"<span>Experiencia en Call Center </span></a> </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 2 })"<span>Experiencia en Servicio al Cliente </span></a> </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 3 })"<span>Experiencia en Cobros </span></a> </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 4 })"<span>Experiencia en Ventas </span></a> </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 5 })"<span>Experiencia en Excel </span></a> </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 6 })"<span>Bachillerato Aprobado </span></a> </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 7 })"<span>Sin filtro </span></a> </li>
+
 
             </ul>
         </div>
