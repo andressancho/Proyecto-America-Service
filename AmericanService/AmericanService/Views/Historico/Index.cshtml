@@ -4,6 +4,29 @@
 }
 @model  IEnumerable<AmericanService.Models.Historico>
 
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../Content/menu.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+</head>
+
+<div id='cssmenu'>
+    <ul>
+
+
+        <li> @Html.ActionLink("Reclutandos", "Index", "Historico")</li>
+        <li> @Html.ActionLink("Gestionar Perfil", "gestionar_perfil", "Perfil")</li>
+        <li> @Html.ActionLink("Crear Perfil", "Crear", "Perfil")</li>
+        <li> @Html.ActionLink("Colaboradores", "Index", "Perfil")</li>
+        <li><a href='#'><span>Evaluaciones</span></a></li>
+        <li><a href='#'><span>Administrador</span></a></li>
+        <li> @Html.ActionLink("Histórico", "Index", "Historico")</li>
+        <li class='last'><a href='#'><span>Reportes</span></a></li>
+    </ul>
+</div>
+
 <h2>Histórico de reclutandos</h2>
 <br />
 @using (Html.BeginForm("Find", "Historico"))

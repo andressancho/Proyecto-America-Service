@@ -14,15 +14,118 @@ namespace AmericanService.Controllers
         // GET: Perfil
         public ActionResult Index()
         {
-            return View();
+
+            return View(obtener_usuarios());
         }
 
-        public ActionResult crear_perfil()
+        public ActionResult Editar(string cedula, string nombre, string apellidos, string fecha_nacimiento, string estado)
+        {
+            SqlConnection con = new SqlConnection(
+                WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+
+
+            SqlCommand cmd = new SqlCommand("editar_perfil", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@cedula", cedula);
+            cmd.Parameters.AddWithValue("@nombre", nombre);
+            cmd.Parameters.AddWithValue("@apellidos", apellidos);
+            cmd.Parameters.AddWithValue("@cumpleanos", fecha_nacimiento);
+            if (estado.ToLower() == "activo")
+            {
+                cmd.Parameters.AddWithValue("@estado", "A");
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@estado", "I");
+            }
+
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            con.Close();
+
+
+            Usuario usuario = obtener_usuario_actual();
+            return View("~/Views/Perfil/Perfil.cshtml", usuario);
+        }
+
+        public ActionResult Crear()
         {
             return View();
         }
 
+        public ActionResult CrearPerfil(string cedula, string nombre, string apellidos, string fecha_nacimiento, string usuario, string contrasena)
+        {
+            SqlConnection con = new SqlConnection(
+                WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+
+
+            SqlCommand cmd = new SqlCommand("crear_perfil", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@cedula", cedula);
+            cmd.Parameters.AddWithValue("@nombre", nombre);
+            cmd.Parameters.AddWithValue("@apellidos", apellidos);
+            cmd.Parameters.AddWithValue("@cumpleanos", fecha_nacimiento);
+            cmd.Parameters.AddWithValue("@usuario", usuario);
+            cmd.Parameters.AddWithValue("@contrasena", contrasena);
+
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            con.Close();
+
+
+
+            return View("~/Views/Perfil/Crear.cshtml");
+        }
+
         public ActionResult gestionar_perfil() {
+
+
+            Usuario usuario = obtener_usuario_actual();
+            return View("~/Views/Perfil/Perfil.cshtml", usuario);
+
+        }
+
+        public List<Usuario> obtener_usuarios()
+        {
+            SqlConnection con = new SqlConnection(
+               WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+
+
+            SqlCommand cmd = new SqlCommand("obtener_perfiles", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            string cedula;
+            String nombre = "";
+            String apellidos = "";
+            DateTime fecha_nacimiento;
+            DateTime fecha_ingreso;
+            string estado;
+            string usuario;
+            List<Usuario> lista_usuarios = new List<Usuario>();
+
+            while (dr.Read())
+            {
+                cedula = Convert.ToString(dr["cedula"]);
+                nombre = Convert.ToString(dr["nombre"]);
+                apellidos = Convert.ToString(dr["apellidos"]);
+                fecha_ingreso = Convert.ToDateTime(dr["fecha_ingreso"]);
+                fecha_nacimiento = Convert.ToDateTime(dr["cumpleanos"]);
+                estado = Convert.ToString(dr["estado"]);
+                usuario = Convert.ToString(dr["usuario"]);
+                lista_usuarios.Add(new Usuario(cedula, nombre, apellidos, fecha_nacimiento, fecha_ingreso,estado,usuario));
+            }
+
+
+            con.Close();
+            return lista_usuarios;
+        }
+
+
+
+        public Usuario obtener_usuario_actual()
+        {
             String cedula = HttpContext.Session["usuario_actual"].ToString();
 
             SqlConnection con = new SqlConnection(
@@ -68,80 +171,7 @@ namespace AmericanService.Controllers
 
             }
             con.Close();
-            return View("~/Views/Perfil/Perfil.cshtml", usuario);
-
-        }
-
-        // GET: Perfil/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Perfil/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Perfil/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Perfil/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Perfil/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Perfil/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Perfil/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return usuario;
         }
     }
 }

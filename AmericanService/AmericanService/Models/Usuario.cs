@@ -15,6 +15,7 @@ namespace AmericanService.Models
         public string estado { get; set; }
         public string desempeno { get; set; }
         public string supervisor { get; set; }
+        public string usuario { get; set; }
 
         public Usuario(string cedula, string nombre, string apellidos, DateTime fecha_nacimiento, DateTime fecha_ingreso, string estado, string desempeno, string supervisor)
         {
@@ -29,6 +30,16 @@ namespace AmericanService.Models
         }
 
         public Usuario() {
+        }
+        public Usuario(string cedula, string nombre, string apellidos, DateTime fecha_nacimiento, DateTime fecha_ingreso, string estado, string usuario)
+        {
+            this.cedula = cedula;
+            this.nombre = nombre;
+            this.apellidos = apellidos;
+            this.fecha_nacimiento = fecha_nacimiento;
+            this.fecha_ingreso = fecha_ingreso;
+            this.estado = estado;
+            this.usuario = usuario;
         }
     }
 }
