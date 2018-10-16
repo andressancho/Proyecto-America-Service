@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+@model  IEnumerable<AmericanService.Models.Formulario>
+
+
+<head>
+
+</head>
+
+<body>
+
+    <h2>Formularios</h2>
+    <br />
+
+    <div class="container">
+
+        <p>Filtrar por:</p>
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                Filtro
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 1 })"<span>Experiencia en Call Center </span></a> </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 2 })"<span>Experiencia en Servicio al Cliente </span></a> </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 3 })"<span>Experiencia en Cobros </span></a> </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 4 })"<span>Experiencia en Ventas </span></a> </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 5 })"<span>Experiencia en Excel </span></a> </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 6 })"<span>Bachillerato Aprobado </span></a> </li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 7 })"<span>Sin filtro </span></a> </li>
+
+
+            </ul>
+        </div>
+    </div>
+
+
+    <br />
+
+    <table class="table table-striped table-bordered table-hover">
+        <tr>
+            <th>Cédula</th>
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.cedula</td>
+                <td>@item.nombre</td>
+                <td>@item.fecha</td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { cedula = item.cedula })|
+                    @Html.ActionLink("Delete", "Delete", new { cedula = item.cedula })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
