@@ -12,10 +12,16 @@ namespace AmericanService.Controllers
     public class PerfilController : Controller
     {
         // GET: Perfil
+        [HttpGet]
         public ActionResult Index()
         {
 
             return View(obtener_usuarios());
+        }
+        [HttpPost]
+        public ActionResult Index(string Estado)
+        {
+            return View(filtrar_usuarios(Estado));
         }
 
         public ActionResult Editar(string cedula, string nombre, string apellidos, string fecha_nacimiento, string estado)
@@ -115,6 +121,43 @@ namespace AmericanService.Controllers
                 estado = Convert.ToString(dr["estado"]);
                 usuario = Convert.ToString(dr["usuario"]);
                 lista_usuarios.Add(new Usuario(cedula, nombre, apellidos, fecha_nacimiento, fecha_ingreso,estado,usuario));
+            }
+
+
+            con.Close();
+            return lista_usuarios;
+        }
+        public List<Usuario> filtrar_usuarios(string filtro)
+        {
+            SqlConnection con = new SqlConnection(
+               WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+
+
+            SqlCommand cmd = new SqlCommand("filtrar_perfiles", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@filtro", filtro);
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            string cedula;
+            String nombre = "";
+            String apellidos = "";
+            DateTime fecha_nacimiento;
+            DateTime fecha_ingreso;
+            string estado;
+            string usuario;
+            List<Usuario> lista_usuarios = new List<Usuario>();
+
+            while (dr.Read())
+            {
+                cedula = Convert.ToString(dr["cedula"]);
+                nombre = Convert.ToString(dr["nombre"]);
+                apellidos = Convert.ToString(dr["apellidos"]);
+                fecha_ingreso = Convert.ToDateTime(dr["fecha_ingreso"]);
+                fecha_nacimiento = Convert.ToDateTime(dr["cumpleanos"]);
+                estado = Convert.ToString(dr["estado"]);
+                usuario = Convert.ToString(dr["usuario"]);
+                lista_usuarios.Add(new Usuario(cedula, nombre, apellidos, fecha_nacimiento, fecha_ingreso, estado, usuario));
             }
 
 

@@ -18,7 +18,24 @@
 
 <body>
 
-    <table class="table table-striped table-bordered table-hover">
+    <br />
+    <div class="container">
+
+        @using (Html.BeginForm("Index", "Perfil"))
+        {
+
+            <lable>Activos</lable> <input checked="checked" id="Estado" name="Estado" type="radio" value="A">
+            <label>Inactivos</label><input id="Estado" name="Estado" type="radio" value="I">
+            <input type="submit" value="Filtrar">
+        }
+
+
+
+
+    </div>
+   
+
+    <table class="table table-striped table-bordered table-hover ">
         <tr>
             <th>Cédula</th>
             <th>Nombre</th>
