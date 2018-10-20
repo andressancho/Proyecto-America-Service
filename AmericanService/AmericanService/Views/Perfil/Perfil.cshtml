@@ -15,21 +15,31 @@
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 </head>
 <body>
-    
-
-
-    <h1>Gestión de perfil</h1>
-    @using (Html.BeginForm("Editar", "Perfil"))
-    {
-        <h3>Cédula: <input type="text" name="cedula" value=@Model.cedula> </h3>
-        <h3>Nombre: <input type="text" name="nombre" value=@Model.nombre></h3>
-        <h3>Apellidos: <input type="text" name="apellidos" value=@Model.apellidos></h3>
-        <h3>Cumpleaños: <input type="text" name="fecha_nacimiento" value=@Model.fecha_nacimiento></h3>
-        <h3>Fecha de ingreso: <input type="text" name="fecha_ingreso" value=@Model.fecha_ingreso></h3>
-        <h3>Estado: <input type="text" name="estado" value=@Model.estado></h3>
-        <h3>Desempeño: <input type="text" name="desempeno" value=@Model.desempeno></h3>
-        <h3>Supervisor: <input type="text" name="supervisor" value=@Model.supervisor></h3>
-        <input type="submit" value="Editar">
+        @using (Html.BeginForm("Editar", "Perfil"))
+        {
+            <div class="d-flex justify-content-center align-items-center container">
+                <div class="row">
+                    <div class="form-group">
+                        <h1>Mi Perfil</h1>
+                        <label>Cédula:</label>
+                        <input type="text" class="form-control" name="cedula" value=@Model.cedula>
+                        <label>Nombre:</label>
+                        <input type="text" class="form-control" name="nombre" value=@Model.nombre>
+                        <label>Primer apellido:</label>
+                        <input type="text" class="form-control" name="apellidos" value=@Model.apellidos>
+                        <label>Cumpleaños:</label>
+                        <input type="text" class="form-control" name="fecha_nacimiento" value=@Convert.ToString(Model.fecha_nacimiento)>
+                        <label>Fecha de ingreso:</label>
+                        <input type="date" class="form-control" name="fecha_ingreso" value="12-10-1997">
+                        <label>Estado:</label>
+                        <input type="text" class="form-control" name="estado" value=@Model.estado>
+                        <label>Desempeño:</label>
+                        <input type="text" class="form-control" name="desempeno" value=@Model.desempeno>
+                        <label>Supervisor:</label>
+                        <input type="text" class="form-control" name="supervisor" value=@Model.supervisor>
+                    </div>
+                </div>
+            </div>
     }
 </body>
 
