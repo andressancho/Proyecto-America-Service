@@ -19,24 +19,19 @@
     <div class="container">
 
         <p>Filtrar por:</p>
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-                Filtro
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 1 })"<span>Experiencia en Call Center </span></a> </li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 2 })"<span>Experiencia en Servicio al Cliente </span></a> </li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 3 })"<span>Experiencia en Cobros </span></a> </li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 4 })"<span>Experiencia en Ventas </span></a> </li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 5 })"<span>Experiencia en Excel </span></a> </li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 6 })"<span>Bachillerato Aprobado </span></a> </li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Filtrar", "Formulario",new { i = 7 })"<span>Sin filtro </span></a> </li>
+        @using (Html.BeginForm("Index", "Formulario"))
+        {
 
-
-            </ul>
-        </div>
+            <lable>Call Center</lable> <input id="call_center" name="call_center" type="checkbox">
+            <label>Ventas</label><input id="ventas" name="ventas" type="checkbox" value="1">
+            <lable>Cobros</lable> <input id="cobros" name="cobros" type="checkbox">
+            <label>Servicio al Cliente</label><input id="servicio_cliente" name="servicio_cliente" type="checkbox">
+            <lable>Excel</lable> <input id="excel" name="excel" type="checkbox">
+            <label>Bachillerato</label><input id="bachillerato" name="bachillerato" type="checkbox">
+            <input type="submit" value="Filtrar">
+        }
+        
     </div>
 
 

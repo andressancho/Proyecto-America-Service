@@ -12,7 +12,13 @@ namespace AmericanService.Controllers
     public class FormularioController : Controller
     {
         // GET: Formulario
+        [HttpGet]
         public ActionResult Index()
+        {
+            return View(obtener_formularios());
+        }
+        [HttpPost]
+        public ActionResult Index(string ventas)
         {
             return View(obtener_formularios());
         }
