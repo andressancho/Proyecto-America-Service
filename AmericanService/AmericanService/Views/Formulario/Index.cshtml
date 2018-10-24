@@ -8,6 +8,34 @@
 
 
 <head>
+    <style>
+        #diseno {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            #diseno td, #diseno th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #diseno tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #diseno tr:hover {
+                background-color: #ddd;
+            }
+
+            #diseno th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #E00914;
+                color: white;
+            }
+    </style>
 
 </head>
 
@@ -18,13 +46,12 @@
 
     <div class="container">
 
-        <p>Filtrar por:</p>
 
         @using (Html.BeginForm("Index", "Formulario"))
         {
 
-            <lable>Call Center</lable> <input id="call_center" name="call_center" type="checkbox">
-            <label>Ventas</label><input id="ventas" name="ventas" type="checkbox" value="1">
+            <lable> Call Center</lable> <input id="call_center" name="call_center" type="checkbox">
+            <label >Ventas</label><input id="ventas" name="ventas" type="checkbox" value="1">
             <lable>Cobros</lable> <input id="cobros" name="cobros" type="checkbox">
             <label>Servicio al Cliente</label><input id="servicio_cliente" name="servicio_cliente" type="checkbox">
             <lable>Excel</lable> <input id="excel" name="excel" type="checkbox">
@@ -37,12 +64,12 @@
 
     <br />
 
-    <table class="table table-striped table-bordered table-hover">
+    <table id="diseno">
         <tr>
             <th>Cédula</th>
             <th>Nombre</th>
             <th>Fecha</th>
-            <th></th>
+            <th>Opciones</th>
         </tr>
 
         @foreach (var item in Model)
