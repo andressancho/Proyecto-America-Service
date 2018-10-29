@@ -19,36 +19,45 @@ namespace AmericanService.Controllers
         }
 
         public List<Historico> consulta_historico() {
-            SqlConnection con = new SqlConnection(
+            List<Historico> lista_historico = new List<Historico>();
+            try
+            {
+                SqlConnection con = new SqlConnection(
                WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
 
 
-            SqlCommand cmd = new SqlCommand("obtener_historico_reclutandos", con);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
+                SqlCommand cmd = new SqlCommand("obtener_historico_reclutandos", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
 
-            int cedula;
-            String nombre = "";
-            String descripcion = "";
-            DateTime fecha;
-            int cantidad;
-            List<Historico> lista_historico = new List<Historico>();
+                int cedula;
+                String nombre = "";
+                String descripcion = "";
+                DateTime fecha;
+                int cantidad;
 
-            while (dr.Read())
-            {
-                cedula = Convert.ToInt32(dr["cedula"]);
-                nombre = Convert.ToString(dr["nombre"]);
-                descripcion = Convert.ToString(dr["descripcion"]);
-                fecha = Convert.ToDateTime(dr["fecha"]);
-                cantidad = Convert.ToInt32(dr["cantidad"]);
-                lista_historico.Add(new Historico(cedula, nombre, descripcion, fecha, cantidad));
+
+                while (dr.Read())
+                {
+                    cedula = Convert.ToInt32(dr["cedula"]);
+                    nombre = Convert.ToString(dr["nombre"]);
+                    descripcion = Convert.ToString(dr["descripcion"]);
+                    fecha = Convert.ToDateTime(dr["fecha"]);
+                    cantidad = Convert.ToInt32(dr["cantidad"]);
+                    lista_historico.Add(new Historico(cedula, nombre, descripcion, fecha, cantidad));
+                }
+
+                //foreach (Historico h in lista_historico) {
+                //    Response.Write(h.nombre);
+                //}
+                con.Close();
             }
+            catch (NullReferenceException)
+            {
 
-            //foreach (Historico h in lista_historico) {
-            //    Response.Write(h.nombre);
-            //}
-            con.Close();
+            }
+            
             return lista_historico;
         }
 
