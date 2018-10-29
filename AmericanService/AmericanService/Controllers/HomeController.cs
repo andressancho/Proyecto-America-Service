@@ -95,7 +95,11 @@ namespace AmericanService.Controllers
                     return View("Index");
                 }
             }
-            catch (NullReferenceException)
+            catch (SqlException)
+            {
+
+            }
+            catch(NullReferenceException)
             {
 
             }
