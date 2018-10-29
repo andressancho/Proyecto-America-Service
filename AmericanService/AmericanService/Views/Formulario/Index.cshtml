@@ -8,83 +8,52 @@
 
 
 <head>
-    <style>
-        #diseno {
-            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-            #diseno td, #diseno th {
-                border: 1px solid #ddd;
-                padding: 8px;
-            }
-
-            #diseno tr:nth-child(even) {
-                background-color: #f2f2f2;
-            }
-
-            #diseno tr:hover {
-                background-color: #ddd;
-            }
-
-            #diseno th {
-                padding-top: 12px;
-                padding-bottom: 12px;
-                text-align: left;
-                background-color: #E00914;
-                color: white;
-            }
-    </style>
-
+    <link rel="stylesheet" href="../Content/tabla.css">
 </head>
 
 <body>
+    <div class="margen">
+        <h2>Formularios</h2>
+        <br />
+        <div>
 
-    <h2>Formularios</h2>
-    <br />
+            @using (Html.BeginForm("Index", "Formulario"))
+            {
 
-    <div class="container">
+                <lable>Call Center</lable> <input id="call_center" name="call_center" type="checkbox">
+                <label>Ventas</label><input id="ventas" name="ventas" type="checkbox" value="1">
+                <lable>Cobros</lable> <input id="cobros" name="cobros" type="checkbox">
+                <label>Servicio al Cliente</label><input id="servicio_cliente" name="servicio_cliente" type="checkbox">
+                <lable>Excel</lable> <input id="excel" name="excel" type="checkbox">
+                <label>Bachillerato</label><input id="bachillerato" name="bachillerato" type="checkbox">
+                <input type="submit" value="Filtrar">
+            }
 
+        </div>
+        <br />
 
-        @using (Html.BeginForm("Index", "Formulario"))
-        {
-
-            <lable> Call Center</lable> <input id="call_center" name="call_center" type="checkbox">
-            <label >Ventas</label><input id="ventas" name="ventas" type="checkbox" value="1">
-            <lable>Cobros</lable> <input id="cobros" name="cobros" type="checkbox">
-            <label>Servicio al Cliente</label><input id="servicio_cliente" name="servicio_cliente" type="checkbox">
-            <lable>Excel</lable> <input id="excel" name="excel" type="checkbox">
-            <label>Bachillerato</label><input id="bachillerato" name="bachillerato" type="checkbox">
-            <input type="submit" value="Filtrar">
-        }
-        
-    </div>
-
-
-    <br />
-
-    <table id="diseno">
-        <tr>
-            <th>Cédula</th>
-            <th>Nombre</th>
-            <th>Fecha</th>
-            <th>Opciones</th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+        <table id="diseno">
             <tr>
-                <td>@item.cedula</td>
-                <td>@item.nombre</td>
-                <td>@item.fecha</td>
-
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { cedula = item.cedula })|
-                    @Html.ActionLink("Delete", "Delete", new { cedula = item.cedula })
-                </td>
+                <th>Cédula</th>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Opciones</th>
             </tr>
-        }
 
-    </table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.cedula</td>
+                    <td>@item.nombre</td>
+                    <td>@item.fecha</td>
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { cedula = item.cedula })|
+                        @Html.ActionLink("Delete", "Delete", new { cedula = item.cedula })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
 </body>
