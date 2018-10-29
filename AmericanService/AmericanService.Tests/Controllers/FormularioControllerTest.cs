@@ -5,18 +5,19 @@ using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AmericanService;
+using AmericanService.Models;
 using AmericanService.Controllers;
 
 namespace AmericanService.Tests.Controllers
 {
     [TestClass]
-    public class HomeControllerTest
+    public class FormularioControllerTest
     {
         [TestMethod]
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            FormularioController controller = new FormularioController();
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -24,23 +25,18 @@ namespace AmericanService.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
-        
         [TestMethod]
-
-        public void Login()
+        
+        public void Obtener_formularios()
         {
-            var usuario = "dvillalobos";
-            var contrasena = "12345678";
             // Arrange
-            HomeController controller = new HomeController();
+            FormularioController controller = new FormularioController();
 
             // Act
-            ViewResult result = controller.Login(usuario,contrasena) as ViewResult;
+            List<Formulario> result = controller.obtener_formularios() as List<Formulario>;
 
             // Assert
-            Assert.IsNotNull( result);
+            Assert.IsNotNull(result);
         }
-
-        
     }
 }
