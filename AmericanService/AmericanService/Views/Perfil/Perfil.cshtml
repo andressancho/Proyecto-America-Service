@@ -23,21 +23,60 @@
                 <h1>Mi Perfil</h1>
                 <label>Cédula:</label>
                 <input type="text" class="form-control" name="cedula" value=@Model.cedula>
-                <label>Nombre:</label>
-                <input type="text" class="form-control" name="nombre" value=@Model.nombre>
-                <label>Primer apellido:</label>
-                <input type="text" class="form-control" name="apellidos" value=@Model.apellidos>
+                <label>Primer Nombre:</label>
+                <input type="text" class="form-control" name="primer_nombre" value=@Model.primer_nombre>
+                <label>Segundo Nombre:</label>
+                <input type="text" class="form-control" name="segundo_nombre" value=@Model.segundo_nombre>
+                <label>Primer Apellido:</label>
+                <input type="text" class="form-control" name="primer_apellido" value=@Model.primer_apellido>
+                <label>Segundo Apellido:</label>
+                <input type="text" class="form-control" name="segundo_apellido" value=@Model.segundo_apellido>
                 <label>Cumpleaños:</label>
-                <input type="text" class="form-control" name="fecha_nacimiento" value=@Convert.ToString(Model.fecha_nacimiento)>
+                <input type="date" class="form-control" name="fecha_nacimiento" value=@Model.fecha_nacimiento.ToString("yyyy-MM-dd")>
                 <label>Fecha de ingreso:</label>
-                <input type="date" class="form-control" name="fecha_ingreso" value="12-10-1997">
+                <input type="date" class="form-control" name="fecha_ingreso" value=@Model.fecha_ingreso.ToString("yyyy-MM-dd")>
                 <label>Estado:</label>
-                <input type="text" class="form-control" name="estado" value=@Model.estado>
+                @if (Model.estado == "Activo")
+                {
+                    <label>Activo</label> <input class="form-control" checked="checked" id="estado" name="estado" type="radio" value="A">
+                    <label>Inactivo</label><input class="form-control" id="estado" name="estado" type="radio" value="I">
+
+                }
+                else if (Model.estado == "Inactivo")
+                {
+                    <label>Activo</label> <input class="form-control"  id="estado" name="estado" type="radio" value="A">
+                    <label>Inactivo</label><input class="form-control" checked="checked" id="estado" name="estado" type="radio" value="I">
+
+                }
+
                 <label>Desempeño:</label>
                 <input type="text" class="form-control" name="desempeno" value=@Model.desempeno>
                 <label>Supervisor:</label>
                 <input type="text" class="form-control" name="supervisor" value=@Model.supervisor>
+                <label>Tipo:</label>
+                @if (Model.tipo == "Administrador")
+                {
+                    <label>Administrador</label> <input class="form-control" checked="checked" id="Tipo" name="tipo" type="radio" value="A">
+                    <label>Supervisor</label><input class="form-control" id="Tipo" name="tipo" type="radio" value="S">
+                    <label>Colaborador</label><input class="form-control" id="Tipo" name="tipo" type="radio" value="C">
+                }
+                else if (Model.tipo == "Supervisor")
+                {
+                    <label>Administrador</label> <input class="form-control" id="Tipo" name="tipo" type="radio" value="A">
+                    <label>Supervisor</label><input class="form-control" checked="checked" id="tipo" name="Tipo" type="radio" value="S">
+                    <label>Colaborador</label><input class="form-control" id="Tipo" name="tipo" type="radio" value="C">
+                }
+                else
+                {
+                    <label>Administrador</label> <input class="form-control" id="Tipo" name="tipo" type="radio" value="A">
+                    <label>Supervisor</label><input class="form-control" id="Tipo" name="tipo" type="radio" value="S">
+                    <label>Colaborador</label><input class="form-control" checked="checked" id="tipo" name="Tipo" type="radio" value="C">
+                }
+
+
+                <input type="submit" class="form-control" value="Editar" />
             </div>
+
         </div>
         </div>
     }

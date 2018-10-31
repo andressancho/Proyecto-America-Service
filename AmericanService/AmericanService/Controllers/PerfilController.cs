@@ -24,7 +24,7 @@ namespace AmericanService.Controllers
             return View(filtrar_usuarios(Estado));
         }
 
-        public ActionResult Editar(string cedula, string nombre, string apellidos, string fecha_nacimiento, string estado)
+        public ActionResult Editar(string cedula, string primer_nombre,string segundo_nombre, string primer_apellido, string segundo_apellido, string fecha_nacimiento, string fecha_ingreso,string tipo,string supervisor,string desempeno, string estado)
         {
             try
             {
@@ -35,17 +35,17 @@ namespace AmericanService.Controllers
                 SqlCommand cmd = new SqlCommand("editar_perfil", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@cedula", cedula);
-                cmd.Parameters.AddWithValue("@nombre", nombre);
-                cmd.Parameters.AddWithValue("@apellidos", apellidos);
+                cmd.Parameters.AddWithValue("@primer_nombre", primer_nombre);
+                cmd.Parameters.AddWithValue("@segundo_nombre", segundo_nombre);
+                cmd.Parameters.AddWithValue("@primer_apellido", primer_apellido);
+                cmd.Parameters.AddWithValue("@segundo_apellido", segundo_apellido);
                 cmd.Parameters.AddWithValue("@cumpleanos", fecha_nacimiento);
-                if (estado.ToLower() == "activo")
-                {
-                    cmd.Parameters.AddWithValue("@estado", "A");
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@estado", "I");
-                }
+                cmd.Parameters.AddWithValue("@ingreso", fecha_ingreso);
+                cmd.Parameters.AddWithValue("@supervisor", supervisor);
+                //cmd.Parameters.AddWithValue("@desempeno", desempeno);
+                cmd.Parameters.AddWithValue("@estado", estado);
+                cmd.Parameters.AddWithValue("@tipo", tipo);
+                
 
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -122,24 +122,32 @@ namespace AmericanService.Controllers
                 SqlDataReader dr = cmd.ExecuteReader();
 
                 string cedula;
-                String nombre = "";
-                String apellidos = "";
+                String primer_nombre = "";
+                String segundo_nombre = "";
+                String primer_apellido = "";
+                String segundo_apellido = "";
                 DateTime fecha_nacimiento;
                 DateTime fecha_ingreso;
                 string estado;
+                string tipo;
                 string usuario;
+                string supervisor;
 
 
                 while (dr.Read())
                 {
                     cedula = Convert.ToString(dr["cedula"]);
-                    nombre = Convert.ToString(dr["nombre"]);
-                    apellidos = Convert.ToString(dr["apellidos"]);
+                    primer_nombre = Convert.ToString(dr["primer_nombre"]);
+                    segundo_nombre = Convert.ToString(dr["segundo_nombre"]);
+                    primer_apellido = Convert.ToString(dr["primer_apellido"]);
+                    segundo_apellido = Convert.ToString(dr["segundo_apellido"]);
                     fecha_ingreso = Convert.ToDateTime(dr["fecha_ingreso"]);
                     fecha_nacimiento = Convert.ToDateTime(dr["cumpleanos"]);
                     estado = Convert.ToString(dr["estado"]);
                     usuario = Convert.ToString(dr["usuario"]);
-                    lista_usuarios.Add(new Usuario(cedula, nombre, apellidos, fecha_nacimiento, fecha_ingreso, estado, usuario));
+                    tipo = Convert.ToString(dr["tipo"]);
+                    supervisor = Convert.ToString(dr["supervisor"]);
+                    lista_usuarios.Add(new Usuario(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, supervisor, fecha_ingreso, estado, tipo, usuario));
                 }
 
 
@@ -168,22 +176,32 @@ namespace AmericanService.Controllers
                 SqlDataReader dr = cmd.ExecuteReader();
 
                 string cedula;
-                String nombre = "";
-                String apellidos = "";
+                String primer_nombre = "";
+                String segundo_nombre = "";
+                String primer_apellido = "";
+                String segundo_apellido = "";
                 DateTime fecha_nacimiento;
                 DateTime fecha_ingreso;
                 string estado;
+                string tipo;
                 string usuario;
+                string supervisor;
+
+
                 while (dr.Read())
                 {
                     cedula = Convert.ToString(dr["cedula"]);
-                    nombre = Convert.ToString(dr["nombre"]);
-                    apellidos = Convert.ToString(dr["apellidos"]);
+                    primer_nombre = Convert.ToString(dr["primer_nombre"]);
+                    segundo_nombre = Convert.ToString(dr["segundo_nombre"]);
+                    primer_apellido = Convert.ToString(dr["primer_apellido"]);
+                    segundo_apellido = Convert.ToString(dr["segundo_apellido"]);
                     fecha_ingreso = Convert.ToDateTime(dr["fecha_ingreso"]);
                     fecha_nacimiento = Convert.ToDateTime(dr["cumpleanos"]);
                     estado = Convert.ToString(dr["estado"]);
                     usuario = Convert.ToString(dr["usuario"]);
-                    lista_usuarios.Add(new Usuario(cedula, nombre, apellidos, fecha_nacimiento, fecha_ingreso, estado, usuario));
+                    tipo = Convert.ToString(dr["tipo"]);
+                    supervisor = Convert.ToString(dr["supervisor"]);
+                    lista_usuarios.Add(new Usuario(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, supervisor, fecha_ingreso, estado, tipo, usuario));
                 }
 
 
@@ -221,34 +239,53 @@ namespace AmericanService.Controllers
 
 
 
-                string nombre = "";
-                string apellidos = "";
+
+                string primer_nombre = "";
+                string segundo_nombre = "";
+                string primer_apellido = "";
+                string segundo_apellido = "";
                 DateTime fecha_nacimiento;
                 DateTime fecha_ingreso;
                 string estado = "";
                 string desempeno = "";
                 string supervisor = "";
+                string tipo = "";
 
                 while (dr.Read())
                 {
 
                     cedula = Convert.ToString(dr["cedula"]);
-                    nombre = Convert.ToString(dr["nombre"]);
-                    apellidos = Convert.ToString(dr["apellidos"]);
+                    primer_nombre = Convert.ToString(dr["primer_nombre"]);
+                    segundo_nombre = Convert.ToString(dr["segundo_nombre"]);
+                    primer_apellido = Convert.ToString(dr["primer_apellido"]);
+                    segundo_apellido = Convert.ToString(dr["segundo_apellido"]);
                     fecha_nacimiento = Convert.ToDateTime(dr["cumpleanos"]);
                     fecha_ingreso = Convert.ToDateTime(dr["fecha_ingreso"]);
                     estado = Convert.ToString(dr["estado"]);
                     desempeno = Convert.ToString(dr["desempeno_pruebas"]);
                     supervisor = Convert.ToString(dr["supervisor"]);
+                    tipo = Convert.ToString(dr["tipo"]);
                     if (estado == "A")
                     {
                         estado = "Activo";
                     }
                     else
                     {
-                        estado = "No Activo";
+                        estado = "Inactivo";
                     }
-                    usuario = new Usuario(cedula, nombre, apellidos, fecha_nacimiento, fecha_ingreso, estado, desempeno, supervisor);
+                    if (tipo == "A")
+                    {
+                        tipo = "Administrador";
+                    }
+                    else if (tipo == "S")
+                    {
+                        tipo = "Supervisor";
+                    }
+                    else
+                    {
+                        tipo = "Colaborador";
+                    }
+                    usuario = new Usuario(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, fecha_ingreso, estado, desempeno, supervisor, tipo);
 
                 }
                 con.Close();

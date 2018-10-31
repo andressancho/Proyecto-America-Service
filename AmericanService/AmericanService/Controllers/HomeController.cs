@@ -51,37 +51,56 @@ namespace AmericanService.Controllers
 
                 Usuario usuario = new Usuario();
                 bool exito = false;
-                string nombre = "";
-                string apellidos = "";
+                string primer_nombre = "";
+               string segundo_nombre = "";
+                string primer_apellido = "";
+                string segundo_apellido = "";
                 DateTime fecha_nacimiento;
                 DateTime fecha_ingreso;
                 string cedula = "";
                 string estado = "";
                 string desempeno = "";
                 string supervisor = "";
+                string tipo = "";
 
                 while (dr.Read())
                 {
                     exito = true;
                     cedula = Convert.ToString(dr["cedula"]);
-                    nombre = Convert.ToString(dr["nombre"]);
-                    apellidos = Convert.ToString(dr["apellidos"]);
+                    primer_nombre = Convert.ToString(dr["primer_nombre"]);
+                    segundo_nombre = Convert.ToString(dr["segundo_nombre"]);
+                    primer_apellido = Convert.ToString(dr["primer_apellido"]);
+                    segundo_apellido = Convert.ToString(dr["segundo_apellido"]);
                     fecha_nacimiento = Convert.ToDateTime(dr["cumpleanos"]);
                     fecha_ingreso = Convert.ToDateTime(dr["fecha_ingreso"]);
                     estado = Convert.ToString(dr["estado"]);
                     desempeno = Convert.ToString(dr["desempeno_pruebas"]);
                     supervisor = Convert.ToString(dr["supervisor"]);
+                    tipo = Convert.ToString(dr["tipo"]);
                     if (estado == "A")
                     {
                         estado = "Activo";
                     }
                     else
                     {
-                        estado = "No Activo";
+                        estado = "Inactivo";
+                    }
+                    if (tipo == "A")
+                    {
+                        tipo = "Administrador";
+                    }
+                    else if (tipo == "S")
+                    {
+                        tipo = "Supervisor";
+                    }
+                    else
+                    {
+                        tipo = "Colaborador";
                     }
 
                     HttpContext.Session["usuario_actual"] = cedula;
-                    usuario = new Usuario(cedula, nombre, apellidos, fecha_nacimiento, fecha_ingreso, estado, desempeno, supervisor);
+                    HttpContext.Session["tipo_usuario"] = tipo;
+                    usuario = new Usuario(cedula, primer_nombre,segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, fecha_ingreso, estado, desempeno, supervisor,tipo);
                 }
                 con.Close();
 
