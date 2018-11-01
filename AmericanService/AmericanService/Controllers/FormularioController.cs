@@ -29,6 +29,21 @@ namespace AmericanService.Controllers
             return View("Index", filtrar_formularios(i));
         }
 
+        public ActionResult Eliminar(String cedula)
+        {
+            SqlConnection con = new SqlConnection(
+            WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+
+
+            SqlCommand cmd = new SqlCommand("eliminar_formulario", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@cedula", cedula);
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            con.Close();
+            return View("Index", obtener_formularios());
+        }
+
         public List<Formulario> filtrar_formularios(int i)
         {
             SqlConnection con = new SqlConnection(
@@ -79,7 +94,7 @@ namespace AmericanService.Controllers
                 cedula = Convert.ToString(dr["cedula"]);
                 nombre = Convert.ToString(dr["nombre"]);
                 fecha = Convert.ToDateTime(dr["fecha"]);
-                lista_formularios.Add(new Formulario(cedula, nombre, fecha));
+                lista_formularios.Add(new Formulario(nombre, cedula, fecha));
             }
 
             con.Close();
@@ -102,7 +117,7 @@ namespace AmericanService.Controllers
 
                 String cedula;
                 String nombre = "";
-                String descripcion = "";
+                //String descripcion = "";
                 DateTime fecha;
 
 
@@ -111,7 +126,7 @@ namespace AmericanService.Controllers
                     cedula = Convert.ToString(dr["cedula"]);
                     nombre = Convert.ToString(dr["nombre"]);
                     fecha = Convert.ToDateTime(dr["fecha"]);
-                    lista_formularios.Add(new Formulario(cedula, nombre, fecha));
+                    lista_formularios.Add(new Formulario(nombre, cedula, fecha));
                 }
 
                 con.Close();

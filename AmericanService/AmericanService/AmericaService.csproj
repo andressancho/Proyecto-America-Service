@@ -301,6 +301,7 @@
     <Content Include="Views\Perfil\Crear.cshtml" />
     <Content Include="Views\Formulario\Index.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Historico\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

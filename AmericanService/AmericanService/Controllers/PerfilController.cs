@@ -24,6 +24,26 @@ namespace AmericanService.Controllers
             return View(filtrar_usuarios(Estado));
         }
 
+        public ActionResult Eliminar(String cedula)
+        {
+            SqlConnection con = new SqlConnection(
+            WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+
+
+            SqlCommand cmd = new SqlCommand("eliminar_perfil", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@cedula", cedula);
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            con.Close();
+            return View("Index", obtener_usuarios());
+        }
+
+        public ActionResult Editar_otro_usuario(String cedula)
+        {
+            return View("~/Views/Perfil/Perfil.cshtml", obtener_usuario_actual(cedula));
+        }
+
         public ActionResult Editar(string cedula, string primer_nombre,string segundo_nombre, string primer_apellido, string segundo_apellido, string fecha_nacimiento, string fecha_ingreso,string tipo,string supervisor,string desempeno, string estado)
         {
             try
@@ -55,10 +75,8 @@ namespace AmericanService.Controllers
             {
 
             }
-            
-
-
-            Usuario usuario = obtener_usuario_actual();
+           
+            Usuario usuario = obtener_usuario_actual(HttpContext.Session["usuario_actual"].ToString());
             return View("~/Views/Perfil/Perfil.cshtml", usuario);
         }
 
@@ -102,7 +120,7 @@ namespace AmericanService.Controllers
         public ActionResult gestionar_perfil() {
 
 
-            Usuario usuario = obtener_usuario_actual();
+            Usuario usuario = obtener_usuario_actual(HttpContext.Session["usuario_actual"].ToString());
             return View("~/Views/Perfil/Perfil.cshtml", usuario);
 
         }
@@ -165,7 +183,7 @@ namespace AmericanService.Controllers
             List<Usuario> lista_usuarios = new List<Usuario>();
             try
             {
-                SqlConnection con = new SqlConnection(
+               SqlConnection con = new SqlConnection(
                WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
 
 
@@ -220,12 +238,12 @@ namespace AmericanService.Controllers
 
 
 
-        public Usuario obtener_usuario_actual()
+        public Usuario obtener_usuario_actual(String cedula)
         {
             Usuario usuario = new Usuario();
             try
             {
-                String cedula = HttpContext.Session["usuario_actual"].ToString();
+                //String cedula = HttpContext.Session["usuario_actual"].ToString();
 
                 SqlConnection con = new SqlConnection(
                     WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
@@ -298,4 +316,6 @@ namespace AmericanService.Controllers
             return usuario;
         }
     }
+
+   
 }

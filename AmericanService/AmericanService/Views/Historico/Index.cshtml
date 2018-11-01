@@ -49,8 +49,8 @@
                             <td>@item.cantidad</td>
 
                             <td>
-                                @Html.ActionLink("Editar", "Edit", new { cedula = item.cedula })|
-                                @Html.ActionLink("Eliminar", "Delete", new { cedula = item.cedula })
+                                @Html.ActionLink("Editar", "Editar", new { cedula = item.cedula })|
+                                @Html.ActionLink("Eliminar", "eliminar", new { cedula = item.cedula })
                             </td>
                         </tr>
                     }

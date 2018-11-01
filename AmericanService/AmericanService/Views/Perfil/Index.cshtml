@@ -71,8 +71,8 @@
                 <td>@item.usuario</td>
                 <div class="letra">
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { cedula = item.cedula })|
-                        @Html.ActionLink("Delete", "Delete", new { cedula = item.cedula })
+                        @Html.ActionLink("Editar", "Editar_otro_usuario", new { cedula = item.cedula })|
+                        @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula })
                     </td>
                 </div>
             </tr>

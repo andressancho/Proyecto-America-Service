@@ -52,7 +52,7 @@ namespace AmericanService.Controllers
                 Usuario usuario = new Usuario();
                 bool exito = false;
                 string primer_nombre = "";
-               string segundo_nombre = "";
+                string segundo_nombre = "";
                 string primer_apellido = "";
                 string segundo_apellido = "";
                 DateTime fecha_nacimiento;

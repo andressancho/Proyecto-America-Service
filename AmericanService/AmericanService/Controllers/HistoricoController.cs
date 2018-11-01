@@ -61,6 +61,21 @@ namespace AmericanService.Controllers
             return lista_historico;
         }
 
+        public ActionResult Eliminar(String cedula)
+        {
+            SqlConnection con = new SqlConnection(
+            WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+
+
+            SqlCommand cmd = new SqlCommand("eliminar_historico", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@cedula", cedula);
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            con.Close();
+            return View("Index", consulta_historico());
+        }
+
         public ActionResult Find(string buscar_string) {
             int i;
             List<Historico> lista_historico_buscar = new List<Historico>();
