@@ -3,27 +3,87 @@
     ViewBag.Title = "Crear";
     Layout = "~/Views/Shared/_Menu.cshtml";
 }
+
+@{
+    if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+        alert(@Html.Raw(Json.Encode(TempData["message"])));
+        </script>
+    }
+}
 <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/gen_validatorv4.js" type="text/javascript"></script>
 </head>
 <body>
-   
+
 
 
     <h1>Crear Perfil</h1>
-    @using (Html.BeginForm("CrearPerfil", "Perfil"))
-    {
-        <h3>Cédula: <input type="text" name="cedula"> </h3>
-        <h3>Nombre: <input type="text" name="nombre"></h3>
-        <h3>Apellidos: <input type="text" name="apellidos"></h3>
-        <h3>Cumpleaños: <input type="text" name="fecha_nacimiento"></h3>
-        <h3>Usuario: <input type="text" name="usuario"></h3>
-        <h3>Contraseña: <input type="password" name="contrasena"></h3>
-        <input type="submit" value="Crear">
-    }
+    <form action="/Perfil/CrearPerfil" method="post" id="crear">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <label>Cédula:</label>
+                    <input name="cedula" id="cedula" class="form-control" type="text">
+                    <label>Primer Nombre:</label>
+                    <input name="primer_nombre" id="primer_nombre" class="form-control" type="text">
+                    <label>Segundo Nombre:</label>
+                    <input name="segundo_nombre" id="segundo_nombre" class="form-control" type="text">
+                    <label>Primer Apellido:</label>
+                    <input name="primer_apellido" id="primer_apellido" class="form-control" type="text">
+                    <label>Segundo Apellido:</label>
+                    <input name="segundo_apellido" id="segundo_apellido" class="form-control" type="text">
+                    <label>Cumpleaños:</label>
+                    <input name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" type="date">
+                    <label>Fecha de ingreso:</label>
+                    <input name="fecha_ingreso" id="fecha_ingreso" class="form-control" type="date">
+                </div>
+                <div class="col-sm">
+                    <label>Supervisor:</label>
+                    <input name="supervisor" class="form-control" type="text">
+                    <label>Usuario:</label>
+                    <input name="usuario" id="usuario" class="form-control" type="text">
+                    <label>Contraseña:</label>
+                    <input name="contrasena" id="contrasena" class="form-control" type="password">
+                    <label>Tipo:</label>
+                    <label>Administrador</label> <input name="tipo" id="Tipo" type="radio" checked="checked" value="A">
+                    <label>Supervisor</label><input name="tipo" id="Tipo" type="radio" value="S">
+                    <label>Colaborador</label><input name="tipo" id="Tipo" type="radio" value="C">
+                    <input class="form-control btn btn-outline-primary" type="submit" value="Crear">
+                </div>
+
+            </div>
+        </div>
+    </form>
+
 </body>
+
+<script type="text/javascript">
+    var frmvalidator = new Validator("crear");
+
+
+
+    frmvalidator.addValidation("primer_nombre", "req", "Por favor ingrese el primer nombre")
+    frmvalidator.addValidation("segundo_nombre", "req", "Por favor ingrese el segundo nombre")
+    frmvalidator.addValidation("primer_apellido", "req", "Por favor ingrese el primer apellido")
+    frmvalidator.addValidation("segundo_apellido", "req", "Por favor ingrese el segundo apellido")
+    frmvalidator.addValidation("cedula", "req", "Por favor ingrese la cedula")
+    frmvalidator.addValidation("fecha_ingreso", "req", "Por favor ingrese la fecha de ingreso");
+    frmvalidator.addValidation("fecha_nacimiento", "req", "Por favor ingrese la fecha de nacimiento");
+    frmvalidator.addValidation("usuario", "req", "Por favor ingrese el usuario")
+    frmvalidator.addValidation("contrasena", "req", "Por favor ingrese la contraseña")
+
+
+
+
+
+
+
+</script>
 
