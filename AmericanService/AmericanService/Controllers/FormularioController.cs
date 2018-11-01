@@ -44,6 +44,19 @@ namespace AmericanService.Controllers
             return View("Index", obtener_formularios());
         }
 
+        public ActionResult Editar(int id_formulario)
+        {
+            return View("Edit", obtener_formulario_editar(id_formulario));
+        }
+
+        public Formulario obtener_formulario_editar(int id_formulario)
+        {
+            Formulario formulario = new Formulario();
+
+
+
+        }
+
         public List<Formulario> filtrar_formularios(int i)
         {
             SqlConnection con = new SqlConnection(
@@ -90,6 +103,7 @@ namespace AmericanService.Controllers
             String segundo_apellido = "";
             //String descripcion = "";
             DateTime fecha;
+            int id_formulario;
             List<Formulario> lista_formularios = new List<Formulario>();
 
             while (dr.Read())
@@ -100,7 +114,8 @@ namespace AmericanService.Controllers
                 primer_apellido = Convert.ToString(dr["primer_apellido"]);
                 segundo_apellido = Convert.ToString(dr["segundo_apellido"]);
                 fecha = Convert.ToDateTime(dr["fecha"]);
-                lista_formularios.Add(new Formulario(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, cedula, fecha));
+                id_formulario = Convert.ToInt16(dr["id_formulario"]);
+                lista_formularios.Add(new Formulario(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, cedula, fecha, id_formulario));
             }
 
             con.Close();
@@ -114,7 +129,7 @@ namespace AmericanService.Controllers
             try
             {
                 SqlConnection con = new SqlConnection(
-               WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+                WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
 
                 SqlCommand cmd = new SqlCommand("obtener_formularios", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -128,6 +143,7 @@ namespace AmericanService.Controllers
                 String segundo_apellido = "";
                 //String descripcion = "";
                 DateTime fecha;
+                int id_formulario;
 
 
                 while (dr.Read())
@@ -138,7 +154,8 @@ namespace AmericanService.Controllers
                     primer_apellido = Convert.ToString(dr["primer_apellido"]);
                     segundo_apellido = Convert.ToString(dr["segundo_apellido"]);
                     fecha = Convert.ToDateTime(dr["fecha"]);
-                    lista_formularios.Add(new Formulario(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, cedula, fecha));
+                    id_formulario = Convert.ToInt16(dr["id_formulario"]);
+                    lista_formularios.Add(new Formulario(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, cedula, fecha, id_formulario));
                 }
 
                 con.Close();

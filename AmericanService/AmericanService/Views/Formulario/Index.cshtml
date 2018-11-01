@@ -54,7 +54,7 @@
                 <td>@item.fecha</td>
 
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { cedula = item.cedula })|
+                    @Html.ActionLink("Editar", "Editar", new { id_formulario = item.id_formulario })|
                     @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula })
                 </td>
             </tr>
