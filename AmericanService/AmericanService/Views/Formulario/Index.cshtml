@@ -35,23 +35,29 @@
         <table id="diseno">
             <tr>
                 <th>Cédula</th>
-                <th>Nombre</th>
+                <th>Primer nombre</th>
+                <th>Segundo nombre</th>
+                <th>Primer apellido</th>
+                <th>Segundo apellido</th>
                 <th>Fecha</th>
                 <th>Opciones</th>
             </tr>
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>@item.cedula</td>
-                    <td>@item.nombre</td>
-                    <td>@item.fecha</td>
+            <tr>
+                <td>@item.cedula</td>
+                <td>@item.primer_nombre</td>
+                <td>@item.segundo_nombre</td>
+                <td>@item.primer_apellido</td>
+                <td>@item.segundo_apellido</td>
+                <td>@item.fecha</td>
 
-                    <td>
-                        @Html.ActionLink("Editar", "Edit", new { cedula = item.cedula })|
-                        @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula})
-                    </td>
-                </tr>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { cedula = item.cedula })|
+                    @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula })
+                </td>
+            </tr>
             }
 
         </table>

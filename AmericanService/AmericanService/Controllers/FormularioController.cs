@@ -84,17 +84,23 @@ namespace AmericanService.Controllers
             SqlDataReader dr = cmd.ExecuteReader();
 
             String cedula;
-            String nombre = "";
-            String descripcion = "";
+            String primer_nombre = "";
+            String segundo_nombre = "";
+            String primer_apellido = "";
+            String segundo_apellido = "";
+            //String descripcion = "";
             DateTime fecha;
             List<Formulario> lista_formularios = new List<Formulario>();
 
             while (dr.Read())
             {
                 cedula = Convert.ToString(dr["cedula"]);
-                nombre = Convert.ToString(dr["nombre"]);
+                primer_nombre = Convert.ToString(dr["primer_nombre"]);
+                segundo_nombre = Convert.ToString(dr["segundo_nombre"]);
+                primer_apellido = Convert.ToString(dr["primer_apellido"]);
+                segundo_apellido = Convert.ToString(dr["segundo_apellido"]);
                 fecha = Convert.ToDateTime(dr["fecha"]);
-                lista_formularios.Add(new Formulario(nombre, cedula, fecha));
+                lista_formularios.Add(new Formulario(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, cedula, fecha));
             }
 
             con.Close();
@@ -116,7 +122,10 @@ namespace AmericanService.Controllers
                 SqlDataReader dr = cmd.ExecuteReader();
 
                 String cedula;
-                String nombre = "";
+                String primer_nombre = "";
+                String segundo_nombre = "";
+                String primer_apellido = "";
+                String segundo_apellido = "";
                 //String descripcion = "";
                 DateTime fecha;
 
@@ -124,9 +133,12 @@ namespace AmericanService.Controllers
                 while (dr.Read())
                 {
                     cedula = Convert.ToString(dr["cedula"]);
-                    nombre = Convert.ToString(dr["nombre"]);
+                    primer_nombre = Convert.ToString(dr["primer_nombre"]);
+                    segundo_nombre = Convert.ToString(dr["segundo_nombre"]);
+                    primer_apellido = Convert.ToString(dr["primer_apellido"]);
+                    segundo_apellido = Convert.ToString(dr["segundo_apellido"]);
                     fecha = Convert.ToDateTime(dr["fecha"]);
-                    lista_formularios.Add(new Formulario(nombre, cedula, fecha));
+                    lista_formularios.Add(new Formulario(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, cedula, fecha));
                 }
 
                 con.Close();

@@ -18,11 +18,41 @@ namespace AmericanService.Controllers
           return View(consulta_historico());
         }
 
+        public ActionResult Editar(string cedula, string primer_nombre, string segundo_nombre, string primer_apellido, string segundo_apellido, string descripcion, string fecha, string cantidad)
+        {
+            try
+            {
+                SqlConnection con = new SqlConnection(
+                WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+
+
+                SqlCommand cmd = new SqlCommand("editar_historico", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@cedula", cedula);
+                cmd.Parameters.AddWithValue("@primer_nombre", primer_nombre);
+                cmd.Parameters.AddWithValue("@segundo_nombre", segundo_nombre);
+                cmd.Parameters.AddWithValue("@primer_apellido", primer_apellido);
+                cmd.Parameters.AddWithValue("@segundo_apellido", segundo_apellido);
+                cmd.Parameters.AddWithValue("@descripcion", descripcion);
+                cmd.Parameters.AddWithValue("@fecha", fecha);
+                cmd.Parameters.AddWithValue("@cantidad", cantidad);
+
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                con.Close();
+            }
+            catch (NullReferenceException)
+            {
+
+            }
+            return View("~/Views/Historico/Index.cshtml", consulta_historico());
+        }
+
         public List<Historico> consulta_historico() {
             List<Historico> lista_historico = new List<Historico>();
             try
             {
-                SqlConnection con = new SqlConnection(
+               SqlConnection con = new SqlConnection(
                WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
 
 
@@ -31,21 +61,27 @@ namespace AmericanService.Controllers
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
 
-                int cedula;
-                String nombre = "";
+                String cedula;
+                String primer_nombre = "";
+                String segundo_nombre = "";
+                String primer_apellido = "";
+                String segundo_apellido = "";
                 String descripcion = "";
                 DateTime fecha;
-                int cantidad;
+                String cantidad;
 
 
                 while (dr.Read())
                 {
-                    cedula = Convert.ToInt32(dr["cedula"]);
-                    nombre = Convert.ToString(dr["nombre"]);
+                    cedula = Convert.ToString(dr["cedula"]);
+                    primer_nombre = Convert.ToString(dr["primer_nombre"]);
+                    segundo_nombre = Convert.ToString(dr["segundo_nombre"]);
+                    primer_apellido = Convert.ToString(dr["primer_apellido"]);
+                    segundo_apellido = Convert.ToString(dr["segundo_apellido"]);
                     descripcion = Convert.ToString(dr["descripcion"]);
                     fecha = Convert.ToDateTime(dr["fecha"]);
-                    cantidad = Convert.ToInt32(dr["cantidad"]);
-                    lista_historico.Add(new Historico(cedula, nombre, descripcion, fecha, cantidad));
+                    cantidad = Convert.ToString(dr["cantidad"]);
+                    lista_historico.Add(new Historico(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, descripcion, fecha, cantidad));
                 }
 
                 //foreach (Historico h in lista_historico) {
@@ -76,6 +112,11 @@ namespace AmericanService.Controllers
             return View("Index", consulta_historico());
         }
 
+        public ActionResult Editar_btn(String cedula)
+        {
+            return View("Edit", obtener_historico_actual(cedula));
+        }
+
         public ActionResult Find(string buscar_string) {
             int i;
             List<Historico> lista_historico_buscar = new List<Historico>();
@@ -83,14 +124,14 @@ namespace AmericanService.Controllers
                 if (!String.IsNullOrEmpty(buscar_string)) {
                     if (int.TryParse(buscar_string, out i))
                     {
-                        if (h.cedula == i)
+                        if (h.cedula == i.ToString())
                         {
                             lista_historico_buscar.Add(h);
                         }
                     }
                     else
                     {
-                        if (h.nombre.Equals(buscar_string))
+                        if (h.primer_nombre.Equals(buscar_string))
                         {
                             lista_historico_buscar.Add(h);    
                         }
@@ -105,7 +146,60 @@ namespace AmericanService.Controllers
             List<Historico> lista = new List<Historico>();
             return View("Index", lista);
         }
+        public Historico obtener_historico_actual(String cedula)
+        {
+            Historico historico = new Historico();
+            try
+            {
+                //String cedula = HttpContext.Session["usuario_actual"].ToString();
 
-        
+                SqlConnection con = new SqlConnection(
+                WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+
+
+                SqlCommand cmd = new SqlCommand("obtener_historico", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@cedula", cedula);
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+
+
+                
+                string primer_nombre = "";
+                string segundo_nombre = "";
+                string primer_apellido = "";
+                string segundo_apellido = "";
+                DateTime fecha;
+                string descripcion = "";
+                string cantidad = "";
+
+                while (dr.Read())
+                {
+
+                    cedula = Convert.ToString(dr["cedula"]);
+                    primer_nombre = Convert.ToString(dr["primer_nombre"]);
+                    segundo_nombre = Convert.ToString(dr["segundo_nombre"]);
+                    primer_apellido = Convert.ToString(dr["primer_apellido"]);
+                    segundo_apellido = Convert.ToString(dr["segundo_apellido"]);
+                    fecha = Convert.ToDateTime(dr["fecha"]);
+                    descripcion = Convert.ToString(dr["descripcion"]);
+                    cantidad = Convert.ToString(dr["cantidad"]);
+
+
+                    historico = new Historico(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, descripcion, fecha, cantidad);
+
+                }
+                con.Close();
+            }
+            catch (NullReferenceException)
+            {
+
+            }
+
+            return historico;
+        }
+
+
     }
 }
