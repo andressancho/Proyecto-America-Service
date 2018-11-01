@@ -3,26 +3,37 @@
 }
 -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <title>Inicio de Sesión</title>
-</head>
+@{
+    if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+        alert(@Html.Raw(Json.Encode(TempData["message"])));
+        </script>
+    }
+}
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+            <title>Inicio de Sesión</title>
+            <script src="~/Scripts/gen_validatorv4.js" type="text/javascript"></script>
+        </head>
 
 <body class="centered-wrapper">
 
     <header>
         <div class="logo container d-flex justify-content-center align-items-center">
 
-        <img src="~/images/logo.png" alt="Logo" title="Sitio Web" width="800px">
+            <img src="~/images/logo.png" alt="Logo" title="Sitio Web" width="800px">
         </div>
 
     </header>
 
     <section>
 
-        @using (Html.BeginForm("Login", "Home"))
-        {
+        <form action="/Home/Login" method="post" id="login">
+
+
             <div class="d-flex justify-content-center ">
                 <div class="row">
                     <div class="form-group align-items-center container">
@@ -33,14 +44,28 @@
                         <input type="submit" class="btn btn-primary" value="Aceptar" />
 
                     </div>
-                    
+
                 </div>
             </div>
+
+        </form>
             
-
-        }
-
     </section>
 
 </body>
+
+<script type="text/javascript">
+    var frmvalidator = new Validator("login");
+
+
+    frmvalidator.addValidation("userid", "req", "Por favor ingrese el usuario")
+    frmvalidator.addValidation("pwd", "req", "Por favor ingrese la contraseña")
+
+
+
+
+
+
+
+</script>
 

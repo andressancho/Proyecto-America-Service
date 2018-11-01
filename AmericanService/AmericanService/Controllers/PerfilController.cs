@@ -67,7 +67,7 @@ namespace AmericanService.Controllers
             return View();
         }
 
-        public ActionResult CrearPerfil(string cedula, string nombre, string apellidos, string fecha_nacimiento, string usuario, string contrasena)
+        public ActionResult CrearPerfil(string cedula, string primer_nombre, string segundo_nombre, string primer_apellido, string segundo_apellido, string fecha_nacimiento, string fecha_ingreso, string tipo, string supervisor,string contrasena, string usuario)
         {
             try
             {
@@ -78,25 +78,36 @@ namespace AmericanService.Controllers
                 SqlCommand cmd = new SqlCommand("crear_perfil", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@cedula", cedula);
-                cmd.Parameters.AddWithValue("@nombre", nombre);
-                cmd.Parameters.AddWithValue("@apellidos", apellidos);
+                cmd.Parameters.AddWithValue("@primer_nombre", primer_nombre);
+                cmd.Parameters.AddWithValue("@segundo_nombre", segundo_nombre);
+                cmd.Parameters.AddWithValue("@primer_apellido", primer_apellido);
+                cmd.Parameters.AddWithValue("@segundo_apellido", segundo_apellido);
                 cmd.Parameters.AddWithValue("@cumpleanos", fecha_nacimiento);
-                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@ingreso", fecha_ingreso);
+                cmd.Parameters.AddWithValue("@supervisor", supervisor);
+                cmd.Parameters.AddWithValue("@tipo", tipo);
                 cmd.Parameters.AddWithValue("@contrasena", contrasena);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
 
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
+                int i=dr.RecordsAffected;
+                if (i == -1)
+                {
+                    TempData["message"] = "Ya existe un usuario con esa cedula o nombre de usuario";
+                }
                 con.Close();
             }
             catch (NullReferenceException)
             {
 
             }
-            
+            catch(SqlException)
+            {
 
+            }
 
-
-            return View("~/Views/Perfil/Crear.cshtml");
+             return View("~/Views/Perfil/Crear.cshtml");
         }
 
         public ActionResult gestionar_perfil() {
