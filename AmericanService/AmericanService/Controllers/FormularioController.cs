@@ -49,9 +49,92 @@ namespace AmericanService.Controllers
             return View("Edit", obtener_formulario_editar(id_formulario));
         }
 
-        public Formulario obtener_formulario_editar(int id_formulario)
+        public Formulario obtener_formulario_editar(int id)
         {
             Formulario formulario = new Formulario();
+            try
+            {
+                SqlConnection con = new SqlConnection(
+                WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+
+                SqlCommand cmd = new SqlCommand("obtener_formulario_editar", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_formulario", id);
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                String primer_nombre;
+                String segundo_nombre;
+                String primer_apellido;
+                String segundo_apellido;
+                String cedula;
+                int id_roleplay;
+                bool jornada_diurna;
+                bool jornada_mixta;
+                bool jornada_nocturna;
+                String justificacion_jornada;
+                DateTime fecha;
+                double salario;
+                int telefono;
+                String correo;
+                String domicilio;
+                bool exp_call_center;
+                bool exp_ventas;
+                bool exp_servicio_cliente;
+                String detalle_experiencias;
+                bool exp_cobros;
+                bool exp_mora30;
+                bool exp_mora60;
+                bool exp_mora90;
+                bool exp_cartera_separada;
+                bool exp_cobro_judicial;
+                String detalle_exp_cobros;
+                bool excel;
+                bool bachillerato;
+                int id_formulario;
+
+                while (dr.Read())
+                {
+                    primer_nombre = Convert.ToString(dr["primer_nombre"]);
+                    segundo_nombre = Convert.ToString(dr["segundo_nombre"]);
+                    primer_apellido = Convert.ToString(dr["primer_apellido"]);
+                    segundo_apellido = Convert.ToString(dr["segundo_apellido"]);
+                    cedula = Convert.ToString(dr["cedula"]);
+                    id_roleplay = 1;
+                    //id_roleplay = Convert.ToInt16(dr["id_roleplay"]);
+                    jornada_diurna = Convert.ToBoolean(dr["jornada_diurna"]);
+                    jornada_mixta = Convert.ToBoolean(dr["jornada_mixta"]);
+                    jornada_nocturna = Convert.ToBoolean(dr["jornada_nocturna"]);
+                    justificacion_jornada = Convert.ToString(dr["justificacion_jornada"]);
+                    fecha = Convert.ToDateTime(dr["fecha"]);
+                    salario = Convert.ToDouble(dr["salario"]);
+                    telefono = Convert.ToInt32(dr["telefono"]);
+                    correo = Convert.ToString(dr["correo"]);
+                    domicilio = Convert.ToString(dr["domicilio"]);
+                    exp_call_center = Convert.ToBoolean(dr["exp_call_center"]);
+                    exp_ventas = Convert.ToBoolean(dr["exp_ventas"]);
+                    exp_servicio_cliente = Convert.ToBoolean(dr["exp_servicio_cliente"]);
+                    detalle_experiencias = Convert.ToString(dr["detalle_experiencias"]);
+                    exp_cobros = Convert.ToBoolean(dr["exp_cobros"]);
+                    exp_mora30 = Convert.ToBoolean(dr["exp_mora30"]);
+                    exp_mora60 = Convert.ToBoolean(dr["exp_mora60"]);
+                    exp_mora90 = Convert.ToBoolean(dr["exp_mora90"]);
+                    exp_cartera_separada = Convert.ToBoolean(dr["exp_cartera_separada"]);
+                    exp_cobro_judicial = Convert.ToBoolean(dr["exp_cobro_judicial"]);
+                    detalle_exp_cobros = Convert.ToString(dr["detalle_exp_cobros"]);
+                    excel = Convert.ToBoolean(dr["excel"]);
+                    bachillerato = Convert.ToBoolean(dr["bachillerato"]);
+                    id_formulario = Convert.ToInt16(dr["id_formulario"]);
+                    formulario = new Formulario( id_formulario,  cedula,  primer_nombre,  segundo_nombre,  primer_apellido,  segundo_apellido,  id_roleplay,  jornada_diurna,  jornada_mixta,  jornada_nocturna,  justificacion_jornada,  fecha,  salario,  telefono,  correo,  domicilio,  exp_call_center,  exp_ventas,  exp_servicio_cliente,  detalle_experiencias,  exp_cobros,  exp_mora30,  exp_mora60,  exp_mora90,  exp_cartera_separada,  exp_cobro_judicial,  detalle_exp_cobros,  excel,  bachillerato);
+                }
+
+                con.Close();
+            }
+            catch (NullReferenceException)
+            {
+
+            }
+            return formulario;
 
 
 

@@ -18,7 +18,7 @@ namespace AmericanService.Models
         public bool jornada_nocturna;
         public String justificacion_jornada;
         public DateTime fecha;
-        public float salario;
+        public double salario;
         public int telefono;
         public String correo;
         public String domicilio;
@@ -49,7 +49,7 @@ namespace AmericanService.Models
             this.id_formulario = id_formulario;
         }
 
-        public Formulario(int id_formulario, String cedula, String primer_nombre, String segundo_nombre, String primer_apellido, String segundo_apellido, int id_roleplay, bool jornada_diurna, bool jornada_mixta, bool jornada_nocturna, String justificacion_jornada, DateTime fecha, float salario, int telefono, String correo, String domicilio, bool exp_call_center, bool exp_ventas, bool exp_servicio_cliente, String detalle_experiencias, bool exp_cobros, bool exp_mora30, bool exp_mora60, bool exp_mora90, bool exp_cartera_separada,bool exp_cobro_judicial, String detalle_exp_cobros, bool excel, bool bachillerato) {
+        public Formulario(int id_formulario, String cedula, String primer_nombre, String segundo_nombre, String primer_apellido, String segundo_apellido, int id_roleplay, bool jornada_diurna, bool jornada_mixta, bool jornada_nocturna, String justificacion_jornada, DateTime fecha, double salario, int telefono, String correo, String domicilio, bool exp_call_center, bool exp_ventas, bool exp_servicio_cliente, String detalle_experiencias, bool exp_cobros, bool exp_mora30, bool exp_mora60, bool exp_mora90, bool exp_cartera_separada,bool exp_cobro_judicial, String detalle_exp_cobros, bool excel, bool bachillerato) {
             this.id_formulario = id_formulario;
             this.cedula = cedula;
             this.primer_nombre = primer_nombre;

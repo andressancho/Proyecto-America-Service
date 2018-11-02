@@ -16,45 +16,138 @@
 <body>
     @using (Html.BeginForm("Editar", "Formulario"))
     {
-        <div class="d-flex justify-content-between align-items-baseline container">
+        <div class="container">
             <div class="row">
-                <div class="form-group">
-                    <h2>Editar Formulario</h2>
+                <div class="col-sm">
+                    <h2>Formulario</h2>
                     <br />
                     <label>Cédula:</label>
-                    <input type="text" class="form-control" name="cedula" value=@Model.cedula>
+                    <input type="text" class="form-control" name="cedula" value=@Model.cedula readonly>
                     <label>Primer nombre:</label>
-                    <input type="text" class="form-control" name="primer_nombre" value=@Model.primer_nombre>
+                    <input type="text" class="form-control" name="primer_nombre" value=@Model.primer_nombre readonly>
                     <label>Segundo nombre:</label>
-                    <input type="text" class="form-control" name="segundo_nombre" value=@Model.segundo_nombre>
+                    <input type="text" class="form-control" name="segundo_nombre" value=@Model.segundo_nombre readonly>
                     <label>Primer apellido:</label>
-                    <input type="text" class="form-control" name="primer_apellido" value=@Model.primer_apellido>
+                    <input type="text" class="form-control" name="primer_apellido" value=@Model.primer_apellido readonly>
                     <label>Segundo apellido:</label>
-                    <input type="text" class="form-control" name="segundo_apellido" value=@Model.segundo_apellido>
-                    <label>Horario:</label>
-                    <!-- <input type="date" class="form-control" name="fecha" value=@Model.horario.ToString()>
-                        -->
+                    <input type="text" class="form-control" name="segundo_apellido" value=@Model.segundo_apellido readonly>
+                    <label>id_roleplay:</label>
+                    <input type="text" class="form-control" name="id_roleplay" value=@Model.id_roleplay readonly>
+                    <label>Jornada:</label>
+                    @if (Model.jornada_diurna == true)
+                    {
+                        if (Model.jornada_mixta == true)
+                        {
+                            if (Model.jornada_nocturna == true)
+                            {
+                                <label>Diurna </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <label>Mixta </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <label>Nocturna </label><input checked="checked" id="jornada" type="radio" readonly>
+                            }
+                            else
+                            {
+                                <label>Diurna </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <label>Mixta </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <label>Nocturna </label><input id="jornada" type="radio" disabled>
+                            }
+                        }
+                        else
+                        {
+                            if (Model.jornada_nocturna == true)
+                            {
+                                <label>Diurna </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <label>Mixta </label><input id="jornada" type="radio" disabled>
+                                <label>Nocturna </label><input checked="checked" id="jornada" type="radio" readonly>
+                            }
+                            else
+                            {
+                                <label>Diurna </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <label>Mixta </label><input id="jornada" type="radio" disabled>
+                                <label>Nocturna </label><input id="jornada" type="radio" disabled>
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        if (Model.jornada_mixta == true)
+                        {
+                            if (Model.jornada_nocturna == true)
+                            {
+                                <label>Diurna </label><input id="jornada" type="radio" disabled>
+                                <label>Mixta </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <label>Nocturna </label><input checked="checked" id="jornada" type="radio" readonly>
+                            }
+                            else
+                            {
+                                <label>Diurna </label><input id="jornada" type="radio" disabled>
+                                <label>Mixta </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <label>Nocturna </label><input id="jornada" type="radio" disabled>
+                            }
+                        }
+                        else
+                        {
+                            if (Model.jornada_nocturna == true)
+                            {
+                                <label>Diurna </label><input id="jornada" type="radio" disabled>
+                                <label>Mixta </label><input id="jornada" type="radio" disabled>
+                                <label>Nocturna </label><input checked="checked" id="jornada" type="radio" readonly>
+                            }
+                            else
+                            {
+                                <label>Diurna </label><input id="jornada" type="radio" disabled>
+                                <label>Mixta </label><input id="jornada" type="radio" disabled>
+                                <label>Nocturna </label><input id="jornada" type="radio" disabled>
+                            }
+                        }
+                    }
+                    <label>Justificacion jornada:</label>
+                    <input type="text" class="form-control" name="justificacion_jornada" value=@Model.justificacion_jornada readonly>
                     <label>Fecha:</label>
-                    <input type="date" class="form-control" name="fecha" value=@Model.fecha.ToString("yyyy-MM-dd")>
+                    <input type="text" class="form-control" name="fecha" value=@Model.fecha readonly>
                     <label>Salario:</label>
+                    <input type="text" class="form-control" name="salario" value=@Model.salario readonly>
+                    <label>Telefono:</label>
+                    <input type="text" class="form-control" name="telefono" value=@Model.telefono readonly>
+                    <label>Correo:</label>
+                    <input type="text" class="form-control" name="correo" value=@Model.correo readonly>
                     <label>Domicilio:</label>
+                    <input type="text" class="form-control" name="domicilio" value=@Model.domicilio readonly>
                     <label>Experiencia en call center:</label>
-                    <label>Detalle experiencia en call center:</label>
+                    <input type="text" class="form-control" name="exp_call_center" value=@Model.exp_call_center readonly>
                     <label>Experiencia en ventas:</label>
-                    <label>Experiencia en servicios:</label>
+                    <input type="text" class="form-control" name="exp_ventas" value=@Model.exp_ventas readonly>
+                    <label>Experiencia en servicio al cliente:</label>
+                    <input type="text" class="form-control" name="exp_servicio_cliente" value=@Model.exp_servicio_cliente readonly>
+                    <label>Detalle de experiencias:</label>
+                    <input type="text" class="form-control" name="detalle_experiencias" value=@Model.detalle_experiencias readonly>
                     <label>Experiencia en cobros:</label>
-                    <label>Detalle experiencia en cobros:</label>
+                    <input type="text" class="form-control" name="exp_cobros" value=@Model.exp_cobros readonly>
                     <label>Experiencia mora 30:</label>
+                    <input type="text" class="form-control" name="exp_mora30" value=@Model.exp_mora30 readonly>
                     <label>Experiencia mora 60:</label>
+                    <input type="text" class="form-control" name="exp_mora60" value=@Model.exp_mora60 readonly>
                     <label>Experiencia mora 90:</label>
+                    <input type="text" class="form-control" name="exp_mora90" value=@Model.exp_mora90 readonly>
                     <label>Experiencia cartera separa:</label>
+                    <input type="text" class="form-control" name="exp_cartera_separada" value=@Model.exp_cartera_separada readonly>
+                    <label>Experiencia cobro judicial:</label>
+                    <input type="text" class="form-control" name="exp_cobro_judicial" value=@Model.exp_cobro_judicial readonly>
+                    <label>Detalle experiencia en cobros:</label>
+                    <input type="text" class="form-control" name="detalle_exp_cobros" value=@Model.detalle_exp_cobros readonly>
                     <label>Excel:</label>
+                    <input type="text" class="form-control" name="excel" value=@Model.excel readonly>
                     <label>Bachillerato:</label>
-                    <label>Visto bueno:</label>
-                    <br />
-                    <input type="submit" class="form-control" value="Editar" />
+                    <input type="text" class="form-control" name="bachillerato" value=@Model.bachillerato readonly>
+                    <label>id_formulario</label>
+                    <input type="text" class="form-control" name="id_formulario" value=@Model.id_formulario readonly>
                 </div>
-            </div>
+                <div class="col-sm">
+                     <h2>Roleplay</h2>
+                     <input type="submit" class="form-control" value="Editar" />
+                    
+                </div>
+                </div>
         </div>
     }
 </body>
