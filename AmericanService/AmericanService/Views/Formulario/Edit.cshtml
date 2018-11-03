@@ -34,6 +34,7 @@
                     <label>id_roleplay:</label>
                     <input type="text" class="form-control" name="id_roleplay" value=@Model.id_roleplay readonly>
                     <label>Jornada:</label>
+                    <br />
                     @if (Model.jornada_diurna == true)
                     {
                         if (Model.jornada_mixta == true)
@@ -41,13 +42,17 @@
                             if (Model.jornada_nocturna == true)
                             {
                                 <label>Diurna </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <br />
                                 <label>Mixta </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <br />
                                 <label>Nocturna </label><input checked="checked" id="jornada" type="radio" readonly>
                             }
                             else
                             {
                                 <label>Diurna </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <br />
                                 <label>Mixta </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <br />
                                 <label>Nocturna </label><input id="jornada" type="radio" disabled>
                             }
                         }
@@ -56,13 +61,17 @@
                             if (Model.jornada_nocturna == true)
                             {
                                 <label>Diurna </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <br />
                                 <label>Mixta </label><input id="jornada" type="radio" disabled>
+                                <br />
                                 <label>Nocturna </label><input checked="checked" id="jornada" type="radio" readonly>
                             }
                             else
                             {
                                 <label>Diurna </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <br />
                                 <label>Mixta </label><input id="jornada" type="radio" disabled>
+                                <br />
                                 <label>Nocturna </label><input id="jornada" type="radio" disabled>
                             }
                         }
@@ -75,13 +84,17 @@
                             if (Model.jornada_nocturna == true)
                             {
                                 <label>Diurna </label><input id="jornada" type="radio" disabled>
+                                <br />
                                 <label>Mixta </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <br />
                                 <label>Nocturna </label><input checked="checked" id="jornada" type="radio" readonly>
                             }
                             else
                             {
                                 <label>Diurna </label><input id="jornada" type="radio" disabled>
+                                <br />
                                 <label>Mixta </label><input checked="checked" id="jornada" type="radio" readonly>
+                                <br />
                                 <label>Nocturna </label><input id="jornada" type="radio" disabled>
                             }
                         }
@@ -90,20 +103,27 @@
                             if (Model.jornada_nocturna == true)
                             {
                                 <label>Diurna </label><input id="jornada" type="radio" disabled>
+                                <br />
                                 <label>Mixta </label><input id="jornada" type="radio" disabled>
+                                <br />
                                 <label>Nocturna </label><input checked="checked" id="jornada" type="radio" readonly>
                             }
                             else
                             {
                                 <label>Diurna </label><input id="jornada" type="radio" disabled>
+                                <br />
                                 <label>Mixta </label><input id="jornada" type="radio" disabled>
+                                <br />
                                 <label>Nocturna </label><input id="jornada" type="radio" disabled>
                             }
                         }
                     }
+                    <br />
                     <label>Justificacion jornada:</label>
-                    <input type="text" class="form-control" name="justificacion_jornada" value=@Model.justificacion_jornada readonly>
-                    <label>Fecha:</label>
+                    <br />
+                    <textarea autofocus="@Model.justificacion_jornada" readonly></textarea>
+                    <!--<input type="text" class="form-control" name="justificacion_jornada" value=@Model.justificacion_jornada readonly>-->
+                    <label></label>
                     <input type="text" class="form-control" name="fecha" value=@Model.fecha readonly>
                     <label>Salario:</label>
                     <input type="text" class="form-control" name="salario" value=@Model.salario readonly>
@@ -114,31 +134,108 @@
                     <label>Domicilio:</label>
                     <input type="text" class="form-control" name="domicilio" value=@Model.domicilio readonly>
                     <label>Experiencia en call center:</label>
-                    <input type="text" class="form-control" name="exp_call_center" value=@Model.exp_call_center readonly>
+                    @if (Model.exp_call_center == true)
+                    {
+                        <input type="text" class="form-control" value="Si" readonly>
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control" value="No" readonly>
+                    }
                     <label>Experiencia en ventas:</label>
-                    <input type="text" class="form-control" name="exp_ventas" value=@Model.exp_ventas readonly>
+                    @if (Model.exp_ventas == true)
+                    {
+                        <input type="text" class="form-control" value="Si" readonly>
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control" value="No" readonly>
+                    }
                     <label>Experiencia en servicio al cliente:</label>
-                    <input type="text" class="form-control" name="exp_servicio_cliente" value=@Model.exp_servicio_cliente readonly>
+                    @if (Model.exp_servicio_cliente == true)
+                    {
+                        <input type="text" class="form-control" value="Si" readonly>
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control" value="No" readonly>
+                    }
                     <label>Detalle de experiencias:</label>
                     <input type="text" class="form-control" name="detalle_experiencias" value=@Model.detalle_experiencias readonly>
                     <label>Experiencia en cobros:</label>
-                    <input type="text" class="form-control" name="exp_cobros" value=@Model.exp_cobros readonly>
+                    @if (Model.exp_cobros == true)
+                    {
+                        <input type="text" class="form-control" value="Si" readonly>
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control" value="No" readonly>
+                    }
                     <label>Experiencia mora 30:</label>
-                    <input type="text" class="form-control" name="exp_mora30" value=@Model.exp_mora30 readonly>
+                    @if (Model.exp_mora30 == true)
+                    {
+                        <input type="text" class="form-control" value="Si" readonly>
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control" value="No" readonly>
+                    }
                     <label>Experiencia mora 60:</label>
-                    <input type="text" class="form-control" name="exp_mora60" value=@Model.exp_mora60 readonly>
+                    @if (Model.exp_mora60 == true)
+                    {
+                        <input type="text" class="form-control" value="Si" readonly>
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control" value="No" readonly>
+                    }
                     <label>Experiencia mora 90:</label>
-                    <input type="text" class="form-control" name="exp_mora90" value=@Model.exp_mora90 readonly>
+                    @if (Model.exp_mora90 == true)
+                    {
+                        <input type="text" class="form-control" value="Si" readonly>
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control" value="No" readonly>
+                    }
                     <label>Experiencia cartera separa:</label>
-                    <input type="text" class="form-control" name="exp_cartera_separada" value=@Model.exp_cartera_separada readonly>
+                    @if (Model.exp_cartera_separada == true)
+                    {
+                        <input type="text" class="form-control" value="Si" readonly>
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control" value="No" readonly>
+                    }
                     <label>Experiencia cobro judicial:</label>
-                    <input type="text" class="form-control" name="exp_cobro_judicial" value=@Model.exp_cobro_judicial readonly>
+                    @if (Model.exp_cobro_judicial == true)
+                    {
+                        <input type="text" class="form-control" value="Si" readonly>
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control" value="No" readonly>
+                    }
                     <label>Detalle experiencia en cobros:</label>
                     <input type="text" class="form-control" name="detalle_exp_cobros" value=@Model.detalle_exp_cobros readonly>
                     <label>Excel:</label>
-                    <input type="text" class="form-control" name="excel" value=@Model.excel readonly>
+                    @if (Model.excel == true)
+                    {
+                        <input type="text" class="form-control" value="Si" readonly>
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control" value="No" readonly>
+                    }
                     <label>Bachillerato:</label>
-                    <input type="text" class="form-control" name="bachillerato" value=@Model.bachillerato readonly>
+                    @if (Model.bachillerato == true)
+                    {
+                        <input type="text" class="form-control" value="Si" readonly>
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control" value="No" readonly>
+                    }
                     <label>id_formulario</label>
                     <input type="text" class="form-control" name="id_formulario" value=@Model.id_formulario readonly>
                 </div>
