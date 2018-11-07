@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Configuration;
 using System.Data.SqlClient;
 using AmericanService.Models;
+using AmericanService.PDF;
 
 namespace AmericanService.Controllers
 {
@@ -43,6 +44,19 @@ namespace AmericanService.Controllers
         {
             return View("~/Views/Perfil/Perfil.cshtml", obtener_usuario_actual(cedula));
         }
+
+        public ActionResult Descargar_PDF(String cedula)
+        {
+            return obtener_usuario_PDF(obtener_usuario_actual(cedula));
+        }
+
+        public ActionResult obtener_usuario_PDF(Usuario usuario) {
+            ArchivoPDF archivoPDF = new ArchivoPDF();
+            byte[] abytes = archivoPDF.PrepararPDF(usuario);
+            return File(abytes, "application/pdf");
+        }
+
+
 
         public ActionResult Editar(string cedula, string primer_nombre,string segundo_nombre, string primer_apellido, string segundo_apellido, string fecha_nacimiento, string fecha_ingreso,string tipo,string supervisor,string desempeno, string estado)
         {
@@ -246,9 +260,7 @@ namespace AmericanService.Controllers
             
             return lista_usuarios;
         }
-
-
-
+        
         public Usuario obtener_usuario_actual(String cedula)
         {
             Usuario usuario = new Usuario();

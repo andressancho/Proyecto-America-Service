@@ -52,6 +52,8 @@ namespace AmericanService.Controllers
         public Formulario obtener_formulario_editar(int id)
         {
             Formulario formulario = new Formulario();
+            Roleplay roleplay = new Roleplay();
+
             try
             {
                 SqlConnection con = new SqlConnection(
@@ -92,6 +94,9 @@ namespace AmericanService.Controllers
                 bool excel;
                 bool bachillerato;
                 int id_formulario;
+                DateTime fecha_roleplay;
+                String detalle;
+                String visto_bueno;
 
                 while (dr.Read())
                 {
@@ -100,8 +105,7 @@ namespace AmericanService.Controllers
                     primer_apellido = Convert.ToString(dr["primer_apellido"]);
                     segundo_apellido = Convert.ToString(dr["segundo_apellido"]);
                     cedula = Convert.ToString(dr["cedula"]);
-                    id_roleplay = 1;
-                    //id_roleplay = Convert.ToInt16(dr["id_roleplay"]);
+                    id_roleplay = Convert.ToInt16(dr["id_roleplay"]);
                     jornada_diurna = Convert.ToBoolean(dr["jornada_diurna"]);
                     jornada_mixta = Convert.ToBoolean(dr["jornada_mixta"]);
                     jornada_nocturna = Convert.ToBoolean(dr["jornada_nocturna"]);
@@ -125,7 +129,11 @@ namespace AmericanService.Controllers
                     excel = Convert.ToBoolean(dr["excel"]);
                     bachillerato = Convert.ToBoolean(dr["bachillerato"]);
                     id_formulario = Convert.ToInt16(dr["id_formulario"]);
-                    formulario = new Formulario( id_formulario,  cedula,  primer_nombre,  segundo_nombre,  primer_apellido,  segundo_apellido,  id_roleplay,  jornada_diurna,  jornada_mixta,  jornada_nocturna,  justificacion_jornada,  fecha,  salario,  telefono,  correo,  domicilio,  exp_call_center,  exp_ventas,  exp_servicio_cliente,  detalle_experiencias,  exp_cobros,  exp_mora30,  exp_mora60,  exp_mora90,  exp_cartera_separada,  exp_cobro_judicial,  detalle_exp_cobros,  excel,  bachillerato);
+                    fecha_roleplay = Convert.ToDateTime(dr["fecha_roleplay"]);
+                    detalle = Convert.ToString(dr["detalle"]);
+                    visto_bueno = Convert.ToString(dr["visto_bueno"]);
+                    roleplay = new Roleplay(id_roleplay, fecha_roleplay, detalle, visto_bueno);
+                    formulario = new Formulario(id_formulario,  cedula,  primer_nombre,  segundo_nombre,  primer_apellido,  segundo_apellido,  id_roleplay,  jornada_diurna,  jornada_mixta,  jornada_nocturna,  justificacion_jornada,  fecha,  salario,  telefono,  correo,  domicilio,  exp_call_center,  exp_ventas,  exp_servicio_cliente,  detalle_experiencias,  exp_cobros,  exp_mora30,  exp_mora60,  exp_mora90,  exp_cartera_separada,  exp_cobro_judicial,  detalle_exp_cobros,  excel,  bachillerato, roleplay);
                 }
 
                 con.Close();
@@ -138,6 +146,31 @@ namespace AmericanService.Controllers
 
 
 
+        }
+
+        public ActionResult Edit(int id_roleplay, DateTime fecha_roleplay, String detalle, String visto_bueno) {
+            try
+            {
+                SqlConnection con = new SqlConnection(
+                WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+
+
+                SqlCommand cmd = new SqlCommand("editar_roleplay", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_roleplay", id_roleplay);
+                cmd.Parameters.AddWithValue("@fecha_roleplay", fecha_roleplay);
+                cmd.Parameters.AddWithValue("@detalle", detalle);
+                cmd.Parameters.AddWithValue("@visto_bueno", visto_bueno);
+
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                con.Close();
+            }
+            catch (NullReferenceException)
+            {
+
+            }
+            return View("~/Views/Formulario/Index.cshtml", obtener_formularios());
         }
 
         public List<Formulario> filtrar_formularios(int i)

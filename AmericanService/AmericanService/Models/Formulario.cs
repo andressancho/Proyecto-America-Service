@@ -36,6 +36,7 @@ namespace AmericanService.Models
         public bool excel;
         public bool bachillerato;
         public int id_formulario;
+        public Roleplay roleplay;
 
 
         public Formulario(String primer_nombre, String segundo_nombre, String primer_apellido, String segundo_apellido, String cedula, DateTime fecha, int id_formulario)
@@ -49,7 +50,7 @@ namespace AmericanService.Models
             this.id_formulario = id_formulario;
         }
 
-        public Formulario(int id_formulario, String cedula, String primer_nombre, String segundo_nombre, String primer_apellido, String segundo_apellido, int id_roleplay, bool jornada_diurna, bool jornada_mixta, bool jornada_nocturna, String justificacion_jornada, DateTime fecha, double salario, int telefono, String correo, String domicilio, bool exp_call_center, bool exp_ventas, bool exp_servicio_cliente, String detalle_experiencias, bool exp_cobros, bool exp_mora30, bool exp_mora60, bool exp_mora90, bool exp_cartera_separada,bool exp_cobro_judicial, String detalle_exp_cobros, bool excel, bool bachillerato) {
+        public Formulario(int id_formulario, String cedula, String primer_nombre, String segundo_nombre, String primer_apellido, String segundo_apellido, int id_roleplay, bool jornada_diurna, bool jornada_mixta, bool jornada_nocturna, String justificacion_jornada, DateTime fecha, double salario, int telefono, String correo, String domicilio, bool exp_call_center, bool exp_ventas, bool exp_servicio_cliente, String detalle_experiencias, bool exp_cobros, bool exp_mora30, bool exp_mora60, bool exp_mora90, bool exp_cartera_separada,bool exp_cobro_judicial, String detalle_exp_cobros, bool excel, bool bachillerato, Roleplay roleplay) {
             this.id_formulario = id_formulario;
             this.cedula = cedula;
             this.primer_nombre = primer_nombre;
@@ -79,6 +80,7 @@ namespace AmericanService.Models
             this.detalle_exp_cobros = detalle_exp_cobros;
             this.excel = excel;
             this.bachillerato = bachillerato;
+            this.roleplay = roleplay;
         }
 
         public Formulario() {

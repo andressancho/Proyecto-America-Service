@@ -72,7 +72,9 @@
                 <div class="letra">
                     <td>
                         @Html.ActionLink("Editar", "Editar_otro_usuario", new { cedula = item.cedula })|
+                        @Html.ActionLink("Descargar","Descargar_PDF", new {cedula = item.cedula})|
                         @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula })
+
                     </td>
                 </div>
             </tr>
