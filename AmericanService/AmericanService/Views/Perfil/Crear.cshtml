@@ -25,7 +25,7 @@
 
 
     <h1>Crear Perfil</h1>
-    <form action="/Perfil/CrearPerfil" method="post" id="crear">
+    <form action="/Perfil/CrearPerfil"  method="post" id="crear">
         <div class="container">
             <div class="row">
                 <div class="col-sm">
@@ -52,6 +52,7 @@
                     <label>Contraseña:</label>
                     <input name="contrasena" id="contrasena" class="form-control" type="password">
                     <label>Tipo:</label>
+                    <br />
                     <label>Administrador</label> <input name="tipo" id="Tipo" type="radio" checked="checked" value="A">
                     <label>Supervisor</label><input name="tipo" id="Tipo" type="radio" value="S">
                     <label>Colaborador</label><input name="tipo" id="Tipo" type="radio" value="C">
@@ -78,12 +79,6 @@
     frmvalidator.addValidation("fecha_nacimiento", "req", "Por favor ingrese la fecha de nacimiento");
     frmvalidator.addValidation("usuario", "req", "Por favor ingrese el usuario")
     frmvalidator.addValidation("contrasena", "req", "Por favor ingrese la contraseña")
-
-
-
-
-
-
 
 </script>
 

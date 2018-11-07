@@ -1,11 +1,22 @@
 ﻿
+@model  IEnumerable<AmericanService.Models.Usuario>
 @{
+    ViewBag.Title = "Perfiles";
+    if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+        alert(@Html.Raw(Json.Encode(TempData["message"])));
+        </script>
+    }
 
     Layout = "~/Views/Shared/_Menu.cshtml";
+
+
+
 }
 
 
-@model  IEnumerable<AmericanService.Models.Usuario>
+
 
 <head>
     <meta charset='utf-8'>
@@ -72,12 +83,13 @@
                 <div class="letra">
                     <td>
                         @Html.ActionLink("Editar", "Editar_otro_usuario", new { cedula = item.cedula })|
-                        @Html.ActionLink("Descargar","Descargar_PDF", new {cedula = item.cedula})|
-                        @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula })
+                        @Html.ActionLink("Descargar", "Descargar_PDF", new { cedula = item.cedula })|
+                        @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula }, new { onclick = "return confirm('¿Seguro que quieres eliminar este perfil?');" })
 
                     </td>
                 </div>
             </tr>
+
             }
 
         </table>

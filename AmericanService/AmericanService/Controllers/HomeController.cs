@@ -106,8 +106,16 @@ namespace AmericanService.Controllers
 
                 if (exito)
                 {
-                    //Response.Write(" <h2> Bienvenido </h2>" + nombre + " " + apellidos);       
-                    return View("~/Views/Perfil/Perfil.cshtml", usuario);
+                    //Response.Write(" <h2> Bienvenido </h2>" + nombre + " " + apellidos);    
+                    if (tipo == "Administrador")
+                    {
+                        return View("~/Views/Perfil/Perfil.cshtml", "~/Views/Shared/_Menu.cshtml", usuario);
+                    }
+                    else if (tipo=="Colaborador"){
+                        return View("~/Views/Perfil/Perfil.cshtml", "~/Views/Shared/_Menu_Colaborador.cshtml", usuario);
+                    }   
+                    
+                    
                 }
                 else
                 {
@@ -125,6 +133,13 @@ namespace AmericanService.Controllers
             }
 
             
+            return View("Index");
+        }
+        public ActionResult Logout()
+        {
+            HttpContext.Session["usuario_actual"] = " ";
+            HttpContext.Session["tipo_usuario"] = " ";
+
             return View("Index");
         }
     }

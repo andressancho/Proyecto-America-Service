@@ -1,17 +1,10 @@
-﻿
-@model  AmericanService.Models.Usuario
-@{
-    ViewBag.Title = "Perfil";
-    if (TempData["message"] != null)
-    {
-        <script type="text/javascript">
-        alert(@Html.Raw(Json.Encode(TempData["message"])));
-        </script>
-    }
-
+﻿@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    
 }
 
-
+@model  AmericanService.Models.Usuario
 
 
 <head>
@@ -24,9 +17,9 @@
 </head>
 <body>
 
-    <form action="/Perfil/Editar" method="post" id="editar">
+    <form action="/Perfil/Editar_otro_perfil" method="post" id="editar">
         <div class="container">
-            <h1>Mi Perfil</h1>
+            <h1>Editar Perfil</h1>
             <input type="hidden" name="ced" id="ced" value=@Model.cedula>
             <div class="row">
                 <div class="col-sm">
@@ -103,27 +96,9 @@
 
 
     frmvalidator.addValidation("primer_nombre", "req", "Por favor ingrese el primer nombre")
+    frmvalidator.addValidation("segundo_nombre", "req", "Por favor ingrese el segundo nombre")
     frmvalidator.addValidation("primer_apellido", "req", "Por favor ingrese el primer apellido")
     frmvalidator.addValidation("segundo_apellido", "req", "Por favor ingrese el segundo apellido")
     frmvalidator.addValidation("cedula", "req", "Por favor ingrese la cedula")
 
 </script>
-<script type="text/javascript">
-
-
-    history.pushState(null, null, "../Perfil/gestionar_perfil");
-    window.onpopstate = function () {
-        history.go(1);
-    };
-</script>
-
-
-
-
-
-
-
-
-
-
-

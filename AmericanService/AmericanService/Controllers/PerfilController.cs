@@ -42,8 +42,9 @@ namespace AmericanService.Controllers
 
         public ActionResult Editar_otro_usuario(String cedula)
         {
-            return View("~/Views/Perfil/Perfil.cshtml", obtener_usuario_actual(cedula));
+            return View("~/Views/Perfil/Edit.cshtml", obtener_usuario_actual(cedula));
         }
+
 
         public ActionResult Descargar_PDF(String cedula)
         {
@@ -58,7 +59,9 @@ namespace AmericanService.Controllers
 
 
 
-        public ActionResult Editar(string cedula, string primer_nombre,string segundo_nombre, string primer_apellido, string segundo_apellido, string fecha_nacimiento, string fecha_ingreso,string tipo,string supervisor,string desempeno, string estado)
+ 
+        public ActionResult Editar(string cedula, string ced, string primer_nombre,string segundo_nombre, string primer_apellido, string segundo_apellido, string fecha_nacimiento, string fecha_ingreso,string tipo,string supervisor,string desempeno, string estado)
+
         {
             try
             {
@@ -69,6 +72,7 @@ namespace AmericanService.Controllers
                 SqlCommand cmd = new SqlCommand("editar_perfil", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@cedula", cedula);
+                cmd.Parameters.AddWithValue("@ced", ced);
                 cmd.Parameters.AddWithValue("@primer_nombre", primer_nombre);
                 cmd.Parameters.AddWithValue("@segundo_nombre", segundo_nombre);
                 cmd.Parameters.AddWithValue("@primer_apellido", primer_apellido);
@@ -89,9 +93,66 @@ namespace AmericanService.Controllers
             {
 
             }
-           
+            catch(SqlException)
+            {
+                TempData["message"] = "Ya existe un usuario con la misma cedula";
+            }
+
+            HttpContext.Session["usuario_actual"] = ced;
             Usuario usuario = obtener_usuario_actual(HttpContext.Session["usuario_actual"].ToString());
-            return View("~/Views/Perfil/Perfil.cshtml", usuario);
+
+            if (tipo == "Administrador")
+            {
+                return View("~/Views/Perfil/Perfil.cshtml", "~/Views/Shared/_Menu.cshtml", usuario);
+            }
+            else if (tipo == "Colaborador")
+            {
+                return View("~/Views/Perfil/Perfil.cshtml", "~/Views/Shared/_Menu_Colaborador.cshtml", usuario);
+            }
+            else
+            {
+                return View("~/Views/Perfil/Perfil.cshtml", "~/Views/Shared/_Menu.cshtml", usuario);
+            }
+            
+        }
+        public ActionResult Editar_otro_perfil(string cedula, string ced, string primer_nombre, string segundo_nombre, string primer_apellido, string segundo_apellido, string fecha_nacimiento, string fecha_ingreso, string tipo, string supervisor, string desempeno, string estado)
+        {
+            try
+            {
+                SqlConnection con = new SqlConnection(
+                WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+
+
+                SqlCommand cmd = new SqlCommand("editar_perfil", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@cedula", cedula);
+                cmd.Parameters.AddWithValue("@ced", ced); 
+                cmd.Parameters.AddWithValue("@primer_nombre", primer_nombre);
+                cmd.Parameters.AddWithValue("@segundo_nombre", segundo_nombre);
+                cmd.Parameters.AddWithValue("@primer_apellido", primer_apellido);
+                cmd.Parameters.AddWithValue("@segundo_apellido", segundo_apellido);
+                cmd.Parameters.AddWithValue("@cumpleanos", fecha_nacimiento);
+                cmd.Parameters.AddWithValue("@ingreso", fecha_ingreso);
+                cmd.Parameters.AddWithValue("@supervisor", supervisor);
+                //cmd.Parameters.AddWithValue("@desempeno", desempeno);
+                cmd.Parameters.AddWithValue("@estado", estado);
+                cmd.Parameters.AddWithValue("@tipo", tipo);
+
+
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                con.Close();
+            }
+            catch (NullReferenceException)
+            {
+
+            }
+            catch (SqlException)
+            {
+                TempData["message"] = "Ya existe un usuario con la misma cedula";
+            }
+
+            return View("~/Views/Perfil/Index.cshtml", obtener_usuarios());
         }
 
         public ActionResult Crear()
@@ -146,6 +207,15 @@ namespace AmericanService.Controllers
 
 
             Usuario usuario = obtener_usuario_actual(HttpContext.Session["usuario_actual"].ToString());
+            String tipo = HttpContext.Session["tipo_usuario"].ToString();
+            if (tipo == "Administrador")
+            {
+                return View("~/Views/Perfil/Perfil.cshtml", "~/Views/Shared/_Menu.cshtml", usuario);
+            }
+            else if (tipo == "Colaborador")
+            {
+                return View("~/Views/Perfil/Perfil.cshtml", "~/Views/Shared/_Menu_Colaborador.cshtml", usuario);
+            }
             return View("~/Views/Perfil/Perfil.cshtml", usuario);
 
         }
