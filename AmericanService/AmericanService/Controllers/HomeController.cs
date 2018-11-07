@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Configuration;
 using System.Data.SqlClient;
 using AmericanService.Models;
+using System.Web.SessionState;
 
 namespace AmericanService.Controllers
 {
@@ -106,6 +107,7 @@ namespace AmericanService.Controllers
 
                 if (exito)
                 {
+                    Session["Sid"] = Session.SessionID;
                     //Response.Write(" <h2> Bienvenido </h2>" + nombre + " " + apellidos);    
                     if (tipo == "Administrador")
                     {

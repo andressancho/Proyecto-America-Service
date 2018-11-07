@@ -1,6 +1,10 @@
 ﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Menu.cshtml";
+    if (Session["Sid"] == null)
+    {
+        Response.Redirect("../Home/Index");
+    }
 }
 
 
@@ -17,15 +21,15 @@
         <br />
         <div>
 
-            @using (Html.BeginForm("Index", "Formulario"))
+            @using (Html.BeginForm("Filtrar", "Formulario"))
             {
 
-                <lable>Call Center</lable> <input id="call_center" name="call_center" type="checkbox">
+                <lable>Call Center</lable> <input id="call_center" name="call_center" type="checkbox" value="1">
                 <label>Ventas</label><input id="ventas" name="ventas" type="checkbox" value="1">
-                <lable>Cobros</lable> <input id="cobros" name="cobros" type="checkbox">
-                <label>Servicio al Cliente</label><input id="servicio_cliente" name="servicio_cliente" type="checkbox">
-                <lable>Excel</lable> <input id="excel" name="excel" type="checkbox">
-                <label>Bachillerato</label><input id="bachillerato" name="bachillerato" type="checkbox">
+                <lable>Cobros</lable> <input id="cobros" name="cobros" type="checkbox" value="1">
+                <label>Servicio al Cliente</label><input id="servicio_cliente" name="servicio_cliente" type="checkbox" value="1">
+                <lable>Excel</lable> <input id="excel" name="excel" type="checkbox" value="1">
+                <label>Bachillerato</label><input id="bachillerato" name="bachillerato" type="checkbox" value="1">
                 <input type="submit" value="Filtrar">
             }
 
@@ -45,21 +49,21 @@
 
             @foreach (var item in Model)
             {
-            <tr>
-                <td>@item.cedula</td>
-                <td>@item.primer_nombre</td>
-                <td>@item.segundo_nombre</td>
-                <td>@item.primer_apellido</td>
-                <td>@item.segundo_apellido</td>
-                <td>@item.fecha</td>
+                <tr>
+                    <td>@item.cedula</td>
+                    <td>@item.primer_nombre</td>
+                    <td>@item.segundo_nombre</td>
+                    <td>@item.primer_apellido</td>
+                    <td>@item.segundo_apellido</td>
+                    <td>@item.fecha</td>
 
-                <td>
+                    <td>
 
-                    @Html.ActionLink("Editar", "Editar", new { id_formulario = item.id_formulario })|
-                    @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula }, new { onclick = "return confirm('¿Seguro que quieres eliminar este formulario?');" })
+                        @Html.ActionLink("Editar", "Editar", new { id_formulario = item.id_formulario })|
+                        @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula }, new { onclick = "return confirm('¿Seguro que quieres eliminar este formulario?');" })
 
-                </td>
-            </tr>
+                    </td>
+                </tr>
             }
 
         </table>

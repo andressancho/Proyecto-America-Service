@@ -8,6 +8,10 @@
         alert(@Html.Raw(Json.Encode(TempData["message"])));
         </script>
     }
+    if (Session["Sid"] == null)
+    {
+        Response.Redirect("../Home/Index");
+    }
 
 }
 

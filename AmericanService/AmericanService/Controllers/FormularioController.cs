@@ -23,10 +23,33 @@ namespace AmericanService.Controllers
             return View(obtener_formularios());
         }
 
-        public ActionResult Filtrar(int i)
+        public ActionResult Filtrar(string ventas, string cobros, string call_center, string servicio_cliente, string excel, string bachillerato)
         {
-
-            return View("Index", filtrar_formularios(i));
+            if (ventas == null)
+            {
+                ventas = "0";
+            }
+            if (cobros == null)
+            {
+                cobros = "0";
+            }
+            if (call_center == null)
+            {
+                call_center = "0";
+            }
+            if (servicio_cliente == null)
+            {
+                servicio_cliente = "0";
+            }
+            if (excel == null)
+            {
+                excel = "0";
+            }
+            if (bachillerato == null)
+            {
+                bachillerato = "0";
+            }
+            return View("Index", filtrar_formularios(ventas, cobros, bachillerato, excel, servicio_cliente, call_center));
         }
 
         public ActionResult Eliminar(String cedula)
@@ -142,6 +165,7 @@ namespace AmericanService.Controllers
             {
 
             }
+            catch (SqlException) { }
             return formulario;
 
 
@@ -173,45 +197,8 @@ namespace AmericanService.Controllers
             return View("~/Views/Formulario/Index.cshtml", obtener_formularios());
         }
 
-        public List<Formulario> filtrar_formularios(int i)
+        public List<Formulario> filtrar_formularios(string ventas, string cobros, string excel, string bachillerato, string servicio_cliente, string call_center)
         {
-            SqlConnection con = new SqlConnection(
-               WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
-            SqlCommand cmd;
-
-            if (i == 1)
-            {
-                cmd = new SqlCommand("obtener_por_exp_callcenter", con);
-            }
-            else if (i == 2)
-            {
-                cmd = new SqlCommand("obtener_por_exp_servicio_cliente", con);
-            }
-            else if (i == 3)
-            {
-                cmd = new SqlCommand("obtener_por_exp_cobros", con);
-            }
-            else if (i == 4)
-            {
-                cmd = new SqlCommand("obtener_por_exp_ventas", con);
-            }
-            else if (i == 5)
-            {
-                cmd = new SqlCommand("obtener_por_excel", con);
-            }
-            else if (i == 6)
-            {
-                cmd = new SqlCommand("obtener_por_excel", con);
-            }
-            else
-            {
-                cmd = new SqlCommand("obtener_bachillerato", con);
-            }
-
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-
             String cedula;
             String primer_nombre = "";
             String segundo_nombre = "";
@@ -221,20 +208,53 @@ namespace AmericanService.Controllers
             DateTime fecha;
             int id_formulario;
             List<Formulario> lista_formularios = new List<Formulario>();
-
-            while (dr.Read())
+            try
             {
-                cedula = Convert.ToString(dr["cedula"]);
-                primer_nombre = Convert.ToString(dr["primer_nombre"]);
-                segundo_nombre = Convert.ToString(dr["segundo_nombre"]);
-                primer_apellido = Convert.ToString(dr["primer_apellido"]);
-                segundo_apellido = Convert.ToString(dr["segundo_apellido"]);
-                fecha = Convert.ToDateTime(dr["fecha"]);
-                id_formulario = Convert.ToInt16(dr["id_formulario"]);
-                lista_formularios.Add(new Formulario(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, cedula, fecha, id_formulario));
-            }
+                SqlConnection con = new SqlConnection(
+               WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+                SqlCommand cmd;
 
-            con.Close();
+
+
+                cmd = new SqlCommand("filtrar_formularios", con);
+
+
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ventas", ventas);
+                cmd.Parameters.AddWithValue("@cobros", cobros);
+                cmd.Parameters.AddWithValue("@excel", excel);
+                cmd.Parameters.AddWithValue("@bachillerato", bachillerato);
+                cmd.Parameters.AddWithValue("@servicio_cliente", servicio_cliente);
+                cmd.Parameters.AddWithValue("@call_center", call_center);
+
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                
+
+                while (dr.Read())
+                {
+                    cedula = Convert.ToString(dr["cedula"]);
+                    primer_nombre = Convert.ToString(dr["primer_nombre"]);
+                    segundo_nombre = Convert.ToString(dr["segundo_nombre"]);
+                    primer_apellido = Convert.ToString(dr["primer_apellido"]);
+                    segundo_apellido = Convert.ToString(dr["segundo_apellido"]);
+                    fecha = Convert.ToDateTime(dr["fecha"]);
+                    id_formulario = Convert.ToInt16(dr["id_formulario"]);
+                    lista_formularios.Add(new Formulario(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, cedula, fecha, id_formulario));
+                }
+
+                con.Close();
+            }
+            catch (NullReferenceException)
+            {
+
+            }
+            catch (SqlException)
+            {
+
+            }
+            
             return lista_formularios;
         }
 

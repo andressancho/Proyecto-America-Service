@@ -1,7 +1,11 @@
 ﻿@{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Menu.cshtml";
-    
+    if (Session["Sid"] == null)
+    {
+        Response.Redirect("../Home/Index");
+    }
+
 }
 
 @model  AmericanService.Models.Usuario

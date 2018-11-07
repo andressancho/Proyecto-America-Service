@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Menu.cshtml";
+    if (Session["Sid"] == null)
+    {
+        Response.Redirect("../Home/Index");
+    }
 }
 @model  IEnumerable<AmericanService.Models.Historico>
 

@@ -205,7 +205,10 @@ namespace AmericanService.Controllers
 
         public ActionResult gestionar_perfil() {
 
-
+            if (Session["Sid"] == null)
+            {
+                return View("~/Views/Home/Index.cshtml");
+            }
             Usuario usuario = obtener_usuario_actual(HttpContext.Session["usuario_actual"].ToString());
             String tipo = HttpContext.Session["tipo_usuario"].ToString();
             if (tipo == "Administrador")

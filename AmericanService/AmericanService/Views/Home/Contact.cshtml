@@ -1,5 +1,9 @@
 ﻿@{
     ViewBag.Title = "Reclutamiento";
+    if (Session["Sid"] == null)
+    {
+        Response.Redirect("../Home/Index");
+    }
 }
 <!--
 <h2>ViewBag.Title.</h2>
