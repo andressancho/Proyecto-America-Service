@@ -55,7 +55,7 @@
 
                 <td>
                     @Html.ActionLink("Editar", "Edit", new { cedula = item.cedula })|
-                    @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula })
+                    @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula }, new { onclick = "return confirm('¿Seguro que quieres eliminar este formulario?');" })
                 </td>
             </tr>
             }

@@ -1,11 +1,22 @@
 ﻿
+@model  IEnumerable<AmericanService.Models.Usuario>
 @{
+    ViewBag.Title = "Perfiles";
+    if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+        alert(@Html.Raw(Json.Encode(TempData["message"])));
+        </script>
+    }
 
     Layout = "~/Views/Shared/_Menu.cshtml";
+
+
+
 }
 
 
-@model  IEnumerable<AmericanService.Models.Usuario>
+
 
 <head>
     <meta charset='utf-8'>
@@ -57,25 +68,25 @@
 
             @foreach (var item in Model)
             {
-            <tr>
-                <td>@item.cedula</td>
-                <td>@item.primer_nombre</td>
-                <td>@item.segundo_nombre</td>
-                <td>@item.primer_apellido</td>
-                <td>@item.segundo_apellido</td>
-                <td>@item.estado</td>
-                <td>@item.tipo</td>
-                <td>@item.fecha_ingreso</td>
-                <td>@item.fecha_nacimiento</td>
-                <td>@item.supervisor</td>
-                <td>@item.usuario</td>
-                <div class="letra">
-                    <td>
-                        @Html.ActionLink("Editar", "Editar_otro_usuario", new { cedula = item.cedula })|
-                        @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula })
-                    </td>
-                </div>
-            </tr>
+                <tr>
+                    <td>@item.cedula</td>
+                    <td>@item.primer_nombre</td>
+                    <td>@item.segundo_nombre</td>
+                    <td>@item.primer_apellido</td>
+                    <td>@item.segundo_apellido</td>
+                    <td>@item.estado</td>
+                    <td>@item.tipo</td>
+                    <td>@item.fecha_ingreso</td>
+                    <td>@item.fecha_nacimiento</td>
+                    <td>@item.supervisor</td>
+                    <td>@item.usuario</td>
+                    <div class="letra">
+                        <td>
+                            @Html.ActionLink("Editar", "Editar_otro_usuario", new { cedula = item.cedula })|
+                            @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula },new { onclick = "return confirm('¿Seguro que quieres eliminar este perfil?');" })
+                        </td>
+                    </div>
+                </tr>
             }
 
         </table>

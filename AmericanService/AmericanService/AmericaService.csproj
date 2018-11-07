@@ -305,6 +305,7 @@
     <Content Include="Views\Historico\Edit.cshtml" />
     <Content Include="Views\Formulario\Edit.cshtml" />
     <Content Include="Views\Perfil\Edit.cshtml" />
+    <Content Include="Views\Shared\_Menu_Colaborador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

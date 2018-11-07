@@ -1,10 +1,17 @@
 ﻿
+@model  AmericanService.Models.Usuario
 @{
     ViewBag.Title = "Perfil";
-    Layout = "~/Views/Shared/_Menu.cshtml";
+    if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+        alert(@Html.Raw(Json.Encode(TempData["message"])));
+        </script>
+    }
+
 }
 
-@model  AmericanService.Models.Usuario
+
 
 
 <head>
@@ -16,10 +23,11 @@
     <script src="~/Scripts/gen_validatorv4.js" type="text/javascript"></script>
 </head>
 <body>
-    
+
     <form action="/Perfil/Editar" method="post" id="editar">
         <div class="container">
             <h1>Mi Perfil</h1>
+            <input type="hidden" name="ced" id="ced" value=@Model.cedula>
             <div class="row">
                 <div class="col-sm">
 
@@ -34,10 +42,10 @@
                     <label>Segundo Apellido:</label>
                     <input type="text" class="form-control" name="segundo_apellido" id="segundo_apellido" value=@Model.segundo_apellido>
                     <label>Cumpleaños:</label>
-                    <input type="date" class="form-control" name="fecha_nacimiento"  value=@Model.fecha_nacimiento.ToString("yyyy-MM-dd")>
+                    <input type="date" class="form-control" name="fecha_nacimiento" value=@Model.fecha_nacimiento.ToString("yyyy-MM-dd")>
                     <label>Fecha de ingreso:</label>
                     <input type="date" class="form-control" name="fecha_ingreso" value=@Model.fecha_ingreso.ToString("yyyy-MM-dd")>
-                    
+
                 </div>
                 <div class="col-sm">
                     <label>Estado:</label>
@@ -86,7 +94,7 @@
 
             </div>
         </div>
-    </form>  
+    </form>
 </body>
 
 <script type="text/javascript">
@@ -95,12 +103,26 @@
 
 
     frmvalidator.addValidation("primer_nombre", "req", "Por favor ingrese el primer nombre")
-    frmvalidator.addValidation("segundo_nombre", "req", "Por favor ingrese el segundo nombre")
     frmvalidator.addValidation("primer_apellido", "req", "Por favor ingrese el primer apellido")
     frmvalidator.addValidation("segundo_apellido", "req", "Por favor ingrese el segundo apellido")
     frmvalidator.addValidation("cedula", "req", "Por favor ingrese la cedula")
 
 </script>
+<script type="text/javascript">
+
+
+    history.pushState(null, null, "../Perfil/gestionar_perfil");
+    window.onpopstate = function () {
+        history.go(1);
+    };
+</script>
+
+
+
+
+
+
+
 
 
 

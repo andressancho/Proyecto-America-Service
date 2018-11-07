@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Menu.cshtml";
+    
 }
 
 @model  AmericanService.Models.Usuario
@@ -19,6 +20,7 @@
     <form action="/Perfil/Editar_otro_perfil" method="post" id="editar">
         <div class="container">
             <h1>Editar Perfil</h1>
+            <input type="hidden" name="ced" id="ced" value=@Model.cedula>
             <div class="row">
                 <div class="col-sm">
 
