@@ -25,6 +25,34 @@ namespace AmericanService.Controllers
             return View(filtrar_usuarios(Estado));
         }
 
+        public ActionResult Buscar(string buscar_string)
+        {
+            int i;
+            List<Usuario> lista_perfiles_buscar = new List<Usuario>();
+            foreach (Usuario h in obtener_usuarios())
+            {
+                if (!String.IsNullOrEmpty(buscar_string))
+                {
+                    if (int.TryParse(buscar_string, out i))
+                    {
+                        if (h.cedula == i.ToString())
+                        {
+                            lista_perfiles_buscar.Add(h);
+                        }
+                    }
+                    else
+                    {
+                        if (h.primer_nombre.Equals(buscar_string) || h.segundo_nombre.Equals(buscar_string) || h.primer_apellido.Equals(buscar_string) || h.segundo_apellido.Equals(buscar_string))
+                        {
+                            lista_perfiles_buscar.Add(h);
+                        }
+                    }
+
+                }
+            }
+            return View("Index", lista_perfiles_buscar);
+        }
+
         public ActionResult Eliminar(String cedula)
         {
             SqlConnection con = new SqlConnection(

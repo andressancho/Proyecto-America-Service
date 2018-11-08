@@ -117,7 +117,7 @@ namespace AmericanService.Controllers
             return View("Edit", obtener_historico_actual(cedula));
         }
 
-        public ActionResult Find(string buscar_string) {
+        public ActionResult Buscar(string buscar_string) {
             int i;
             List<Historico> lista_historico_buscar = new List<Historico>();
             foreach (Historico h in consulta_historico()) {
@@ -131,7 +131,7 @@ namespace AmericanService.Controllers
                     }
                     else
                     {
-                        if (h.primer_nombre.Equals(buscar_string))
+                        if (h.primer_nombre.Equals(buscar_string) || h.segundo_nombre.Equals(buscar_string) || h.primer_apellido.Equals(buscar_string) || h.segundo_apellido.Equals(buscar_string))
                         {
                             lista_historico_buscar.Add(h);    
                         }

@@ -36,7 +36,11 @@
                     <label>Segundo apellido:</label>
                     <input type="text" class="form-control" name="segundo_apellido" value=@Model.segundo_apellido>
                     <label>Descripción:</label>
-                    <input type="text" class="form-control" name="descripcion" value=@Model.descripcion>
+                    <textarea class="form-control"
+                              id="descripcion"
+                              name="descripcion"
+                              rows="4"
+                              cols="20">@Model.descripcion</textarea>
                     <label>Fecha:</label>
                     <input type="date" class="form-control" name="fecha" value=@Model.fecha.ToString("yyyy-MM-dd")>
                     <label>Cantidad:</label>
