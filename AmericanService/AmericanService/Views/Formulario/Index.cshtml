@@ -19,6 +19,13 @@
     <div class="margen">
         <h2>Formularios</h2>
         <br />
+        @using (Html.BeginForm("Buscar", "Formulario"))
+        {
+            <label>Buscar:</label>
+            <input type="text" id="buscar_string" name="buscar_string">
+            <input type="submit" value="Aceptar" />
+        }
+        <br />
         <div>
 
             @using (Html.BeginForm("Filtrar", "Formulario"))

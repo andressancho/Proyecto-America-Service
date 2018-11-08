@@ -26,15 +26,15 @@
                     <h2>Formulario</h2>
                     <br />
                     <label>Cédula:</label>
-                    <input type="text" class="form-control" name="cedula" value=@Model.cedula readonly>
+                    <input type="text" class="form-control" name="cedula" readonly value=@Model.cedula >
                     <label>Primer nombre:</label>
                     <input type="text" class="form-control" name="primer_nombre" readonly value=@Model.primer_nombre>
                     <label>Segundo nombre:</label>
                     <input type="text" class="form-control" name="segundo_nombre" readonly value=@Model.segundo_nombre>
                     <label>Primer apellido:</label>
-                    <input type="text" class="form-control" name="primer_apellido" value=@Model.primer_apellido readonly>
+                    <input type="text" class="form-control" name="primer_apellido" readonly value=@Model.primer_apellido >
                     <label>Segundo apellido:</label>
-                    <input type="text" class="form-control" name="segundo_apellido" value=@Model.segundo_apellido readonly>
+                    <input type="text" class="form-control" name="segundo_apellido" readonly value=@Model.segundo_apellido >
                     <input type="hidden" class="form-control" name="id_roleplay" value=@Model.id_roleplay>
                     <label>Jornada:</label>
                     <br />
@@ -124,18 +124,22 @@
                     <br />
                     <label>Justificacion jornada:</label>
                     <br />
-                    <textarea readonly>@Model.justificacion_jornada</textarea>
-                    <!--<input type="text" class="form-control" name="justificacion_jornada" value=@Model.justificacion_jornada readonly>-->
+                    <textarea class="form-control"
+                              id="justificacion_jornada"
+                              name="justificacion_jornada"
+                              rows="4"
+                              cols="20"
+                              readonly>@Model.justificacion_jornada</textarea>
                     <label>Fecha:</label>
-                    <input type="text" class="form-control" name="fecha" value=@Model.fecha readonly>
+                    <input type="text" class="form-control" name="fecha" readonly value=@Model.fecha >
                     <label>Salario:</label>
-                    <input type="text" class="form-control" name="salario" value=@Model.salario readonly>
+                    <input type="text" class="form-control" name="salario" readonly value=@Model.salario >
                     <label>Telefono:</label>
-                    <input type="text" class="form-control" name="telefono" value=@Model.telefono readonly>
+                    <input type="text" class="form-control" name="telefono" readonly value=@Model.telefono >
                     <label>Correo:</label>
-                    <input type="text" class="form-control" name="correo" value=@Model.correo readonly>
+                    <input type="text" class="form-control" name="correo" readonly value=@Model.correo >
                     <label>Domicilio:</label>
-                    <input type="text" class="form-control" name="domicilio" value=@Model.domicilio readonly>
+                    <input type="text" class="form-control" name="domicilio" readonly value=@Model.domicilio >
                     <label>Experiencia en call center:</label>
                     @if (Model.exp_call_center == true)
                     {
@@ -164,7 +168,12 @@
                         <input type="text" class="form-control" value="No" readonly>
                     }
                     <label>Detalle de experiencias:</label>
-                    <input type="text" class="form-control" name="detalle_experiencias" value=@Model.detalle_experiencias readonly>
+                    <textarea class="form-control"
+                              id="detalle_experiencias"
+                              name="detalle_experiencias"
+                              rows="4"
+                              cols="20"
+                              readonly>@Model.detalle_experiencias</textarea>
                     <label>Experiencia en cobros:</label>
                     @if (Model.exp_cobros == true)
                     {
@@ -220,7 +229,13 @@
                         <input type="text" class="form-control" value="No" readonly>
                     }
                     <label>Detalle experiencia en cobros:</label>
-                    <input type="text" class="form-control" name="detalle_exp_cobros" value=@Model.detalle_exp_cobros readonly>
+                    <textarea class="form-control"
+                              readonly
+                              id="detalle_exp_cobros"
+                              name="detalle_exp_cobros"
+                              rows="4"
+                              cols="20"
+                              >@Model.detalle_exp_cobros</textarea>
                     <label>Excel:</label>
                     @if (Model.excel == true)
                     {
@@ -247,16 +262,40 @@
                     <label>Fecha:</label>
                     <input type="date" class="form-control" name="fecha_roleplay" value=@Model.roleplay.fecha.ToString("yyyy-MM-dd")>
                     <label>Detalle:</label>
-                    <input type="text" class="form-control" name="detalle" value=@Model.roleplay.detalle>
+                    <textarea class="form-control"
+                              id="detalle"
+                              name="detalle"
+                              rows="4"
+                              cols="20">@Model.roleplay.detalle</textarea>
                     <label>Visto Bueno:</label>
                     <br />
-                    <label>Si:</label><input checked="checked" id="visto" name="visto_bueno" type="radio" value="S">
+                    @if (Model.roleplay.visto_bueno == "S")
+                    {
+                        <label>Si:</label><input checked="checked" id="visto" name="visto_bueno" type="radio" value="S">
+                        <br />
+                        <label>No:</label><input id="visto" name="visto_bueno" type="radio" value="N">
+                        <br />
+                        <label>Sin definir:</label><input id="visto" name="visto_bueno" type="radio" value="D">
+                    }
+                    else if (Model.roleplay.visto_bueno == "N")
+                    {
+                        <label>Si:</label><input id="visto" name="visto_bueno" type="radio" value="S">
+                        <br />
+                        <label>No:</label><input checked="checked" id="visto" name="visto_bueno" type="radio" value="N">
+                        <br />
+                        <label>Sin definir:</label><input id="visto" name="visto_bueno" type="radio" value="D">
+                    }
+                    else
+                    {
+                        <label>Si:</label><input id="visto" name="visto_bueno" type="radio" value="S">
+                        <br />
+                        <label>No:</label><input id="visto" name="visto_bueno" type="radio" value="N">
+                        <br />
+                        <label>Sin definir:</label><input checked="checked" id="visto" name="visto_bueno" type="radio" value="D">
+                    }
+
                     <br />
-                    <label>No:</label><input id="visto" name="visto_bueno" type="radio" value="N">
-                    <br />
-                    <label>Sin definir:</label><input checked="checked" id="visto" name="visto_bueno" type="radio" value="D">
-                    <br />
-                    <label>Prueba de mecanografía:</label>
+                    <label>Nota prueba de mecanografía:</label>
                     <input type="text" class="form-control" name="mecanografia">
                     <br />
                     <input type="submit" class="form-control" value="Editar" />

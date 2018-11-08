@@ -23,6 +23,34 @@ namespace AmericanService.Controllers
             return View(obtener_formularios());
         }
 
+        public ActionResult Buscar(string buscar_string)
+        {
+            int i;
+            List<Formulario> lista_formulario_buscar = new List<Formulario>();
+            foreach (Formulario h in obtener_formularios())
+            {
+                if (!String.IsNullOrEmpty(buscar_string))
+                {
+                    if (int.TryParse(buscar_string, out i))
+                    {
+                        if (h.cedula == i.ToString())
+                        {
+                            lista_formulario_buscar.Add(h);
+                        }
+                    }
+                    else
+                    {
+                        if (h.primer_nombre.Equals(buscar_string) || h.segundo_nombre.Equals(buscar_string) || h.primer_apellido.Equals(buscar_string) || h.segundo_apellido.Equals(buscar_string))
+                        {
+                            lista_formulario_buscar.Add(h);
+                        }
+                    }
+
+                }
+            }
+            return View("Index", lista_formulario_buscar);
+        }
+
         public ActionResult Filtrar(string ventas, string cobros, string call_center, string servicio_cliente, string excel, string bachillerato)
         {
             if (ventas == null)

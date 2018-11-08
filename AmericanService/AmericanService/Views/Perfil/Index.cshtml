@@ -34,6 +34,13 @@
 <body>
     <div class="margen">
         <h2>Colaboradores</h2>
+        <br />
+        @using (Html.BeginForm("Buscar", "Perfil"))
+        {
+            <label>Buscar:</label>
+            <input type="text" id="buscar_string" name="buscar_string">
+            <input type="submit" value="Aceptar" />
+        }
 
         <br />
         <div>
@@ -72,27 +79,27 @@
 
             @foreach (var item in Model)
             {
-            <tr>
-                <td>@item.cedula</td>
-                <td>@item.primer_nombre</td>
-                <td>@item.segundo_nombre</td>
-                <td>@item.primer_apellido</td>
-                <td>@item.segundo_apellido</td>
-                <td>@item.estado</td>
-                <td>@item.tipo</td>
-                <td>@item.fecha_ingreso</td>
-                <td>@item.fecha_nacimiento</td>
-                <td>@item.supervisor</td>
-                <td>@item.usuario</td>
-                <div class="letra">
-                    <td>
-                        @Html.ActionLink("Editar", "Editar_otro_usuario", new { cedula = item.cedula })|
-                        @Html.ActionLink("Descargar", "Descargar_PDF", new { cedula = item.cedula })|
-                        @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula }, new { onclick = "return confirm('¿Seguro que quieres eliminar este perfil?');" })
+                <tr>
+                    <td>@item.cedula</td>
+                    <td>@item.primer_nombre</td>
+                    <td>@item.segundo_nombre</td>
+                    <td>@item.primer_apellido</td>
+                    <td>@item.segundo_apellido</td>
+                    <td>@item.estado</td>
+                    <td>@item.tipo</td>
+                    <td>@item.fecha_ingreso</td>
+                    <td>@item.fecha_nacimiento</td>
+                    <td>@item.supervisor</td>
+                    <td>@item.usuario</td>
+                    <div class="letra">
+                        <td>
+                            @Html.ActionLink("Editar", "Editar_otro_usuario", new { cedula = item.cedula })|
+                            @Html.ActionLink("Descargar", "Descargar_PDF", new { cedula = item.cedula })|
+                            @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula }, new { onclick = "return confirm('¿Seguro que quieres eliminar este perfil?');" })
 
-                    </td>
-                </div>
-            </tr>
+                        </td>
+                    </div>
+                </tr>
 
             }
 
