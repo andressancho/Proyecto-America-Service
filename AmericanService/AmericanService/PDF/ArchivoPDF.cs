@@ -116,7 +116,7 @@ namespace AmericanService.PDF
             _pdfTable.AddCell(_pdfCell);
             _pdfTable.CompleteRow();
             
-            _pdfCell = new PdfPCell(new Phrase("Cumpleaños:" + " " + _usuario.fecha_nacimiento.ToString() + "\n\n", _fontStyle));
+            _pdfCell = new PdfPCell(new Phrase("Cumpleaños:" + " " + _usuario.fecha_nacimiento.ToString("dd-MMM-yyyy") + "\n\n", _fontStyle));
             _pdfCell.Colspan = _totalColumn;
             _pdfCell.HorizontalAlignment = Element.ALIGN_LEFT;
             _pdfCell.Border = 0;
@@ -125,7 +125,7 @@ namespace AmericanService.PDF
             _pdfTable.AddCell(_pdfCell);
             _pdfTable.CompleteRow();
            
-            _pdfCell = new PdfPCell(new Phrase("Fecha de ingreso:" + " " + _usuario.fecha_ingreso.ToString() + "\n\n", _fontStyle));
+            _pdfCell = new PdfPCell(new Phrase("Fecha de ingreso:" + " " + _usuario.fecha_ingreso.ToString("dd-MMM-yyyy") + "\n\n", _fontStyle));
             _pdfCell.Colspan = _totalColumn;
             _pdfCell.HorizontalAlignment = Element.ALIGN_LEFT;
             _pdfCell.Border = 0;
