@@ -54,16 +54,25 @@ namespace AmericanService.Controllers
 
         public ActionResult Eliminar(String cedula)
         {
-            SqlConnection con = new SqlConnection(
-            WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+            try
+            {
+                SqlConnection con = new SqlConnection(
+                WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
 
 
-            SqlCommand cmd = new SqlCommand("eliminar_formulario", con);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@cedula", cedula);
-            con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-            con.Close();
+                SqlCommand cmd = new SqlCommand("eliminar_formulario", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_formulario", cedula);
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                con.Close();
+            }
+            catch (Exception)
+            {
+
+            }
+            
+            
             return View("Index", obtener_formularios());
         }
 
@@ -120,6 +129,7 @@ namespace AmericanService.Controllers
                 DateTime fecha_roleplay;
                 String detalle;
                 String visto_bueno;
+                int mecanografia;
 
                 while (dr.Read())
                 {
@@ -155,7 +165,8 @@ namespace AmericanService.Controllers
                     fecha_roleplay = Convert.ToDateTime(dr["fecha_roleplay"]);
                     detalle = Convert.ToString(dr["detalle"]);
                     visto_bueno = Convert.ToString(dr["visto_bueno"]);
-                    roleplay = new Roleplay(id_roleplay, fecha_roleplay, detalle, visto_bueno);
+                    mecanografia = Convert.ToInt32(dr["mecanografia"]);
+                    roleplay = new Roleplay(id_roleplay, fecha_roleplay, detalle, visto_bueno, mecanografia);
                     formulario = new Formulario(id_formulario,  cedula,  primer_nombre,  segundo_nombre,  primer_apellido,  segundo_apellido,  id_roleplay,  jornada_diurna,  jornada_mixta,  jornada_nocturna,  justificacion_jornada,  fecha,  salario,  telefono,  correo,  domicilio,  exp_call_center,  exp_ventas,  exp_servicio_cliente,  detalle_experiencias,  exp_cobros,  exp_mora30,  exp_mora60,  exp_mora90,  exp_cartera_separada,  exp_cobro_judicial,  detalle_exp_cobros,  excel,  bachillerato, roleplay);
                 }
 
@@ -172,7 +183,7 @@ namespace AmericanService.Controllers
 
         }
 
-        public ActionResult Edit(int id_roleplay, DateTime fecha_roleplay, String detalle, String visto_bueno) {
+        public ActionResult Edit(int id_roleplay, DateTime fecha_roleplay, String detalle, String visto_bueno, string mecanografia) {
             try
             {
                 SqlConnection con = new SqlConnection(
@@ -185,6 +196,7 @@ namespace AmericanService.Controllers
                 cmd.Parameters.AddWithValue("@fecha_roleplay", fecha_roleplay);
                 cmd.Parameters.AddWithValue("@detalle", detalle);
                 cmd.Parameters.AddWithValue("@visto_bueno", visto_bueno);
+                cmd.Parameters.AddWithValue("@mecanografia", Convert.ToInt32(mecanografia));
 
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();

@@ -16,11 +16,14 @@ namespace AmericanService.Models
         public DateTime fecha_ingreso { get; set; }
         public string estado { get; set; }
         public string desempeno { get; set; }
+        public int productividad { get; set; }
+        public int pruebas { get; set; }
+        public int habilidades_blandas { get; set; }
         public string supervisor { get; set; }
         public string usuario { get; set; }
         public string tipo { get; set; }
 
-        public Usuario(string cedula, string primer_nombre, string segundo_nombre, string primer_apellido, string segundo_apellido, DateTime fecha_nacimiento, DateTime fecha_ingreso, string estado, string desempeno, string supervisor, string tipo)
+        public Usuario(string cedula, string primer_nombre, string segundo_nombre, string primer_apellido, string segundo_apellido, DateTime fecha_nacimiento, DateTime fecha_ingreso, string estado, string desempeno, string supervisor, string tipo, int productividad, int pruebas, int habilidades_blandas)
         {
             this.cedula = cedula;
             this.primer_nombre = primer_nombre;
@@ -33,11 +36,14 @@ namespace AmericanService.Models
             this.desempeno = desempeno;
             this.supervisor = supervisor;
             this.tipo = tipo;
+            this.productividad = productividad;
+            this.pruebas = pruebas;
+            this.habilidades_blandas = habilidades_blandas;
         }
 
         public Usuario() {
         }
-        public Usuario(string cedula, string primer_nombre, string segundo_nombre, string primer_apellido, string segundo_apellido, DateTime fecha_nacimiento, string supervisor, DateTime fecha_ingreso, string estado, string tipo, string usuario)
+        public Usuario(string cedula, string primer_nombre, string segundo_nombre, string primer_apellido, string segundo_apellido, DateTime fecha_nacimiento, string supervisor, DateTime fecha_ingreso, string estado, string tipo, string usuario, string desempeno, int productividad, int pruebas, int habilidades_blandas)
         {
             this.cedula = cedula;
             this.primer_nombre = primer_nombre;
@@ -50,6 +56,10 @@ namespace AmericanService.Models
             this.tipo = tipo;
             this.usuario = usuario;
             this.supervisor = supervisor;
+            this.desempeno = desempeno;
+            this.productividad = productividad;
+            this.pruebas = pruebas;
+            this.habilidades_blandas = habilidades_blandas;
         }
     }
 }

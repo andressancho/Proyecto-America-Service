@@ -60,7 +60,7 @@ namespace AmericanService.Controllers
 
 
  
-        public ActionResult Editar(string cedula, string ced, string primer_nombre,string segundo_nombre, string primer_apellido, string segundo_apellido, string fecha_nacimiento, string fecha_ingreso,string tipo,string supervisor,string desempeno, string estado)
+        public ActionResult Editar(string cedula, string ced, string primer_nombre,string segundo_nombre, string primer_apellido, string segundo_apellido, string fecha_nacimiento, string fecha_ingreso,string tipo,string supervisor,string desempeno, string estado,string productividad, string pruebas, string habilidades)
 
         {
             try
@@ -80,6 +80,9 @@ namespace AmericanService.Controllers
                 cmd.Parameters.AddWithValue("@cumpleanos", fecha_nacimiento);
                 cmd.Parameters.AddWithValue("@ingreso", fecha_ingreso);
                 cmd.Parameters.AddWithValue("@supervisor", supervisor);
+                cmd.Parameters.AddWithValue("@productividad", Convert.ToInt32(productividad));
+                cmd.Parameters.AddWithValue("@pruebas", Convert.ToInt32(pruebas));
+                cmd.Parameters.AddWithValue("@habilidades_blandas", Convert.ToInt32(habilidades));
                 //cmd.Parameters.AddWithValue("@desempeno", desempeno);
                 cmd.Parameters.AddWithValue("@estado", estado);
                 cmd.Parameters.AddWithValue("@tipo", tipo);
@@ -115,7 +118,7 @@ namespace AmericanService.Controllers
             }
             
         }
-        public ActionResult Editar_otro_perfil(string cedula, string ced, string primer_nombre, string segundo_nombre, string primer_apellido, string segundo_apellido, string fecha_nacimiento, string fecha_ingreso, string tipo, string supervisor, string desempeno, string estado)
+        public ActionResult Editar_otro_perfil(string cedula, string ced, string primer_nombre, string segundo_nombre, string primer_apellido, string segundo_apellido, string fecha_nacimiento, string fecha_ingreso, string tipo, string supervisor, string desempeno, string estado, string productividad, string pruebas, string habilidades)
         {
             try
             {
@@ -134,6 +137,9 @@ namespace AmericanService.Controllers
                 cmd.Parameters.AddWithValue("@cumpleanos", fecha_nacimiento);
                 cmd.Parameters.AddWithValue("@ingreso", fecha_ingreso);
                 cmd.Parameters.AddWithValue("@supervisor", supervisor);
+                cmd.Parameters.AddWithValue("@productividad", Convert.ToInt32(productividad));
+                cmd.Parameters.AddWithValue("@pruebas", Convert.ToInt32(pruebas));
+                cmd.Parameters.AddWithValue("@habilidades_blandas", Convert.ToInt32(habilidades));
                 //cmd.Parameters.AddWithValue("@desempeno", desempeno);
                 cmd.Parameters.AddWithValue("@estado", estado);
                 cmd.Parameters.AddWithValue("@tipo", tipo);
@@ -248,6 +254,8 @@ namespace AmericanService.Controllers
                 string tipo;
                 string usuario;
                 string supervisor;
+                string desempeno;
+                int productividad, pruebas, habilidades_blandas;
 
 
                 while (dr.Read())
@@ -263,7 +271,11 @@ namespace AmericanService.Controllers
                     usuario = Convert.ToString(dr["usuario"]);
                     tipo = Convert.ToString(dr["tipo"]);
                     supervisor = Convert.ToString(dr["supervisor"]);
-                    lista_usuarios.Add(new Usuario(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, supervisor, fecha_ingreso, estado, tipo, usuario));
+                    desempeno = Convert.ToString(dr["desempeno"]);
+                    productividad = Convert.ToInt32(dr["productividad"]);
+                    pruebas = Convert.ToInt32(dr["pruebas"]);
+                    habilidades_blandas = Convert.ToInt32(dr["habilidades_blandas"]);
+                    lista_usuarios.Add(new Usuario(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, supervisor, fecha_ingreso, estado, tipo, usuario,desempeno,productividad,pruebas, habilidades_blandas));
                 }
 
 
@@ -317,7 +329,7 @@ namespace AmericanService.Controllers
                     usuario = Convert.ToString(dr["usuario"]);
                     tipo = Convert.ToString(dr["tipo"]);
                     supervisor = Convert.ToString(dr["supervisor"]);
-                    lista_usuarios.Add(new Usuario(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, supervisor, fecha_ingreso, estado, tipo, usuario));
+                    lista_usuarios.Add(new Usuario(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, supervisor, fecha_ingreso, estado, tipo, usuario,"",1,1,1));
                 }
 
 
@@ -364,6 +376,7 @@ namespace AmericanService.Controllers
                 string desempeno = "";
                 string supervisor = "";
                 string tipo = "";
+                int productividad, pruebas, habilidades_blandas;
 
                 while (dr.Read())
                 {
@@ -376,7 +389,10 @@ namespace AmericanService.Controllers
                     fecha_nacimiento = Convert.ToDateTime(dr["cumpleanos"]);
                     fecha_ingreso = Convert.ToDateTime(dr["fecha_ingreso"]);
                     estado = Convert.ToString(dr["estado"]);
-                    desempeno = Convert.ToString(dr["desempeno_pruebas"]);
+                    desempeno = Convert.ToString(dr["desempeno"]);
+                    productividad = Convert.ToInt32(dr["productividad"]);
+                    pruebas = Convert.ToInt32(dr["pruebas"]);
+                    habilidades_blandas = Convert.ToInt32(dr["habilidades_blandas"]);
                     supervisor = Convert.ToString(dr["supervisor"]);
                     tipo = Convert.ToString(dr["tipo"]);
                     if (estado == "A")
@@ -399,7 +415,7 @@ namespace AmericanService.Controllers
                     {
                         tipo = "Colaborador";
                     }
-                    usuario = new Usuario(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, fecha_ingreso, estado, desempeno, supervisor, tipo);
+                    usuario = new Usuario(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, fecha_ingreso, estado, desempeno, supervisor, tipo, productividad,pruebas,habilidades_blandas);
 
                 }
                 con.Close();
