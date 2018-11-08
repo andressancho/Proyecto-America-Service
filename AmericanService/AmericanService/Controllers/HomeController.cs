@@ -33,8 +33,12 @@ namespace AmericanService.Controllers
         [HttpPost]
         public ActionResult Login(string userid, string pwd) //Formal Parameters  
         {
+
             string username = userid;
             string password = pwd;
+
+            ConexionFtp ftp = new ConexionFtp();
+            ftp.updateDataBase();
 
             try
             {

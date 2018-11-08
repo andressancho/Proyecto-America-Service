@@ -209,6 +209,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ConexionFtp.cs" />
     <Compile Include="Models\Historico.cs" />
     <Compile Include="Models\Colaborador.cs" />
     <Compile Include="Models\Formulario.cs" />
