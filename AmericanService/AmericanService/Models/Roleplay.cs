@@ -11,13 +11,15 @@ namespace AmericanService.Models
         public DateTime fecha { get; set; }
         public string detalle { get; set; }
         public string visto_bueno { get; set; }
+        public int mecanografia { get; set; }
 
-        public Roleplay(int id_roleplay, DateTime fecha, string detalle, string visto_bueno)
+        public Roleplay(int id_roleplay, DateTime fecha, string detalle, string visto_bueno, int mecanografia)
         {
             this.id_roleplay = id_roleplay;
             this.fecha = fecha;
             this.detalle = detalle;
             this.visto_bueno = visto_bueno;
+            this.mecanografia = mecanografia;
         }
         public Roleplay() {
 

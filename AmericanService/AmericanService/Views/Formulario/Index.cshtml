@@ -19,6 +19,13 @@
     <div class="margen">
         <h2>Formularios</h2>
         <br />
+        @using (Html.BeginForm("Buscar", "Formulario"))
+        {
+            <label>Buscar:</label>
+            <input type="text" id="buscar_string" name="buscar_string">
+            <input type="submit" value="Aceptar" />
+        }
+        <br />
         <div>
 
             @using (Html.BeginForm("Filtrar", "Formulario"))
@@ -44,7 +51,7 @@
                 <th>Segundo nombre</th>
                 <th>Primer apellido</th>
                 <th>Segundo apellido</th>
-                <th>Fecha</th>
+                <th>Fecha (mm/dd/aaaa)</th>
                 <th>Opciones</th>
             </tr>
 
@@ -61,7 +68,7 @@
                     <td>
 
                         @Html.ActionLink("Editar", "Editar", new { id_formulario = item.id_formulario })|
-                        @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula }, new { onclick = "return confirm('¿Seguro que quieres eliminar este formulario?');" })
+                        @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.id_formulario }, new { onclick = "return confirm('¿Seguro que quieres eliminar este formulario?');" })
 
                     </td>
                 </tr>

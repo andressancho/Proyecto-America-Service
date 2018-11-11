@@ -37,8 +37,12 @@ namespace AmericanService.Controllers
             string username = userid;
             string password = pwd;
 
+<<<<<<< HEAD
             
             
+=======
+           
+>>>>>>> 76e90664fc632de1ab84053612fc00fa736c7d63
 
             try
             {
@@ -67,6 +71,7 @@ namespace AmericanService.Controllers
                 string desempeno = "";
                 string supervisor = "";
                 string tipo = "";
+                int productividad, pruebas, habilidades_blandas;
 
                 while (dr.Read())
                 {
@@ -79,7 +84,10 @@ namespace AmericanService.Controllers
                     fecha_nacimiento = Convert.ToDateTime(dr["cumpleanos"]);
                     fecha_ingreso = Convert.ToDateTime(dr["fecha_ingreso"]);
                     estado = Convert.ToString(dr["estado"]);
-                    desempeno = Convert.ToString(dr["desempeno_pruebas"]);
+                    desempeno = Convert.ToString(dr["desempeno"]);
+                    productividad = Convert.ToInt32(dr["productividad"]);
+                    pruebas = Convert.ToInt32(dr["pruebas"]);
+                    habilidades_blandas = Convert.ToInt32(dr["habilidades_blandas"]);
                     supervisor = Convert.ToString(dr["supervisor"]);
                     tipo = Convert.ToString(dr["tipo"]);
                     if (estado == "A")
@@ -105,7 +113,7 @@ namespace AmericanService.Controllers
 
                     HttpContext.Session["usuario_actual"] = cedula;
                     HttpContext.Session["tipo_usuario"] = tipo;
-                    usuario = new Usuario(cedula, primer_nombre,segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, fecha_ingreso, estado, desempeno, supervisor,tipo);
+                    usuario = new Usuario(cedula, primer_nombre,segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, fecha_ingreso, estado, desempeno, supervisor,tipo,productividad, pruebas, habilidades_blandas);
                 }
                 con.Close();
 
