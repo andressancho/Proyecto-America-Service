@@ -20,6 +20,7 @@ namespace AmericanService.Controllers
         {
             return View(obtener_formularios());
         }
+
         //Entradas: String para buscar formularios en la tabla
         //Salidas: La vista mostrando los los formularios encontrados
         //Descripción: Busca en la tabla formularios, registros segun lo que ingrese el usuario, ya sea nombres apellidos o cédula
@@ -55,6 +56,13 @@ namespace AmericanService.Controllers
         //Salidas: La vista de la tabla mostrando los formularios que corresponden al filtro
         //Descripción: Obtiene los formularios que cumplen con el filtro ingresado por el usuario por ventas, cobros, call center, servicio al cliente, excel o bachillerato
 
+
+        [HttpPost]
+        public ActionResult Index(string ventas)
+        {
+            return View(obtener_formularios());
+        }
+
         public ActionResult Filtrar(string ventas, string cobros, string call_center, string servicio_cliente, string excel, string bachillerato)
         {
             if (ventas == null)
@@ -89,25 +97,16 @@ namespace AmericanService.Controllers
 
         public ActionResult Eliminar(String cedula)
         {
-            try
-            {
-                SqlConnection con = new SqlConnection(
-                WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+            SqlConnection con = new SqlConnection(
+            WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
 
 
-                SqlCommand cmd = new SqlCommand("eliminar_formulario", con);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@id_formulario", cedula);
-                con.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                con.Close();
-            }
-            catch (Exception)
-            {
-
-            }
-            
-            
+            SqlCommand cmd = new SqlCommand("eliminar_formulario", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@cedula", cedula);
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            con.Close();
             return View("Index", obtener_formularios());
         }
 
@@ -207,7 +206,7 @@ namespace AmericanService.Controllers
                     detalle = Convert.ToString(dr["detalle"]);
                     visto_bueno = Convert.ToString(dr["visto_bueno"]);
                     mecanografia = Convert.ToInt32(dr["mecanografia"]);
-                    roleplay = new Roleplay(id_roleplay, fecha_roleplay, detalle, visto_bueno, mecanografia);
+                    roleplay = new Roleplay(id_roleplay, fecha_roleplay, detalle, visto_bueno,mecanografia);
                     formulario = new Formulario(id_formulario,  cedula,  primer_nombre,  segundo_nombre,  primer_apellido,  segundo_apellido,  id_roleplay,  jornada_diurna,  jornada_mixta,  jornada_nocturna,  justificacion_jornada,  fecha,  salario,  telefono,  correo,  domicilio,  exp_call_center,  exp_ventas,  exp_servicio_cliente,  detalle_experiencias,  exp_cobros,  exp_mora30,  exp_mora60,  exp_mora90,  exp_cartera_separada,  exp_cobro_judicial,  detalle_exp_cobros,  excel,  bachillerato, roleplay);
                 }
 
@@ -221,10 +220,12 @@ namespace AmericanService.Controllers
             return formulario;
         }
 
+
         //Entradas:La información editable del formulario
         //Salidas: La vista de la tabla de formularios actualizada
         //Descripción: Edita un registro de un formulario
         public ActionResult Edit(int id_roleplay, DateTime fecha_roleplay, String detalle, String visto_bueno, string mecanografia) {
+
             try
             {
                 SqlConnection con = new SqlConnection(
@@ -237,7 +238,7 @@ namespace AmericanService.Controllers
                 cmd.Parameters.AddWithValue("@fecha_roleplay", fecha_roleplay);
                 cmd.Parameters.AddWithValue("@detalle", detalle);
                 cmd.Parameters.AddWithValue("@visto_bueno", visto_bueno);
-                cmd.Parameters.AddWithValue("@mecanografia", Convert.ToInt32(mecanografia));
+                cmd.Parameters.AddWithValue("@mecanografia", mecanografia);
 
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -314,9 +315,11 @@ namespace AmericanService.Controllers
             return lista_formularios;
         }
 
+
         //Entradas: no tiene entradas
         //Salidas:  Todos los formularios en la base de datos
         //Descripción: Obtiene la lista de formularios de la base de datos 
+
         public List<Formulario> obtener_formularios()
         {
             List<Formulario> lista_formularios = new List<Formulario>();
@@ -363,6 +366,55 @@ namespace AmericanService.Controllers
 
             
             return lista_formularios;
+        }
+
+        public ActionResult update_formulario()
+        {
+            ConexionFtp ftp = new ConexionFtp();
+            List<string> information = ftp.updateDataBase();
+
+            SqlConnection con = new SqlConnection(
+            WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+
+            foreach (string line in information)
+            {
+                string[] values = line.Split(',');
+
+                SqlCommand cmd = new SqlCommand("agregar_formulario", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@cedula", values[1]);
+                cmd.Parameters.AddWithValue("@primer_nombre", values[2]);
+                cmd.Parameters.AddWithValue("@segundo_nombre", "");
+                cmd.Parameters.AddWithValue("@primer_apellido", values[3]);
+                cmd.Parameters.AddWithValue("@segundo_apellido", values[4]);
+                cmd.Parameters.AddWithValue("@id_roleplay", DBNull.Value);
+                cmd.Parameters.AddWithValue("@jornada_diurna", bool.Parse(values[15]));
+                cmd.Parameters.AddWithValue("@jornada_mixta", bool.Parse(values[16]));
+                cmd.Parameters.AddWithValue("@jornada_nocturna", bool.Parse(values[17]));
+                cmd.Parameters.AddWithValue("@justificacion_jornada", values[18]);
+                cmd.Parameters.AddWithValue("@fecha", DBNull.Value);
+                cmd.Parameters.AddWithValue("@salario", Int32.Parse(values[8]));
+                cmd.Parameters.AddWithValue("@telefono", Int32.Parse(values[5]));
+                cmd.Parameters.AddWithValue("@correo", values[6]);
+                cmd.Parameters.AddWithValue("@domicilio", values[7]);
+                cmd.Parameters.AddWithValue("@exp_call_center", bool.Parse(values[9]));
+                cmd.Parameters.AddWithValue("@exp_ventas", bool.Parse(values[10]));
+                cmd.Parameters.AddWithValue("@exp_servicio_cliente", bool.Parse(values[11]));
+                cmd.Parameters.AddWithValue("@detalle_experiencias", values[13]);
+                cmd.Parameters.AddWithValue("@exp_cobros", 0);
+                cmd.Parameters.AddWithValue("@exp_mora30", bool.Parse(values[19]));
+                cmd.Parameters.AddWithValue("@exp_mora60", bool.Parse(values[20]));
+                cmd.Parameters.AddWithValue("@exp_mora90", bool.Parse(values[21]));
+                cmd.Parameters.AddWithValue("@exp_cartera_separada", bool.Parse(values[22]));
+                cmd.Parameters.AddWithValue("@exp_cobro_judicial", bool.Parse(values[23]));
+                cmd.Parameters.AddWithValue("@detalle_exp_cobros", values[24]);
+                cmd.Parameters.AddWithValue("@excel", bool.Parse(values[12]));
+                cmd.Parameters.AddWithValue("@bachillerato", bool.Parse(values[14]));
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                con.Close();
+            }
+            return View("Index", obtener_formularios());
         }
     }
 }
