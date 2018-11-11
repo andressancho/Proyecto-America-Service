@@ -13,7 +13,7 @@ namespace AmericanService.Models
 
         public List<string> updateDataBase()
         {
-            //String result_information = String.Empty;
+            
             //String result_cv = String.Empty;
             FtpWebRequest request_information = (FtpWebRequest)WebRequest.Create("ftp://files.000webhost.com:21/public_html/data_information.csv");
             //FtpWebRequest request_cv = (FtpWebRequest)WebRequest.Create("ftp://files.000webhost.com:21/public_html/data_cv.csv");
@@ -29,25 +29,17 @@ namespace AmericanService.Models
 
             List<string> information = new List<string>();
 
-            //while (!reader_information.EndOfStream)
-            //foreach(string line in reader_information)
-            do
+            
+            string[] lines = reader_information.ReadToEnd().Split('\n');
+            foreach (string line in lines)
             {
-                string line = reader_information.ReadLine();
-
-                if (line == null)
-                {
-                    break;
-                }
 
                 if (!String.IsNullOrWhiteSpace(line))
                 {
 
-                    information.Add(line.Replace("SI", "1").Replace("NO", "0"));
+                    information.Add(line.Replace("SI", "True").Replace("NO", "False"));
                 }
-            } while (!reader_information.EndOfStream);
-
-            //result_information = reader_information.ReadToEnd();
+            } 
             information.RemoveAt(0);
             return information;
 

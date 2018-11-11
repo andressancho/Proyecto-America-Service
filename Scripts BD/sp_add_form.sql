@@ -33,6 +33,7 @@ CREATE PROCEDURE [dbo].[agregar_formulario]
 AS
 
 BEGIN
+SET @fecha = getdate()
 
 INSERT INTO [dbo].[Formulario] 
 (
@@ -114,7 +115,7 @@ EXEC agregar_formulario
 		@jornada_mixta = 1,
 		@jornada_nocturna = 0,
 		@justificacion_jornada = "test_sp",
-		@fecha = "11/04/18",
+		@fecha = null,
 		@salario = 123456,
 		@telefono = 23456439,
 		@correo = "test_sp@test_sp",
