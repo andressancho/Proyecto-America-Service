@@ -37,8 +37,8 @@ namespace AmericanService.Controllers
             string username = userid;
             string password = pwd;
 
-            ConexionFtp ftp = new ConexionFtp();
-            ftp.updateDataBase();
+            
+            
 
             try
             {

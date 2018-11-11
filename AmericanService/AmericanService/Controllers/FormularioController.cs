@@ -258,7 +258,6 @@ namespace AmericanService.Controllers
             return lista_formularios;
         }
 
-
         public List<Formulario> obtener_formularios()
         {
             List<Formulario> lista_formularios = new List<Formulario>();
@@ -305,6 +304,55 @@ namespace AmericanService.Controllers
 
             
             return lista_formularios;
+        }
+
+        public ActionResult update_formulario()
+        {
+            ConexionFtp ftp = new ConexionFtp();
+            List<string> information = ftp.updateDataBase();
+
+            SqlConnection con = new SqlConnection(
+            WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+
+            foreach (string line in information)
+            {
+                string[] values = line.Split(',');
+
+                SqlCommand cmd = new SqlCommand("agregar_formulario", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@cedula", values[1]);
+                cmd.Parameters.AddWithValue("@primer_nombre", Int32.Parse(values[2]));
+                cmd.Parameters.AddWithValue("@segundo_nombre", "");
+                cmd.Parameters.AddWithValue("@primer_apellido", values[3]);
+                cmd.Parameters.AddWithValue("@segundo_apellido", values[4]);
+                cmd.Parameters.AddWithValue("@id_roleplay", null);
+                cmd.Parameters.AddWithValue("@jornada_diurna", bool.Parse(values[15]));
+                cmd.Parameters.AddWithValue("@jornada_mixta", bool.Parse(values[16]));
+                cmd.Parameters.AddWithValue("@jornada_nocturna", bool.Parse(values[17]));
+                cmd.Parameters.AddWithValue("@justificacion_jornada", values[18]);
+                cmd.Parameters.AddWithValue("@fecha", DateTime.Parse(values[1]));
+                cmd.Parameters.AddWithValue("@salario", Int32.Parse(values[8]));
+                cmd.Parameters.AddWithValue("@telefono", Int32.Parse(values[5]));
+                cmd.Parameters.AddWithValue("@correo", values[6]);
+                cmd.Parameters.AddWithValue("@domicilio", values[7]);
+                cmd.Parameters.AddWithValue("@exp_call_center", bool.Parse(values[9]));
+                cmd.Parameters.AddWithValue("@exp_ventas", bool.Parse(values[10]));
+                cmd.Parameters.AddWithValue("@exp_servicio_cliente", bool.Parse(values[11]));
+                cmd.Parameters.AddWithValue("@detalle_experiencias", values[13]);
+                cmd.Parameters.AddWithValue("@exp_cobros", 0);
+                cmd.Parameters.AddWithValue("@exp_mora30", bool.Parse(values[19]));
+                cmd.Parameters.AddWithValue("@exp_mora60", bool.Parse(values[20]));
+                cmd.Parameters.AddWithValue("@exp_mora90", bool.Parse(values[21]));
+                cmd.Parameters.AddWithValue("@exp_cartera_separada", bool.Parse(values[22]));
+                cmd.Parameters.AddWithValue("@exp_cobro_judicial", bool.Parse(values[23]));
+                cmd.Parameters.AddWithValue("@detalle_exp_cobros", values[24]);
+                cmd.Parameters.AddWithValue("@excel", bool.Parse(values[12]));
+                cmd.Parameters.AddWithValue("@bachillerato", bool.Parse(values[14]));
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                con.Close();
+            }
+            return View("Index", obtener_formularios());
         }
     }
 }
