@@ -12,24 +12,17 @@ namespace AmericanService.Controllers
 {
     public class HomeController : Controller
     {
+        //Entradas: ninguna
+        //Salidas: la vista de inicio sesion
+        //Descripción: 
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        //Entradas: el usuario y la contraseña parael inicio de sesión
+        //Salidas: la vista de iniciar sesion si no coincide la contraseña y el de mi perfil si fue exitoso
+        //Descripción:verifica el usuario y la contraseña si son las que corresponde
         [HttpPost]
         public ActionResult Login(string userid, string pwd) //Formal Parameters  
         {
@@ -144,6 +137,10 @@ namespace AmericanService.Controllers
             
             return View("Index");
         }
+
+        //Entradas: ninguna
+        //Salidas: la vista de inicio de sesion
+        //Descripción: cierra la sesion actual
         public ActionResult Logout()
         {
             HttpContext.Session["usuario_actual"] = " ";

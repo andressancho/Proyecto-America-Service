@@ -13,16 +13,16 @@ namespace AmericanService.Controllers
     {
         // GET: Formulario
         [HttpGet]
+        //Entradas: 
+        //Salidas: Vista de tablas de formularios con todos los formularios
+        //Descripción: 
         public ActionResult Index()
         {
             return View(obtener_formularios());
         }
-        [HttpPost]
-        public ActionResult Index(string ventas)
-        {
-            return View(obtener_formularios());
-        }
-
+        //Entradas: String para buscar formularios en la tabla
+        //Salidas: La vista mostrando los los formularios encontrados
+        //Descripción: Busca en la tabla formularios, registros segun lo que ingrese el usuario, ya sea nombres apellidos o cédula
         public ActionResult Buscar(string buscar_string)
         {
             int i;
@@ -50,6 +50,10 @@ namespace AmericanService.Controllers
             }
             return View("Index", lista_formulario_buscar);
         }
+
+        //Entradas: Los filtros ingresados por el usuario
+        //Salidas: La vista de la tabla mostrando los formularios que corresponden al filtro
+        //Descripción: Obtiene los formularios que cumplen con el filtro ingresado por el usuario por ventas, cobros, call center, servicio al cliente, excel o bachillerato
 
         public ActionResult Filtrar(string ventas, string cobros, string call_center, string servicio_cliente, string excel, string bachillerato)
         {
@@ -79,6 +83,9 @@ namespace AmericanService.Controllers
             }
             return View("Index", filtrar_formularios(ventas, cobros, bachillerato, excel, servicio_cliente, call_center));
         }
+        //Entradas: el id de formulario por borrar
+        //Salidas: la vista de la tabla con los registros de formularios
+        //Descripción: Elimina un registro de formulario por el id
 
         public ActionResult Eliminar(String cedula)
         {
@@ -104,11 +111,17 @@ namespace AmericanService.Controllers
             return View("Index", obtener_formularios());
         }
 
+        //Entradas: el id del formulario para abrir la vista para editar ese formulario
+        //Salidas: la vista de editar mostrando la informacion del formulario a editar
+        //Descripción: función para desplegar la vista de editar con la informacion de un formulario
         public ActionResult Editar(int id_formulario)
         {
             return View("Edit", obtener_formulario_editar(id_formulario));
         }
 
+        //Entradas: id de un formulario
+        //Salidas: la información de un formulario para editar
+        //Descripción: Obtiene la información para editarlo por medio del id
         public Formulario obtener_formulario_editar(int id)
         {
             Formulario formulario = new Formulario();
@@ -206,11 +219,11 @@ namespace AmericanService.Controllers
             }
             catch (SqlException) { }
             return formulario;
-
-
-
         }
 
+        //Entradas:La información editable del formulario
+        //Salidas: La vista de la tabla de formularios actualizada
+        //Descripción: Edita un registro de un formulario
         public ActionResult Edit(int id_roleplay, DateTime fecha_roleplay, String detalle, String visto_bueno, string mecanografia) {
             try
             {
@@ -237,6 +250,9 @@ namespace AmericanService.Controllers
             return View("~/Views/Formulario/Index.cshtml", obtener_formularios());
         }
 
+        //Entradas: los filtros escogidos por el usuario
+        //Salidas: la lsta de formularios que corresponden al filtro
+        //Descripción: filtra los formularios escogido por el usuario (cobros, ventas, excel bachillerato, servicio al cliente, call center)
         public List<Formulario> filtrar_formularios(string ventas, string cobros, string excel, string bachillerato, string servicio_cliente, string call_center)
         {
             String cedula;
@@ -298,7 +314,9 @@ namespace AmericanService.Controllers
             return lista_formularios;
         }
 
-
+        //Entradas: no tiene entradas
+        //Salidas:  Todos los formularios en la base de datos
+        //Descripción: Obtiene la lista de formularios de la base de datos 
         public List<Formulario> obtener_formularios()
         {
             List<Formulario> lista_formularios = new List<Formulario>();

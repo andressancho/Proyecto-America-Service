@@ -70,8 +70,8 @@
                 <th>Segundo Apellido</th>
                 <th>Estado</th>
                 <th>Tipo</th>
-                <th>Fecha de Ingreso (mm/dd/aaaa)</th>
-                <th>Fecha de Nacimiento (mm/dd/aaaa)</th>
+                <th>Fecha de Ingreso</th>
+                <th>Fecha de Nacimiento</th>
                 <th>Supervisor</th>
                 <th>Desempeño</th>
                 <th>Usuario</th>
@@ -88,8 +88,8 @@
                 <td>@item.segundo_apellido</td>
                 <td>@item.estado</td>
                 <td>@item.tipo</td>
-                <td>@item.fecha_ingreso</td>
-                <td>@item.fecha_nacimiento</td>
+                <td>@item.fecha_ingreso.ToString("dd/MMM/yyyy")</td>
+                <td>@item.fecha_nacimiento.ToString("dd/MMM/yyyy")</td>
                 <td>@item.supervisor</td>
                 <td>@item.desempeno</td>
                 <td>@item.usuario</td>

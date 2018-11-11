@@ -143,7 +143,7 @@ namespace AmericanService.PDF
             _pdfTable.AddCell(_pdfCell);
             _pdfTable.CompleteRow();
             
-            _pdfCell = new PdfPCell(new Phrase("Desempeño:" + " " + _usuario.desempeno + "\n\n", _fontStyle));
+            _pdfCell = new PdfPCell(new Phrase("Promedio Desempeño General:" + " " + _usuario.desempeno + "\n\n", _fontStyle));
             _pdfCell.Colspan = _totalColumn;
             _pdfCell.HorizontalAlignment = Element.ALIGN_LEFT;
             _pdfCell.Border = 0;
@@ -151,7 +151,34 @@ namespace AmericanService.PDF
             _pdfCell.ExtraParagraphSpace = 0;
             _pdfTable.AddCell(_pdfCell);
             _pdfTable.CompleteRow();
-          
+
+            _pdfCell = new PdfPCell(new Phrase("Nota de Productividad:" + " " + _usuario.productividad + "\n\n", _fontStyle));
+            _pdfCell.Colspan = _totalColumn;
+            _pdfCell.HorizontalAlignment = Element.ALIGN_LEFT;
+            _pdfCell.Border = 0;
+            _pdfCell.BackgroundColor = BaseColor.WHITE;
+            _pdfCell.ExtraParagraphSpace = 0;
+            _pdfTable.AddCell(_pdfCell);
+            _pdfTable.CompleteRow();
+
+            _pdfCell = new PdfPCell(new Phrase("Nota de Pruebas:" + " " + _usuario.pruebas + "\n\n", _fontStyle));
+            _pdfCell.Colspan = _totalColumn;
+            _pdfCell.HorizontalAlignment = Element.ALIGN_LEFT;
+            _pdfCell.Border = 0;
+            _pdfCell.BackgroundColor = BaseColor.WHITE;
+            _pdfCell.ExtraParagraphSpace = 0;
+            _pdfTable.AddCell(_pdfCell);
+            _pdfTable.CompleteRow();
+
+            _pdfCell = new PdfPCell(new Phrase("Nota de Habilidades Blandas:" + " " + _usuario.habilidades_blandas + "\n\n", _fontStyle));
+            _pdfCell.Colspan = _totalColumn;
+            _pdfCell.HorizontalAlignment = Element.ALIGN_LEFT;
+            _pdfCell.Border = 0;
+            _pdfCell.BackgroundColor = BaseColor.WHITE;
+            _pdfCell.ExtraParagraphSpace = 0;
+            _pdfTable.AddCell(_pdfCell);
+            _pdfTable.CompleteRow();
+
             _pdfCell = new PdfPCell(new Phrase("Supervisor:" + " " + _usuario.supervisor + "\n\n", _fontStyle));
             _pdfCell.Colspan = _totalColumn;
             _pdfCell.HorizontalAlignment = Element.ALIGN_LEFT;
@@ -161,14 +188,14 @@ namespace AmericanService.PDF
             _pdfTable.AddCell(_pdfCell);
             _pdfTable.CompleteRow();
             
-            _pdfCell = new PdfPCell(new Phrase("Nombre de usuario:" + " " + _usuario.usuario + "\n\n", _fontStyle));
+            /*_pdfCell = new PdfPCell(new Phrase("Nombre de usuario:" + " " + _usuario.usuario + "\n\n", _fontStyle));
             _pdfCell.Colspan = _totalColumn;
             _pdfCell.HorizontalAlignment = Element.ALIGN_LEFT;
             _pdfCell.Border = 0;
             _pdfCell.BackgroundColor = BaseColor.WHITE;
             _pdfCell.ExtraParagraphSpace = 0;
             _pdfTable.AddCell(_pdfCell);
-            _pdfTable.CompleteRow();
+            _pdfTable.CompleteRow();*/
             
             _pdfCell = new PdfPCell(new Phrase("Tipo de usuario:" + " " + _usuario.tipo + "\n\n", _fontStyle));
             _pdfCell.Colspan = _totalColumn;

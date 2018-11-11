@@ -14,17 +14,26 @@ namespace AmericanService.Controllers
     {
         // GET: Perfil
         [HttpGet]
+        //Entradas:ninguna
+        //Salidas: la vista con la tabla de usuarios
+        //Descripción: carga la vista con la tabla de usuarios
         public ActionResult Index()
         {
 
             return View(obtener_usuarios());
         }
         [HttpPost]
+        //Entradas: el estado el usuario para filtrar por estado
+        //Salidas: la vista de la tabla con los usuarios filtrados
+        //Descripción: muestra los usuarios segun el filtro de estado activo o inactivo
         public ActionResult Index(string Estado)
         {
             return View(filtrar_usuarios(Estado));
         }
 
+        //Entradas:un string para buscar
+        //Salidas: la vista de la tabla de perfiles con el resultado de la busqueda
+        //Descripción: busca en los perfiles que coincidan con el string de busqueda segun nombre, apellido o cedula
         public ActionResult Buscar(string buscar_string)
         {
             int i;
@@ -53,6 +62,9 @@ namespace AmericanService.Controllers
             return View("Index", lista_perfiles_buscar);
         }
 
+        //Entradas: la cedula de un perfil a eliminar
+        //Salidas: la vista con la tabla de perfiles acualizada
+        //Descripción: eliminar un registro de perfil
         public ActionResult Eliminar(String cedula)
         {
             SqlConnection con = new SqlConnection(
@@ -68,17 +80,26 @@ namespace AmericanService.Controllers
             return View("Index", obtener_usuarios());
         }
 
+        //Entradas: la cedula de un perfil para editar
+        //Salidas:la vista de perfil con la informacion
+        //Descripción: carga la vista perfil con la informacion del perfil por editar
         public ActionResult Editar_otro_usuario(String cedula)
         {
             return View("~/Views/Perfil/Edit.cshtml", obtener_usuario_actual(cedula));
         }
 
-
+        //Entradas: cedula de un usuario para obtener la informcion
+        //Salidas: llamada a la funcion que llama el pdf con la informacion del usuario
+        //Descripción: Obtiene la información del usuario para pasarselo al pdf
         public ActionResult Descargar_PDF(String cedula)
         {
             return obtener_usuario_PDF(obtener_usuario_actual(cedula));
         }
 
+        
+        //Entradas: la cedula  del perfil para descargar el pdf
+        //Salidas: la vista del pdf con la informacion del perfil
+        //Descripción: saca la informacion de un perfil en un pdf
         public ActionResult obtener_usuario_PDF(Usuario usuario) {
             ArchivoPDF archivoPDF = new ArchivoPDF();
             byte[] abytes = archivoPDF.PrepararPDF(usuario);
@@ -87,7 +108,9 @@ namespace AmericanService.Controllers
 
 
 
- 
+        //Entradas: Los valores editables provenientes de la vista editar perfil
+        //Salidas: Retorna la vista de mi perfil con el usuario actualizado
+        //Descripción:  Edita la información de mi perfil
         public ActionResult Editar(string cedula, string ced, string primer_nombre,string segundo_nombre, string primer_apellido, string segundo_apellido, string fecha_nacimiento, string fecha_ingreso,string tipo,string supervisor,string desempeno, string estado,string productividad, string pruebas, string habilidades)
 
         {
@@ -146,6 +169,10 @@ namespace AmericanService.Controllers
             }
             
         }
+
+        //Entradas: los valores editables del perfil a editar
+        //Salidas: la vista con la tabla de perfiles actualizados
+        //Descripción: Edita la información de n perfil
         public ActionResult Editar_otro_perfil(string cedula, string ced, string primer_nombre, string segundo_nombre, string primer_apellido, string segundo_apellido, string fecha_nacimiento, string fecha_ingreso, string tipo, string supervisor, string desempeno, string estado, string productividad, string pruebas, string habilidades)
         {
             try
@@ -189,11 +216,17 @@ namespace AmericanService.Controllers
             return View("~/Views/Perfil/Index.cshtml", obtener_usuarios());
         }
 
+        //Entradas: 
+        //Salidas:
+        //Descripción:
         public ActionResult Crear()
         {
             return View();
         }
 
+        //Entradas: la informacion para crear el perfil
+        //Salidas: vuelve a cargar la vista de crear perfil con los inputs vacios
+        //Descripción: crear un perfil con la informacion ingresada por el usuarios
         public ActionResult CrearPerfil(string cedula, string primer_nombre, string segundo_nombre, string primer_apellido, string segundo_apellido, string fecha_nacimiento, string fecha_ingreso, string tipo, string supervisor,string contrasena, string usuario)
         {
             try
@@ -237,6 +270,9 @@ namespace AmericanService.Controllers
              return View("~/Views/Perfil/Crear.cshtml");
         }
 
+        //Entradas: ninguna
+        //Salidas: la vista de mi perfil con la informacion
+        //Descripción: carga los datos de mi perfil
         public ActionResult gestionar_perfil() {
 
             if (Session["Sid"] == null)
@@ -257,6 +293,9 @@ namespace AmericanService.Controllers
 
         }
 
+        //Entradas: ninguna
+        //Salidas: lista de todos los perfiles de la base de datos
+        //Descripción: obtiene todos los perfiles de la base de datos
         public List<Usuario> obtener_usuarios()
         {
             List<Usuario> lista_usuarios = new List<Usuario>();
@@ -316,6 +355,10 @@ namespace AmericanService.Controllers
             
             return lista_usuarios;
         }
+
+        //Entradas: el filtro para buscar
+        //Salidas: lista de usuarios filtrados
+        //Descripción: obtiene la lista de usuarios que cumplan con el filtro
         public List<Usuario> filtrar_usuarios(string filtro)
         {
             List<Usuario> lista_usuarios = new List<Usuario>();
@@ -373,7 +416,10 @@ namespace AmericanService.Controllers
             
             return lista_usuarios;
         }
-        
+
+        //Entradas: la cedula para obtener la informacion de un perfil
+        //Salidas: la informacion de un usuario
+        //Descripción: obtiene la informacion de un usuario
         public Usuario obtener_usuario_actual(String cedula)
         {
             Usuario usuario = new Usuario();

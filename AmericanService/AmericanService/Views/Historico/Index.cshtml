@@ -40,7 +40,7 @@
                         <th>Primer apellido</th>
                         <th>Segundo apellido</th>
                         <th>Descripción</th>
-                        <th>Fecha (mm/dd/aaaa)</th>
+                        <th>Fecha</th>
                         <th>Cantidad</th>
                         <th>Opciones</th>
                     </tr>
@@ -55,7 +55,7 @@
                         <td>@item.primer_apellido</td>
                         <td>@item.segundo_apellido</td>
                         <td>@item.descripcion</td>
-                        <td>@item.fecha</td>
+                        <td>@item.fecha.ToString("dd/MMM/yyyy")</td>
                         <td>@item.cantidad</td>
 
                         <td>

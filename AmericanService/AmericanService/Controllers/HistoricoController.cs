@@ -12,12 +12,18 @@ namespace AmericanService.Controllers
     public class HistoricoController : Controller
     {
         // GET: Historico
+        //Entradas: ninguna
+        //Salidas: La vista con la información de la tabla de historicos
+        //Descripción: Muestra todos los historicos en la tabla de la vista
         public ActionResult Index()
         {
             
           return View(consulta_historico());
         }
 
+        //Entradas: Todos los valores editables de los históricos
+        //Salidas: La vista con los registros de historicos actualizados
+        //Descripción: Edita un registro de historicos
         public ActionResult Editar(string cedula, string primer_nombre, string segundo_nombre, string primer_apellido, string segundo_apellido, string descripcion, string fecha, string cantidad)
         {
             try
@@ -48,6 +54,9 @@ namespace AmericanService.Controllers
             return View("~/Views/Historico/Index.cshtml", consulta_historico());
         }
 
+        //Entradas: ninguna
+        //Salidas: La lista de historicos que están en la base de datos
+        //Descripción: obtiene la lista de históricos de la base de datos
         public List<Historico> consulta_historico() {
             List<Historico> lista_historico = new List<Historico>();
             try
@@ -97,6 +106,9 @@ namespace AmericanService.Controllers
             return lista_historico;
         }
 
+        //Entradas: La cedula para eliminar un historico
+        //Salidas: la vista con la tabla de historicos actualizada
+        //Descripción: Elimina un registro de historico por la cedula
         public ActionResult Eliminar(String cedula)
         {
             SqlConnection con = new SqlConnection(
@@ -112,11 +124,17 @@ namespace AmericanService.Controllers
             return View("Index", consulta_historico());
         }
 
+        //Entradas: la cedula para editar un historico
+        //Salidas: La vista de editar con la informacion del historico a editar
+        //Descripción: Abrir la vista de editar con la informacion de un historico
         public ActionResult Editar_btn(String cedula)
         {
             return View("Edit", obtener_historico_actual(cedula));
         }
 
+        //Entradas:un string para buscar
+        //Salidas: la vista con la tabla con los registros buscados
+        //Descripción: Busca los registros que coincidan con el string buscar segun nombres, apellido, cedula
         public ActionResult Buscar(string buscar_string) {
             int i;
             List<Historico> lista_historico_buscar = new List<Historico>();
@@ -141,11 +159,10 @@ namespace AmericanService.Controllers
             }
             return View("Index", lista_historico_buscar);
         }
-        public ActionResult Edit(String cedula) {
-            Response.Write(cedula);
-            List<Historico> lista = new List<Historico>();
-            return View("Index", lista);
-        }
+
+        //Entradas:  la cedula del historico a editar
+        //Salidas: un historico
+        //Descripción: obtiene la informacion del historico a editar y desplegarlo en la vista
         public Historico obtener_historico_actual(String cedula)
         {
             Historico historico = new Historico();
