@@ -209,7 +209,7 @@ namespace AmericanService.Controllers
                     roleplay = new Roleplay(id_roleplay, fecha_roleplay, detalle, visto_bueno,mecanografia);
                     formulario = new Formulario(id_formulario,  cedula,  primer_nombre,  segundo_nombre,  primer_apellido,  segundo_apellido,  id_roleplay,  jornada_diurna,  jornada_mixta,  jornada_nocturna,  justificacion_jornada,  fecha,  salario,  telefono,  correo,  domicilio,  exp_call_center,  exp_ventas,  exp_servicio_cliente,  detalle_experiencias,  exp_cobros,  exp_mora30,  exp_mora60,  exp_mora90,  exp_cartera_separada,  exp_cobro_judicial,  detalle_exp_cobros,  excel,  bachillerato, roleplay);
                 }
-
+                
                 con.Close();
             }
             catch (NullReferenceException)
@@ -217,6 +217,7 @@ namespace AmericanService.Controllers
 
             }
             catch (SqlException) { }
+            
             return formulario;
         }
 
@@ -248,6 +249,7 @@ namespace AmericanService.Controllers
             {
 
             }
+            //TempData["message"] = "Formulario editado correctamente.";
             return View("~/Views/Formulario/Index.cshtml", obtener_formularios());
         }
 

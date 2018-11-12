@@ -28,38 +28,58 @@
 
 
 
-    <h1>Crear Perfil</h1>
+    
     <form action="/Perfil/CrearPerfil"  method="post" id="crear">
         <div class="container">
+            <h1>Crear Perfil</h1>
             <div class="row">
                 <div class="col-sm">
                     <label>Cédula:</label>
                     <input name="cedula" id="cedula" class="form-control" type="text">
+                    <br />
                     <label>Primer Nombre:</label>
                     <input name="primer_nombre" id="primer_nombre" class="form-control" type="text">
+                    <br />
                     <label>Segundo Nombre:</label>
                     <input name="segundo_nombre" id="segundo_nombre" class="form-control" type="text">
+                    <br />
                     <label>Primer Apellido:</label>
                     <input name="primer_apellido" id="primer_apellido" class="form-control" type="text">
-                    <label>Segundo Apellido:</label>
-                    <input name="segundo_apellido" id="segundo_apellido" class="form-control" type="text">
-                    <label>Cumpleaños:</label>
-                    <input name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" type="date">
-                    <label>Fecha de ingreso:</label>
-                    <input name="fecha_ingreso" id="fecha_ingreso" class="form-control" type="date">
+
+
                 </div>
                 <div class="col-sm">
+                    <label>Segundo Apellido:</label>
+                    <input name="segundo_apellido" id="segundo_apellido" class="form-control" type="text">
+                    <br />
+                    <label>Cumpleaños:</label>
+                    <input name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" type="date">
+                    <br />
+                    <label>Fecha de ingreso:</label>
+                    <input name="fecha_ingreso" id="fecha_ingreso" class="form-control" type="date">
+                    <br />
                     <label>Supervisor:</label>
                     <input name="supervisor" class="form-control" type="text">
+
+
+                </div>
+                <div class="col-sm">
                     <label>Usuario:</label>
                     <input name="usuario" id="usuario" class="form-control" type="text">
+                    <br />
                     <label>Contraseña:</label>
                     <input name="contrasena" id="contrasena" class="form-control" type="password">
+                    <br />
                     <label>Tipo:</label>
                     <br />
                     <label>Administrador</label> <input name="tipo" id="Tipo" type="radio" checked="checked" value="A">
+                    <label> | </label>
                     <label>Supervisor</label><input name="tipo" id="Tipo" type="radio" value="S">
+                    <label> | </label>
                     <label>Colaborador</label><input name="tipo" id="Tipo" type="radio" value="C">
+                    <br />
+                    <br />
+                    <br />
                     <input class="form-control btn btn-outline-primary" type="submit" value="Crear">
                 </div>
 

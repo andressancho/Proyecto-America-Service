@@ -31,6 +31,7 @@ namespace AmericanService.Controllers
             return View(filtrar_usuarios(Estado));
         }
 
+
         //Entradas:un string para buscar
         //Salidas: la vista de la tabla de perfiles con el resultado de la busqueda
         //Descripción: busca en los perfiles que coincidan con el string de busqueda segun nombre, apellido o cedula
@@ -142,6 +143,7 @@ namespace AmericanService.Controllers
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 con.Close();
+                
             }
             catch (NullReferenceException)
             {
@@ -152,19 +154,24 @@ namespace AmericanService.Controllers
                 TempData["message"] = "Ya existe un usuario con la misma cedula";
             }
 
+            
+
             HttpContext.Session["usuario_actual"] = ced;
             Usuario usuario = obtener_usuario_actual(HttpContext.Session["usuario_actual"].ToString());
 
             if (tipo == "Administrador")
             {
+                TempData["message"] = "Usuario editado correctamente.";
                 return View("~/Views/Perfil/Perfil.cshtml", "~/Views/Shared/_Menu.cshtml", usuario);
             }
             else if (tipo == "Colaborador")
             {
+                TempData["message"] = "Usuario editado correctamente.";
                 return View("~/Views/Perfil/Perfil.cshtml", "~/Views/Shared/_Menu_Colaborador.cshtml", usuario);
             }
             else
             {
+                TempData["message"] = "Usuario editado correctamente.";
                 return View("~/Views/Perfil/Perfil.cshtml", "~/Views/Shared/_Menu.cshtml", usuario);
             }
             

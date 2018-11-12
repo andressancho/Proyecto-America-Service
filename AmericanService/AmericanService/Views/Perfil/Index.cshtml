@@ -33,80 +33,99 @@
 
 <body>
     <div class="margen">
-        <h2>Colaboradores</h2>
-        <br />
-        @using (Html.BeginForm("Buscar", "Perfil"))
-        {
-            <label>Buscar:</label>
-            <input type="text" id="buscar_string" name="buscar_string">
-            <input type="submit" value="Aceptar" />
-        }
-
-        <br />
-        <div>
-
-            @using (Html.BeginForm("Index", "Perfil"))
-            {
-
-                <label>Activos</label> <input checked="checked" id="Estado" name="Estado" type="radio" value="A">
-                <label>Inactivos</label><input id="Estado" name="Estado" type="radio" value="I">
-                <input type="submit" value="Filtrar">
-            }
-
-
-
-
-        </div>
-
-        <br />
-
-
-        <table id="diseno2">
-            <tr>
-                <th>Cédula</th>
-                <th>Primer Nombre</th>
-                <th>Segundo Nombre</th>
-                <th>Primer Apellido</th>
-                <th>Segundo Apellido</th>
-                <th>Estado</th>
-                <th>Tipo</th>
-                <th>Fecha de Ingreso</th>
-                <th>Fecha de Nacimiento</th>
-                <th>Supervisor</th>
-                <th>Desempeño</th>
-                <th>Usuario</th>
-                <th>Opciones</th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>@item.cedula</td>
-                <td>@item.primer_nombre</td>
-                <td>@item.segundo_nombre</td>
-                <td>@item.primer_apellido</td>
-                <td>@item.segundo_apellido</td>
-                <td>@item.estado</td>
-                <td>@item.tipo</td>
-                <td>@item.fecha_ingreso.ToString("dd/MMM/yyyy")</td>
-                <td>@item.fecha_nacimiento.ToString("dd/MMM/yyyy")</td>
-                <td>@item.supervisor</td>
-                <td>@item.desempeno</td>
-                <td>@item.usuario</td>
-                <div class="letra">
-                    <td>
-                        @Html.ActionLink("Editar", "Editar_otro_usuario", new { cedula = item.cedula })|
-                        @Html.ActionLink("Descargar", "Descargar_PDF", new { cedula = item.cedula })|
-                        @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula }, new { onclick = "return confirm('¿Seguro que quieres eliminar este perfil?');" })
-
-                    </td>
+            <h2>Colaboradores</h2>
+            <br />
+            <div class="row">
+                <div class="col-sm">
+                    @using (Html.BeginForm("Buscar", "Perfil"))
+                    {
+                        <label>Buscar:</label>
+                        <input type="text" id="buscar_string" name="buscar_string">
+                        <input type="submit" value="Aceptar" />
+                    }
+                    <br />
+                    <br />
                 </div>
-            </tr>
+                <div class="col-sm">
+
+                    @using (Html.BeginForm("Index", "Perfil"))
+                    {
+
+                        <label>Activos</label> <input checked="checked" id="Estado" name="Estado" type="radio" value="A">
+                        <label> | </label>
+                        <label>Inactivos</label><input id="Estado" name="Estado" type="radio" value="I">
+                        <input type="submit" value="Filtrar">
+                    }
+                    <br />
+                    <br />
+                </div>
+
+                <table id="diseno2">
+
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Primer Nombre</th>
+                        <th>Segundo Nombre</th>
+                        <th>Primer Apellido</th>
+                        <th>Segundo Apellido</th>
+                        <th>Estado</th>
+                        <th>Tipo</th>
+                        <th>Fecha de Ingreso</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th>Supervisor</th>
+                        <th>Desempeño</th>
+                        <th>Usuario</th>
+                        <th>Opciones</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@item.cedula</td>
+                        <td>@item.primer_nombre</td>
+                        <td>@item.segundo_nombre</td>
+                        <td>@item.primer_apellido</td>
+                        <td>@item.segundo_apellido</td>
+                        @if (item.estado == "A")
+                        {
+                            <td>Activo</td>
+                        }
+                        else if (item.estado == "I")
+                        {
+                            <td>Inactivo</td>
+                        }
+                        @if (item.tipo == "A")
+                        {
+                            <td>Administrador</td>
+                        }
+                        else if (item.tipo == "S")
+                        {
+                            <td>Supervisor</td>
+                        }
+                        else if (item.tipo == "C")
+                        {
+                            <td>Colaborador</td>
+                        }
+                        <td>@item.fecha_ingreso.ToString("dd/MMM/yyyy")</td>
+                        <td>@item.fecha_nacimiento.ToString("dd/MMM/yyyy")</td>
+                        <td>@item.supervisor</td>
+                        <td>@item.desempeno</td>
+                        <td>@item.usuario</td>
+                        <div class="letra">
+                            <td>
+                                @Html.ActionLink("Editar", "Editar_otro_usuario", new { cedula = item.cedula })|
+                                @Html.ActionLink("Descargar", "Descargar_PDF", new { cedula = item.cedula })|
+                                @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula }, new { onclick = "return confirm('¿Seguro que quieres eliminar este perfil?');" })
+
+                            </td>
+                        </div>
+                    </tr>
 
 
-            }
+                    }
 
-        </table>
-    </div>
+                </table>
+            </div>
+        </div>
 </body>
 

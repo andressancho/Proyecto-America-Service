@@ -18,6 +18,7 @@
 
 
 
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,72 +40,103 @@
 
                     <label>Cédula:</label>
                     <input type="text" class="form-control" name="cedula" id="cedula" value=@Model.cedula>
+                    <br />
                     <label>Primer Nombre:</label>
                     <input type="text" class="form-control" name="primer_nombre" id="primer_nombre" value=@Model.primer_nombre>
+                    <br />
                     <label>Segundo Nombre:</label>
                     <input type="text" class="form-control" name="segundo_nombre" id="segundo_nombre" value=@Model.segundo_nombre>
+                    <br />
                     <label>Primer Apellido:</label>
                     <input type="text" class="form-control" name="primer_apellido" id="primer_apellido" value=@Model.primer_apellido>
+                    <br />
                     <label>Segundo Apellido:</label>
                     <input type="text" class="form-control" name="segundo_apellido" id="segundo_apellido" value=@Model.segundo_apellido>
-                    <label>Cumpleaños:</label>
-                    <input type="date" class="form-control" name="fecha_nacimiento" value=@Model.fecha_nacimiento.ToString("yyyy-MM-dd")>
-                    <label>Fecha de ingreso:</label>
-                    <input type="date" class="form-control" name="fecha_ingreso" value=@Model.fecha_ingreso.ToString("yyyy-MM-dd")>
 
                 </div>
                 <div class="col-sm">
+
+                    <label>Cumpleaños:</label>
+                    <input type="date" class="form-control" name="fecha_nacimiento" value=@Model.fecha_nacimiento.ToString("yyyy-MM-dd")>
+                    <br />
+                    <label>Fecha de ingreso:</label>
+                    <input type="date" class="form-control" name="fecha_ingreso" value=@Model.fecha_ingreso.ToString("yyyy-MM-dd")>
+                    <br />
                     <label>Estado:</label>
                     <br />
                     @if (Model.estado == "Activo")
                     {
                         <label>Activo</label> <input class="separar" checked="checked" id="estado" name="estado" type="radio" value="A">
-                        <br />
+                        <label> | </label>
                         <label>Inactivo</label><input class="separar" id="estado" name="estado" type="radio" value="I">
+                        <br />
+
 
                     }
 
                     else if (Model.estado == "Inactivo")
                     {
                         <label>Activo</label> <input class="separar" id="estado" name="estado" type="radio" value="A">
-                        <br />
+                        <label> | </label>
                         <label>Inactivo</label><input class="separar" checked="checked" id="estado" name="estado" type="radio" value="I">
+                        <br />
+
                     }
                     <br />
                     <label>Desempeño:</label>
                     <input type="text" class="form-control" name="desempeno" readonly value=@Model.desempeno>
+                    <br />
                     <label>Productividad:</label>
                     <input type="number" class="form-control" name="productividad" value=@Model.productividad>
+
+                </div>
+                <div class="col-sm">
+
                     <label>Pruebas:</label>
                     <input type="number" class="form-control" name="pruebas" value=@Model.pruebas>
+                    <br />
                     <label>Habilidades Blandas:</label>
                     <input type="number" class="form-control" name="habilidades" value=@Model.habilidades_blandas>
+                    <br />
                     <label>Supervisor:</label>
                     <input type="text" class="form-control" name="supervisor" value=@Model.supervisor>
+                    <br />
                     <label>Tipo:</label>
                     <br />
                     @if (Model.tipo == "Administrador")
                     {
                         <label>Administrador</label> <input checked="checked" id="Tipo" name="tipo" type="radio" value="A">
+                        <label> | </label>
                         <label>Supervisor</label><input id="Tipo" name="tipo" type="radio" value="S">
+                        <label> | </label>
                         <label>Colaborador</label><input id="Tipo" name="tipo" type="radio" value="C">
+                        <br />
                     }
                     else if (Model.tipo == "Supervisor")
                     {
                         <label>Administrador</label> <input id="Tipo" name="tipo" type="radio" value="A">
+                        <label> | </label>
                         <label>Supervisor</label><input checked="checked" id="tipo" name="Tipo" type="radio" value="S">
+                        <label> | </label>
                         <label>Colaborador</label><input id="Tipo" name="tipo" type="radio" value="C">
+                        <br />
                     }
                     else
                     {
                         <label>Administrador</label> <input id="Tipo" name="tipo" type="radio" value="A">
+                        <label> | </label>
                         <label>Supervisor</label><input id="Tipo" name="tipo" type="radio" value="S">
+                        <label> | </label>
                         <label>Colaborador</label><input checked="checked" id="tipo" name="Tipo" type="radio" value="C">
+                        <br />
                     }
-
                     <br />
+                    <br />
+
                     <input type="submit" class="form-control btn btn-outline-primary" value="Editar" />
+
                 </div>
+
 
             </div>
         </div>

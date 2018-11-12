@@ -1,5 +1,12 @@
 ﻿
 @{
+    ViewBag.Title = "Perfil";
+    if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+        alert(@Html.Raw(Json.Encode(TempData["message"])));
+        </script>
+    }
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Menu.cshtml";
     if (Session["Sid"] == null)
@@ -26,15 +33,15 @@
                     <h2>Formulario</h2>
                     <br />
                     <label>Cédula:</label>
-                    <input type="text" class="form-control" name="cedula" readonly value=@Model.cedula >
+                    <input type="text" class="form-control" name="cedula" readonly value=@Model.cedula>
                     <label>Primer nombre:</label>
                     <input type="text" class="form-control" name="primer_nombre" readonly value=@Model.primer_nombre>
                     <label>Segundo nombre:</label>
                     <input type="text" class="form-control" name="segundo_nombre" readonly value=@Model.segundo_nombre>
                     <label>Primer apellido:</label>
-                    <input type="text" class="form-control" name="primer_apellido" readonly value=@Model.primer_apellido >
+                    <input type="text" class="form-control" name="primer_apellido" readonly value=@Model.primer_apellido>
                     <label>Segundo apellido:</label>
-                    <input type="text" class="form-control" name="segundo_apellido" readonly value=@Model.segundo_apellido >
+                    <input type="text" class="form-control" name="segundo_apellido" readonly value=@Model.segundo_apellido>
                     <input type="hidden" class="form-control" name="id_roleplay" value=@Model.id_roleplay>
                     <label>Jornada:</label>
                     <br />
@@ -131,15 +138,15 @@
                               cols="20"
                               readonly>@Model.justificacion_jornada</textarea>
                     <label>Fecha:</label>
-                    <input type="text" class="form-control" name="fecha" readonly value=@Model.fecha >
+                    <input type="text" class="form-control" name="fecha" readonly value=@Model.fecha>
                     <label>Salario:</label>
-                    <input type="text" class="form-control" name="salario" readonly value=@Model.salario >
+                    <input type="text" class="form-control" name="salario" readonly value=@Model.salario>
                     <label>Telefono:</label>
-                    <input type="text" class="form-control" name="telefono" readonly value=@Model.telefono >
+                    <input type="text" class="form-control" name="telefono" readonly value=@Model.telefono>
                     <label>Correo:</label>
-                    <input type="text" class="form-control" name="correo" readonly value=@Model.correo >
+                    <input type="text" class="form-control" name="correo" readonly value=@Model.correo>
                     <label>Domicilio:</label>
-                    <input type="text" class="form-control" name="domicilio" readonly value=@Model.domicilio >
+                    <input type="text" class="form-control" name="domicilio" readonly value=@Model.domicilio>
                     <label>Experiencia en call center:</label>
                     @if (Model.exp_call_center == true)
                     {
@@ -234,8 +241,7 @@
                               id="detalle_exp_cobros"
                               name="detalle_exp_cobros"
                               rows="4"
-                              cols="20"
-                              >@Model.detalle_exp_cobros</textarea>
+                              cols="20">@Model.detalle_exp_cobros</textarea>
                     <label>Excel:</label>
                     @if (Model.excel == true)
                     {
@@ -302,7 +308,7 @@
                     <br />
                     <input type="submit" class="form-control" value="Editar" />
                 </div>
-                </div>
+            </div>
         </div>
     }
 </body>
