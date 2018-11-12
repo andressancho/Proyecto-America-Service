@@ -14,7 +14,8 @@ namespace AmericanService.Models
         public List<string> updateDataBase()
         {
             
-            //String result_cv = String.Empty;
+            //--------------------- Download information from FTP server 000Webhost
+
             FtpWebRequest request_information = (FtpWebRequest)WebRequest.Create("ftp://files.000webhost.com:21/public_html/data_information.csv");
             //FtpWebRequest request_cv = (FtpWebRequest)WebRequest.Create("ftp://files.000webhost.com:21/public_html/data_cv.csv");
 
@@ -39,8 +40,24 @@ namespace AmericanService.Models
 
                     information.Add(line.Replace("SI", "True").Replace("NO", "False"));
                 }
-            } 
-            information.RemoveAt(0);
+            }
+
+            if (information.Count != 0)
+            {
+                information.RemoveAt(0);
+                //--------------------- Upload information to FTP server 000Webhost
+
+                FtpWebRequest request_upload = (FtpWebRequest)WebRequest.Create("ftp://files.000webhost.com:21/public_html/data_information.csv");
+
+                request_upload.Method = WebRequestMethods.Ftp.UploadFile;
+                request_upload.Credentials = new NetworkCredential("americaservice", "ameser2018");
+
+                Stream ftp_stream = request_upload.GetRequestStream();
+                byte[] buffer = new byte[] { };
+                ftp_stream.Write(buffer, 0, 0);
+                ftp_stream.Close();
+            }
+
             return information;
 
 
