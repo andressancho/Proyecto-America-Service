@@ -108,6 +108,7 @@ namespace AmericanService.Controllers
                 if (exito)
                 {
                     Session["Sid"] = Session.SessionID;
+                    Session["tipo"] = tipo;
                     //Response.Write(" <h2> Bienvenido </h2>" + nombre + " " + apellidos);    
                     if (tipo == "Administrador")
                     {
