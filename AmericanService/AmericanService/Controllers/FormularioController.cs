@@ -103,7 +103,7 @@ namespace AmericanService.Controllers
 
             SqlCommand cmd = new SqlCommand("eliminar_formulario", con);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@cedula", cedula);
+            cmd.Parameters.AddWithValue("@id_formulario", cedula);
             con.Open();
             SqlDataReader dr = cmd.ExecuteReader();
             con.Close();
