@@ -13,6 +13,7 @@
         Response.Redirect("../Home/Index");
     }
 
+
 }
 
 
@@ -30,6 +31,8 @@
 </head>
 <body>
 
+    @if (Session["tipo"] == "Administrador")
+    {
     <form action="/Perfil/Editar" method="post" id="editar">
         <div class="container">
             <h1>Mi Perfil</h1>
@@ -109,6 +112,88 @@
             </div>
         </div>
     </form>
+    }
+    else  if(Session["tipo"] == "Colaborador"){
+    <form action="/Perfil/Editar" method="post" id="editar">
+        <div class="container">
+            <h1>Mi Perfil</h1>
+            <input type="hidden" name="ced" id="ced" value=@Model.cedula>
+            <div class="row">
+                <div class="col-sm">
+
+                    <label>Cédula:</label>
+                    <input type="text" class="form-control" name="cedula" id="cedula" readonly value=@Model.cedula>
+                    <label>Primer Nombre:</label>
+                    <input type="text" class="form-control" name="primer_nombre" id="primer_nombre" readonly value=@Model.primer_nombre>
+                    <label>Segundo Nombre:</label>
+                    <input type="text" class="form-control" name="segundo_nombre" id="segundo_nombre" readonly value=@Model.segundo_nombre>
+                    <label>Primer Apellido:</label>
+                    <input type="text" class="form-control" name="primer_apellido" id="primer_apellido" readonly value=@Model.primer_apellido>
+                    <label>Segundo Apellido:</label>
+                    <input type="text" class="form-control" name="segundo_apellido" id="segundo_apellido" readonly value=@Model.segundo_apellido>
+                    <label>Cumpleaños:</label>
+                    <input type="date" class="form-control" name="fecha_nacimiento" readonly value=@Model.fecha_nacimiento.ToString("yyyy-MM-dd")>
+                    <label>Fecha de ingreso:</label>
+                    <input type="date" class="form-control" name="fecha_ingreso" readonly value=@Model.fecha_ingreso.ToString("yyyy-MM-dd")>
+
+                </div>
+                <div class="col-sm">
+                    <label>Estado:</label>
+                    <br />
+                    @if (Model.estado == "Activo")
+                    {
+                        <label>Activo</label> <input class="separar" checked="checked"disabled id="estado" name="estado" type="radio" value="A">
+                        <br />
+                        <label>Inactivo</label><input class="separar" id="estado" name="estado" disabled type="radio" value="I">
+
+                    }
+
+                    else if (Model.estado == "Inactivo")
+                    {
+                        <label>Activo</label> <input class="separar" id="estado" name="estado" disabled type="radio" value="A">
+                        <br />
+                        <label>Inactivo</label><input class="separar" checked="checked" id="estado" disabled name="estado" type="radio" value="I">
+                    }
+                    <br />
+                    <label>Desempeño:</label>
+                    <input type="text" class="form-control" name="desempeno" readonly value=@Model.desempeno>
+                    <label>Productividad:</label>
+                    <input type="number" class="form-control" name="productividad" readonly value=@Model.productividad>
+                    <label>Pruebas:</label>
+                    <input type="number" class="form-control" name="pruebas" readonly  value=@Model.pruebas>
+                    <label>Habilidades Blandas:</label>
+                    <input type="number" class="form-control" name="habilidades" readonly value=@Model.habilidades_blandas>
+                    <label>Supervisor:</label>
+                    <input type="text" class="form-control" name="supervisor" readonly value=@Model.supervisor>
+                    <label>Tipo:</label>
+                    <br />
+                    @if (Model.tipo == "Administrador")
+                    {
+                        <label>Administrador</label> <input checked="checked" id="Tipo" disabled name="tipo" type="radio" value="A">
+                        <label>Supervisor</label><input id="Tipo" name="tipo" disabled type="radio" value="S">
+                        <label>Colaborador</label><input id="Tipo" name="tipo" disabled type="radio" value="C">
+                    }
+                    else if (Model.tipo == "Supervisor")
+                    {
+                        <label>Administrador</label> <input id="Tipo" name="tipo" disabled type="radio" value="A">
+                        <label>Supervisor</label><input checked="checked" id="tipo" disabled name="Tipo" type="radio" value="S">
+                        <label>Colaborador</label><input id="Tipo" name="tipo" disabled type="radio" value="C">
+                    }
+                    else
+                    {
+                        <label>Administrador</label> <input id="Tipo" disabled name="tipo" type="radio" value="A">
+                        <label>Supervisor</label><input id="Tipo" disabled name="tipo" type="radio" value="S">
+                        <label>Colaborador</label><input checked="checked" disabled id="tipo" name="Tipo" type="radio" value="C">
+                    }
+
+                    <br />
+                </div>
+
+            </div>
+        </div>
+    </form>
+    }
+
 </body>
 
 <script type="text/javascript">
