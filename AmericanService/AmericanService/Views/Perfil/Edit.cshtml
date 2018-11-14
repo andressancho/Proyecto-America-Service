@@ -50,12 +50,14 @@
                     @if (Model.estado == "Activo")
                     {
                         <label>Activo</label> <input checked="checked" id="estado" name="estado" type="radio" value="A">
+                        <label>|</label>
                         <label>Inactivo</label><input id="estado" name="estado" type="radio" value="I">
 
                     }
                     else if (Model.estado == "Inactivo")
                     {
                         <label>Activo</label> <input id="estado" name="estado" type="radio" value="A">
+                        <label>|</label>
                         <label>Inactivo</label><input checked="checked" id="estado" name="estado" type="radio" value="I">
 
                     }
@@ -75,19 +77,25 @@
                     @if (Model.tipo == "Administrador")
                     {
                         <label>Administrador</label> <input checked="checked" id="Tipo" name="tipo" type="radio" value="A">
+                        <label>|</label>
                         <label>Supervisor</label><input id="Tipo" name="tipo" type="radio" value="S">
+                        <label>|</label>
                         <label>Colaborador</label><input id="Tipo" name="tipo" type="radio" value="C">
                     }
                     else if (Model.tipo == "Supervisor")
                     {
                         <label>Administrador</label> <input id="Tipo" name="tipo" type="radio" value="A">
+                        <label>|</label>
                         <label>Supervisor</label><input checked="checked" id="tipo" name="Tipo" type="radio" value="S">
+                        <label>|</label>
                         <label>Colaborador</label><input id="Tipo" name="tipo" type="radio" value="C">
                     }
                     else
                     {
                         <label>Administrador</label> <input id="Tipo" name="tipo" type="radio" value="A">
+                        <label>|</label>
                         <label>Supervisor</label><input id="Tipo" name="tipo" type="radio" value="S">
+                        <label>|</label>
                         <label>Colaborador</label><input checked="checked" id="tipo" name="Tipo" type="radio" value="C">
                     }
 
