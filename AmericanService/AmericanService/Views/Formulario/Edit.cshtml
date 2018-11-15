@@ -8,10 +8,22 @@
         </script>
     }
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Menu.cshtml";
+
     if (Session["Sid"] == null)
     {
         Response.Redirect("../Home/Index");
+    }
+    if (Session["tipo"] == "Colaborador")
+    {
+        Response.Redirect("../Perfil/gestionar_perfil");
+    }
+    else if (Session["tipo"] == "Administrador")
+    {
+        Layout = "~/Views/Shared/_Menu.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Menu_Supervisor.cshtml";
     }
 }
 @model  AmericanService.Models.Formulario
@@ -273,32 +285,65 @@
                               name="detalle"
                               rows="4"
                               cols="20">@Model.roleplay.detalle</textarea>
-                    <label>Visto Bueno:</label>
-                    <br />
-                    @if (Model.roleplay.visto_bueno == "S")
+                    @if (Session["tipo"] == "Administrador")
                     {
-                        <label>Si:</label><input checked="checked" id="visto" name="visto_bueno" type="radio" value="S">
+                        <label>Visto Bueno:</label>
                         <br />
-                        <label>No:</label><input id="visto" name="visto_bueno" type="radio" value="N">
-                        <br />
-                        <label>Sin definir:</label><input id="visto" name="visto_bueno" type="radio" value="D">
+                        if (Model.roleplay.visto_bueno == "S")
+                        {
+                            <label>Si:</label><input checked="checked" id="visto" name="visto_bueno" type="radio" value="S">
+                            <br />
+                            <label>No:</label><input id="visto" name="visto_bueno" type="radio" value="N">
+                            <br />
+                            <label>Sin definir:</label><input id="visto" name="visto_bueno" type="radio" value="D">
+                        }
+                        else if (Model.roleplay.visto_bueno == "N")
+                        {
+                            <label>Si:</label><input id="visto" name="visto_bueno" type="radio" value="S">
+                            <br />
+                            <label>No:</label><input checked="checked" id="visto" name="visto_bueno" type="radio" value="N">
+                            <br />
+                            <label>Sin definir:</label><input id="visto" name="visto_bueno" type="radio" value="D">
+                        }
+                        else
+                        {
+                            <label>Si:</label><input id="visto" name="visto_bueno" type="radio" value="S">
+                            <br />
+                            <label>No:</label><input id="visto" name="visto_bueno" type="radio" value="N">
+                            <br />
+                            <label>Sin definir:</label><input checked="checked" id="visto" name="visto_bueno" type="radio" value="D">
+                        }
                     }
-                    else if (Model.roleplay.visto_bueno == "N")
+                    @if (Session["tipo"] == "Supervisor")
                     {
-                        <label>Si:</label><input id="visto" name="visto_bueno" type="radio" value="S">
+                        <label>Visto Bueno:</label>
                         <br />
-                        <label>No:</label><input checked="checked" id="visto" name="visto_bueno" type="radio" value="N">
-                        <br />
-                        <label>Sin definir:</label><input id="visto" name="visto_bueno" type="radio" value="D">
+                        if (Model.roleplay.visto_bueno == "S")
+                        {
+                            <label>Si:</label><input checked="checked" id="visto" name="visto_bueno" disabled type="radio" value="S">
+                            <br />
+                            <label>No:</label><input id="visto" name="visto_bueno" disabled type="radio" value="N">
+                            <br />
+                            <label>Sin definir:</label><input id="visto" name="visto_bueno" disabled type="radio" value="D">
+                        }
+                        else if (Model.roleplay.visto_bueno == "N")
+                        {
+                            <label>Si:</label><input id="visto" name="visto_bueno" disabled type="radio" value="S">
+                            <br />
+                            <label>No:</label><input checked="checked" id="visto" disabled name="visto_bueno" type="radio" value="N">
+                            <br />
+                            <label>Sin definir:</label><input id="visto" disabled name="visto_bueno" type="radio" value="D">
+                        }
+                        else
+                        {
+                            <label>Si:</label><input id="visto" name="visto_bueno" disabled type="radio" value="S">
+                            <br />
+                            <label>No:</label><input id="visto" name="visto_bueno" disabled type="radio" value="N">
+                            <br />
+                            <label>Sin definir:</label><input checked="checked" id="visto" disabled name="visto_bueno" type="radio" value="D">
+                        }
                     }
-                    else
-                    {
-                        <label>Si:</label><input id="visto" name="visto_bueno" type="radio" value="S">
-                        <br />
-                        <label>No:</label><input id="visto" name="visto_bueno" type="radio" value="N">
-                        <br />
-                        <label>Sin definir:</label><input checked="checked" id="visto" name="visto_bueno" type="radio" value="D">
-                    }
+
 
                     <br />
 

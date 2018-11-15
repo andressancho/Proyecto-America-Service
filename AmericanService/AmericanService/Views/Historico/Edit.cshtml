@@ -6,6 +6,15 @@
     {
         Response.Redirect("../Home/Index");
     }
+    if (Session["tipo"] == "Colaborador" || Session["tipo"] == "Supervisor")
+    {
+        Response.Redirect("../Perfil/gestionar_perfil");
+    }
+    else if (Session["tipo"] == "Administrador")
+    {
+        Layout = "~/Views/Shared/_Menu.cshtml";
+    }
+   
 }
 @model  AmericanService.Models.Historico
 

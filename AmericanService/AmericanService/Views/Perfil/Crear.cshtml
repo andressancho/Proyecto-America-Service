@@ -6,6 +6,10 @@
     {
         Response.Redirect("../Home/Index");
     }
+    if (Session["tipo"] == "Colaborador" || Session["tipo"] == "Supervisor")
+    {
+        Response.Redirect("../Perfil/gestionar_perfil");
+    }
 }
 
 @{

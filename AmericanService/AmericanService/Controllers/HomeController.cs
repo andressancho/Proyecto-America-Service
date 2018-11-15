@@ -116,9 +116,13 @@ namespace AmericanService.Controllers
                     }
                     else if (tipo=="Colaborador"){
                         return View("~/Views/Perfil/Perfil.cshtml", "~/Views/Shared/_Menu_Colaborador.cshtml", usuario);
-                    }   
-                    
-                    
+                    }
+                    else if (tipo == "Supervisor")
+                    {
+                        return View("~/Views/Perfil/Perfil.cshtml", "~/Views/Shared/_Menu_Supervisor.cshtml", usuario);
+                    }
+
+
                 }
                 else
                 {

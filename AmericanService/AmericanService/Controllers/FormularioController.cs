@@ -403,7 +403,15 @@ namespace AmericanService.Controllers
                 cmd.Parameters.AddWithValue("@exp_ventas", bool.Parse(values[10]));
                 cmd.Parameters.AddWithValue("@exp_servicio_cliente", bool.Parse(values[11]));
                 cmd.Parameters.AddWithValue("@detalle_experiencias", values[13]);
-                cmd.Parameters.AddWithValue("@exp_cobros", 0);
+                if (bool.Parse(values[19]) || bool.Parse(values[20]) || bool.Parse(values[21]) || bool.Parse(values[22]) || bool.Parse(values[23]))
+                {
+                    cmd.Parameters.AddWithValue("@exp_cobros", 1);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@exp_cobros", 0);
+                }
+                
                 cmd.Parameters.AddWithValue("@exp_mora30", bool.Parse(values[19]));
                 cmd.Parameters.AddWithValue("@exp_mora60", bool.Parse(values[20]));
                 cmd.Parameters.AddWithValue("@exp_mora90", bool.Parse(values[21]));

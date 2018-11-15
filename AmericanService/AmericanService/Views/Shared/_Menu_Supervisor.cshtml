@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>@ViewBag.Title America Service</title>
+    <link rel="stylesheet" href="../Content/menu.css">
+    <link rel="stylesheet" href="../Content/bootstrap.min.css">
+    <!-- propiedad para footable -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- footable -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/css/footable.min.css" />
+
+
+
+</head>
+
+<body style="padding-top:unset; padding-bottom:unset">
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fondo-negro">
+            <a class="navbar-brand" href="#"><img src="~/images/logo.jpg" /></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Perfil/gestionar_perfil">Mi Perfil <span class="sr-only">(current)</span></a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Formulario/Indx">Formularios <span class="sr-only">(current)</span></a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Perfil/Index">Colaboradores <span class="sr-only">(current)</span></a>
+
+                    </li>
+                    >
+
+                </ul>
+                <ul class="navbar ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Logout">Cerrar Sesión <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+    </header>
+
+
+
+
+
+    @RenderBody()
+
+
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - America Service</p>
+    </footer>
+
+    <!-- footable -->
+    <script src="~/Scripts/footable.min.js"></script>
+    <script src="~/Scripts/javascript/tablas-html.js"></script>
+
+    <script src="~/Scripts/menu.js"></script>
+    <!-- jquery bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <!--<script type="text/javascript">$(function () { $('table').footable(); });</script>-->
+
+</body>
+</html>

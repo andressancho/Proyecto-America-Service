@@ -61,7 +61,7 @@ namespace AmericanService.PDF
             _pdfTable.CompleteRow();
 
             _fontStyle = FontFactory.GetFont("Tahoma", 18f, 1);
-            _pdfCell = new PdfPCell(new Phrase("Perfil de Usuario" + "\n\n" + "\n\n", _fontStyle));
+            _pdfCell = new PdfPCell(new Phrase("Perfil de Usuario", _fontStyle));
             _pdfCell.Colspan = _totalColumn;
             _pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfCell.Border = 0;
@@ -69,6 +69,17 @@ namespace AmericanService.PDF
             _pdfCell.ExtraParagraphSpace = 0;
             _pdfTable.AddCell(_pdfCell);
             _pdfTable.CompleteRow();
+
+            _fontStyle = FontFactory.GetFont("Tahoma", 15f, 1);
+            _pdfCell = new PdfPCell(new Phrase(DateTime.Now.ToString("dd-MMM-yyyy") + "\n\n" + "\n\n", _fontStyle));
+            _pdfCell.Colspan = _totalColumn;
+            _pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            _pdfCell.Border = 0;
+            _pdfCell.BackgroundColor = BaseColor.WHITE;
+            _pdfCell.ExtraParagraphSpace = 0;
+            _pdfTable.AddCell(_pdfCell);
+            _pdfTable.CompleteRow();
+
 
             _fontStyle = FontFactory.GetFont("Tahoma", 12f, 0);
             _pdfCell = new PdfPCell(new Phrase("Cédula:" + " " + _usuario.cedula + "\n\n", _fontStyle));

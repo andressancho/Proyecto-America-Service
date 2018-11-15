@@ -1,9 +1,21 @@
 ﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Menu.cshtml";
-    if (Session["Sid"] == null)
+    if (Session["Sid"] == null )
     {
         Response.Redirect("../Home/Index");
+    }
+    if (Session["tipo"] == "Colaborador")
+    {
+        Response.Redirect("../Perfil/gestionar_perfil");
+    }
+    else if (Session["tipo"] == "Administrador")
+    {
+        Layout = "~/Views/Shared/_Menu.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Menu_Supervisor.cshtml";
     }
 }
 
@@ -49,20 +61,23 @@
 
         </div>
         <br />
+        @if (Session["tipo"] == "Administrador")
+        {
 
-        <table id="diseno2">
-            <tr>
-                <th>Cédula</th>
-                <th>Primer nombre</th>
-                <th>Segundo nombre</th>
-                <th>Primer apellido</th>
-                <th>Segundo apellido</th>
-                <th>Fecha</th>
-                <th>Opciones</th>
-            </tr>
+            <table id="diseno2">
+                <tr>
+                    <th>Cédula</th>
+                    <th>Primer nombre</th>
+                    <th>Segundo nombre</th>
+                    <th>Primer apellido</th>
+                    <th>Segundo apellido</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Opciones</th>
+                </tr>
 
-            @foreach (var item in Model)
-            {
+                @foreach (var item in Model)
+                {
                 <tr>
                     <td>@item.cedula</td>
                     <td>@item.primer_nombre</td>
@@ -70,6 +85,8 @@
                     <td>@item.primer_apellido</td>
                     <td>@item.segundo_apellido</td>
                     <td>@item.fecha.ToString("dd/MMM/yyyy")</td>
+                   
+
 
                     <td>
 
@@ -78,8 +95,45 @@
 
                     </td>
                 </tr>
-            }
+                }
 
-        </table>
+            </table>
+
+        }
+
+        else if (Session["tipo"] == "Supervisor")
+        {
+            <table id="diseno2">
+                <tr>
+                    <th>Cédula</th>
+                    <th>Primer nombre</th>
+                    <th>Segundo nombre</th>
+                    <th>Primer apellido</th>
+                    <th>Segundo apellido</th>
+                    <th>Fecha</th>
+                    <th>Opciones</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.cedula</td>
+                        <td>@item.primer_nombre</td>
+                        <td>@item.segundo_nombre</td>
+                        <td>@item.primer_apellido</td>
+                        <td>@item.segundo_apellido</td>
+                        <td>@item.fecha.ToString("dd/MMM/yyyy")</td>
+
+                        <td>
+
+                            @Html.ActionLink("Editar", "Editar", new { id_formulario = item.id_formulario })
+                          
+
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
     </div>
-</body>
+    </body>

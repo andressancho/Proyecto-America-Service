@@ -14,6 +14,18 @@
     {
         Response.Redirect("../Home/Index");
     }
+    if (Session["tipo"] == "Colaborador")
+    {
+        Response.Redirect("../Perfil/gestionar_perfil");
+    }
+    else if (Session["tipo"] == "Administrador")
+    {
+        Layout = "~/Views/Shared/_Menu.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Menu_Supervisor.cshtml";
+    }
 
 
 
@@ -115,7 +127,11 @@
                             <td>
                                 @Html.ActionLink("Editar", "Editar_otro_usuario", new { cedula = item.cedula })|
                                 @Html.ActionLink("Descargar", "Descargar_PDF", new { cedula = item.cedula })|
-                                @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula }, new { onclick = "return confirm('¿Seguro que quieres eliminar este perfil?');" })
+                                @if (Session["tipo"] == "Administrador")
+                                {
+                                    @Html.ActionLink("Eliminar", "Eliminar", new { cedula = item.cedula }, new { onclick = "return confirm('¿Seguro que quieres eliminar este perfil?');" })
+                                }
+
 
                             </td>
                         </div>
