@@ -97,16 +97,24 @@ namespace AmericanService.Controllers
 
         public ActionResult Eliminar(String cedula)
         {
-            SqlConnection con = new SqlConnection(
+            try
+            {
+                SqlConnection con = new SqlConnection(
             WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
 
 
-            SqlCommand cmd = new SqlCommand("eliminar_formulario", con);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@id_formulario", cedula);
-            con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-            con.Close();
+                SqlCommand cmd = new SqlCommand("eliminar_formulario", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_formulario", cedula);
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                con.Close();
+            }
+            catch (Exception)
+            {
+
+            }
+            
             return View("Index", obtener_formularios());
         }
 
@@ -375,55 +383,64 @@ namespace AmericanService.Controllers
             ConexionFtp ftp = new ConexionFtp();
             List<string> information = ftp.updateDataBase();
 
-            SqlConnection con = new SqlConnection(
+            try
+            {
+                SqlConnection con = new SqlConnection(
             WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
 
-            foreach (string line in information)
-            {
-                string[] values = line.Split(',');
+                foreach (string line in information)
+                {
+                    string[] values = line.Split(',');
 
-                SqlCommand cmd = new SqlCommand("agregar_formulario", con);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@cedula", values[1]);
-                cmd.Parameters.AddWithValue("@primer_nombre", values[2]);
-                cmd.Parameters.AddWithValue("@segundo_nombre", "");
-                cmd.Parameters.AddWithValue("@primer_apellido", values[3]);
-                cmd.Parameters.AddWithValue("@segundo_apellido", values[4]);
-                cmd.Parameters.AddWithValue("@id_roleplay", DBNull.Value);
-                cmd.Parameters.AddWithValue("@jornada_diurna", bool.Parse(values[15]));
-                cmd.Parameters.AddWithValue("@jornada_mixta", bool.Parse(values[16]));
-                cmd.Parameters.AddWithValue("@jornada_nocturna", bool.Parse(values[17]));
-                cmd.Parameters.AddWithValue("@justificacion_jornada", values[18]);
-                cmd.Parameters.AddWithValue("@fecha", DBNull.Value);
-                cmd.Parameters.AddWithValue("@salario", Int32.Parse(values[8]));
-                cmd.Parameters.AddWithValue("@telefono", Int32.Parse(values[5]));
-                cmd.Parameters.AddWithValue("@correo", values[6]);
-                cmd.Parameters.AddWithValue("@domicilio", values[7]);
-                cmd.Parameters.AddWithValue("@exp_call_center", bool.Parse(values[9]));
-                cmd.Parameters.AddWithValue("@exp_ventas", bool.Parse(values[10]));
-                cmd.Parameters.AddWithValue("@exp_servicio_cliente", bool.Parse(values[11]));
-                cmd.Parameters.AddWithValue("@detalle_experiencias", values[13]);
-                if (bool.Parse(values[19]) || bool.Parse(values[20]) || bool.Parse(values[21]) || bool.Parse(values[22]) || bool.Parse(values[23]))
-                {
-                    cmd.Parameters.AddWithValue("@exp_cobros", 1);
+                    SqlCommand cmd = new SqlCommand("agregar_formulario", con);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@cedula", values[1]);
+                    cmd.Parameters.AddWithValue("@primer_nombre", values[2]);
+                    cmd.Parameters.AddWithValue("@segundo_nombre", "");
+                    cmd.Parameters.AddWithValue("@primer_apellido", values[3]);
+                    cmd.Parameters.AddWithValue("@segundo_apellido", values[4]);
+                    cmd.Parameters.AddWithValue("@id_roleplay", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@jornada_diurna", bool.Parse(values[15]));
+                    cmd.Parameters.AddWithValue("@jornada_mixta", bool.Parse(values[16]));
+                    cmd.Parameters.AddWithValue("@jornada_nocturna", bool.Parse(values[17]));
+                    cmd.Parameters.AddWithValue("@justificacion_jornada", values[18]);
+                    cmd.Parameters.AddWithValue("@fecha", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@salario", Int32.Parse(values[8]));
+                    cmd.Parameters.AddWithValue("@telefono", Int32.Parse(values[5]));
+                    cmd.Parameters.AddWithValue("@correo", values[6]);
+                    cmd.Parameters.AddWithValue("@domicilio", values[7]);
+                    cmd.Parameters.AddWithValue("@exp_call_center", bool.Parse(values[9]));
+                    cmd.Parameters.AddWithValue("@exp_ventas", bool.Parse(values[10]));
+                    cmd.Parameters.AddWithValue("@exp_servicio_cliente", bool.Parse(values[11]));
+                    cmd.Parameters.AddWithValue("@detalle_experiencias", values[13]);
+                    if (bool.Parse(values[19]) || bool.Parse(values[20]) || bool.Parse(values[21]) || bool.Parse(values[22]) || bool.Parse(values[23]))
+                    {
+                        cmd.Parameters.AddWithValue("@exp_cobros", 1);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@exp_cobros", 0);
+                    }
+
+                    cmd.Parameters.AddWithValue("@exp_mora30", bool.Parse(values[19]));
+                    cmd.Parameters.AddWithValue("@exp_mora60", bool.Parse(values[20]));
+                    cmd.Parameters.AddWithValue("@exp_mora90", bool.Parse(values[21]));
+                    cmd.Parameters.AddWithValue("@exp_cartera_separada", bool.Parse(values[22]));
+                    cmd.Parameters.AddWithValue("@exp_cobro_judicial", bool.Parse(values[23]));
+                    cmd.Parameters.AddWithValue("@detalle_exp_cobros", values[24]);
+                    cmd.Parameters.AddWithValue("@excel", bool.Parse(values[12]));
+                    cmd.Parameters.AddWithValue("@bachillerato", bool.Parse(values[14]));
+                    con.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    con.Close();
                 }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@exp_cobros", 0);
-                }
-                
-                cmd.Parameters.AddWithValue("@exp_mora30", bool.Parse(values[19]));
-                cmd.Parameters.AddWithValue("@exp_mora60", bool.Parse(values[20]));
-                cmd.Parameters.AddWithValue("@exp_mora90", bool.Parse(values[21]));
-                cmd.Parameters.AddWithValue("@exp_cartera_separada", bool.Parse(values[22]));
-                cmd.Parameters.AddWithValue("@exp_cobro_judicial", bool.Parse(values[23]));
-                cmd.Parameters.AddWithValue("@detalle_exp_cobros", values[24]);
-                cmd.Parameters.AddWithValue("@excel", bool.Parse(values[12]));
-                cmd.Parameters.AddWithValue("@bachillerato", bool.Parse(values[14]));
-                con.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                con.Close();
             }
+            catch (Exception)
+            {
+
+            }
+
+            
             return View("Index", obtener_formularios());
         }
     }

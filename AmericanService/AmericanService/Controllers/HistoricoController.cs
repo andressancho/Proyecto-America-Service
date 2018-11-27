@@ -111,16 +111,24 @@ namespace AmericanService.Controllers
         //Descripción: Elimina un registro de historico por la cedula
         public ActionResult Eliminar(String cedula)
         {
-            SqlConnection con = new SqlConnection(
+            try
+            {
+                SqlConnection con = new SqlConnection(
             WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
 
 
-            SqlCommand cmd = new SqlCommand("eliminar_historico", con);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@cedula", cedula);
-            con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-            con.Close();
+                SqlCommand cmd = new SqlCommand("eliminar_historico", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@cedula", cedula);
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                con.Close();
+            }
+            catch (Exception)
+            {
+
+            }
+            
             return View("Index", consulta_historico());
         }
 

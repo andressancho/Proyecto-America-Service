@@ -41,6 +41,22 @@ namespace AmericanService.Tests.Controllers
             Assert.IsNotNull( result);
         }
 
-        
+        [ExpectedException(typeof(NullReferenceException))]
+        [TestMethod]
+
+        public void Logout()
+        {
+            
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.Logout() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+
     }
 }

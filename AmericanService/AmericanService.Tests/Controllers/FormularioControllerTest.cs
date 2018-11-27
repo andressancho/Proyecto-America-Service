@@ -25,6 +25,20 @@ namespace AmericanService.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
+
+        [TestMethod]
+        public void Buscar()
+        {
+            // Arrange
+            FormularioController controller = new FormularioController();
+
+            // Act
+            ViewResult result = controller.Buscar("Andres") as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
         [TestMethod]
         
         public void Obtener_formularios()
@@ -34,6 +48,47 @@ namespace AmericanService.Tests.Controllers
 
             // Act
             List<Formulario> result = controller.obtener_formularios() as List<Formulario>;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+        [TestMethod]
+
+        public void Eliminar()
+        {
+            // Arrange
+            FormularioController controller = new FormularioController();
+
+            // Act
+             ViewResult result = controller.Eliminar("000000") as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+
+        public void Editar()
+        {
+            // Arrange
+            FormularioController controller = new FormularioController();
+
+            // Act
+            ViewResult result = controller.Editar(1) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+
+        public void Actualizar()
+        {
+            // Arrange
+            FormularioController controller = new FormularioController();
+
+            // Act
+            ViewResult result = controller.update_formulario() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

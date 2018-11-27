@@ -68,16 +68,25 @@ namespace AmericanService.Controllers
         //Descripción: eliminar un registro de perfil
         public ActionResult Eliminar(String cedula)
         {
-            SqlConnection con = new SqlConnection(
-            WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+            try
+            {
+                SqlConnection con = new SqlConnection(
+                WebConfigurationManager.ConnectionStrings["MyDbconn"].ConnectionString);
+                SqlCommand cmd = new SqlCommand("eliminar_perfil", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@cedula", cedula);
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                con.Close();
+            }
+
+            catch (Exception)
+            {
+
+            }
 
 
-            SqlCommand cmd = new SqlCommand("eliminar_perfil", con);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@cedula", cedula);
-            con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-            con.Close();
+            
             return View("Index", obtener_usuarios());
         }
 
@@ -103,6 +112,7 @@ namespace AmericanService.Controllers
         //Descripción: saca la informacion de un perfil en un pdf
         public ActionResult obtener_usuario_PDF(Usuario usuario) {
             ArchivoPDF archivoPDF = new ArchivoPDF();
+
             byte[] abytes = archivoPDF.PrepararPDF(usuario);
             return File(abytes, "application/pdf");
         }
